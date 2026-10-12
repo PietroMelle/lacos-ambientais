@@ -1,0 +1,185 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap");
+
+:root {
+  --verde: #2f7d4f;
+  --verde-escuro: #1d5234;
+  --verde-claro: #e6f2ea;
+  --creme: #fbf8f1;
+  --tinta: #1f2a24;
+  --cinza: #5d6b63;
+  --linha: #dfe6e1;
+  --branco: #ffffff;
+  --cor: var(--verde);          /* sobrescrita pela cor da lixeira */
+  --cor-clara: var(--verde-claro);
+  --sobre-cor: #ffffff;         /* cor do texto em cima de --cor */
+  --raio: 18px;
+  --sombra: 0 6px 24px rgba(29, 82, 52, 0.10);
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--tinta);
+  background:
+    radial-gradient(circle at 10% 0%, rgba(47,125,79,.08) 0, transparent 40%),
+    radial-gradient(circle at 100% 30%, rgba(224,168,0,.07) 0, transparent 35%),
+    var(--creme);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+h1, h2, h3 { font-family: "Fredoka", "Nunito", sans-serif; line-height: 1.15; margin: 0 0 .4em; }
+h1 { font-size: clamp(1.9rem, 7vw, 2.6rem); }
+h2 { font-size: 1.35rem; }
+p { margin: 0 0 .8em; }
+a { color: var(--verde-escuro); }
+code { background: rgba(0,0,0,.06); padding: 1px 5px; border-radius: 5px; font-size: .9em; }
+
+.container { max-width: 560px; margin: 0 auto; padding: 0 16px; }
+
+/* ---------- Topo / rodapé ---------- */
+.aviso-demo {
+  background: #fff4cc; color: #6b5300; font-size: .82rem; text-align: center;
+  padding: 7px 16px; border-bottom: 1px solid #f0dd95;
+}
+#topo {
+  max-width: 560px; margin: 0 auto; padding: 14px 16px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.marca { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--verde-escuro);
+  font-family: "Fredoka", sans-serif; font-size: 1.15rem; }
+.marca b { font-weight: 700; color: var(--verde); }
+.marca-icone { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%;
+  background: var(--verde); color: #fff; font-size: 1.1rem; }
+.topo-link { text-decoration: none; font-weight: 800; font-size: .9rem; color: var(--verde-escuro);
+  background: var(--branco); border: 1px solid var(--linha); padding: 7px 12px; border-radius: 999px; }
+#rodape { text-align: center; color: var(--cinza); font-size: .85rem; padding: 28px 16px 40px; }
+#rodape p { margin: 2px 0; }
+
+/* ---------- Blocos ---------- */
+.cartao {
+  background: var(--branco); border-radius: var(--raio); box-shadow: var(--sombra);
+  padding: 20px; margin: 0 0 16px; border: 1px solid rgba(0,0,0,.03);
+}
+.hero {
+  background: var(--cor); color: var(--sobre-cor); border-radius: 0 0 28px 28px;
+  padding: 26px 20px 30px; margin: 0 -16px 20px; position: relative; overflow: hidden;
+}
+.hero::after {
+  content: ""; position: absolute; right: -40px; top: -40px; width: 170px; height: 170px;
+  border-radius: 50%; background: rgba(255,255,255,.12);
+}
+.hero p { opacity: .95; font-size: 1.05rem; position: relative; z-index: 1; }
+.hero h1 { position: relative; z-index: 1; }
+.hero .etiqueta {
+  display: inline-block; background: rgba(255,255,255,.22); border-radius: 999px;
+  padding: 4px 12px; font-weight: 800; font-size: .8rem; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 10px;
+}
+.hero-emoji { font-size: 3.2rem; display: block; margin-bottom: 4px; position: relative; z-index: 1; }
+
+.lista { list-style: none; padding: 0; margin: 0; }
+.lista li { padding: 8px 0 8px 32px; position: relative; border-bottom: 1px dashed var(--linha); }
+.lista li:last-child { border-bottom: 0; }
+.lista li::before { position: absolute; left: 0; top: 7px; width: 22px; height: 22px; border-radius: 50%;
+  display: grid; place-items: center; font-size: .75rem; font-weight: 800; }
+.lista.sim li::before { content: "✓"; background: var(--cor-clara); color: var(--cor); }
+.lista.nao li::before { content: "✕"; background: #fde6e8; color: #c22b37; }
+
+.destaque { background: var(--cor-clara); border-left: 5px solid var(--cor); }
+.destaque h2 { color: var(--tinta); }
+
+/* ---------- Formulário ---------- */
+label { display: block; font-weight: 800; font-size: .92rem; margin: 14px 0 6px; }
+input[type=text], input[type=tel], select {
+  width: 100%; font: inherit; font-size: 1rem; padding: 13px 14px; border-radius: 12px;
+  border: 2px solid var(--linha); background: #fff; color: var(--tinta); appearance: none;
+}
+select { background-image: linear-gradient(45deg, transparent 50%, var(--cinza) 50%), linear-gradient(135deg, var(--cinza) 50%, transparent 50%);
+  background-position: calc(100% - 20px) 55%, calc(100% - 14px) 55%; background-size: 6px 6px; background-repeat: no-repeat; }
+input:focus, select:focus { outline: none; border-color: var(--cor); box-shadow: 0 0 0 4px var(--cor-clara); }
+.ajuda { font-size: .82rem; color: var(--cinza); margin-top: 4px; }
+
+.contador { display: flex; align-items: center; justify-content: center; gap: 18px; margin: 8px 0 4px; }
+.contador button {
+  width: 56px; height: 56px; border-radius: 50%; border: 0; font-size: 1.8rem; font-weight: 800;
+  background: var(--cor-clara); color: var(--cor); cursor: pointer;
+}
+.contador button:active { transform: scale(.94); }
+.contador output { font-family: "Fredoka", sans-serif; font-size: 2.6rem; min-width: 64px; text-align: center; }
+
+.consentimento { display: flex; gap: 10px; align-items: flex-start; font-weight: 600; font-size: .9rem; margin: 18px 0 4px; }
+.consentimento input { width: 22px; height: 22px; flex: 0 0 auto; accent-color: var(--cor); margin-top: 1px; }
+
+.botao {
+  display: block; width: 100%; border: 0; border-radius: 14px; padding: 16px; margin-top: 18px;
+  font: inherit; font-weight: 800; font-size: 1.08rem; background: var(--cor); color: var(--sobre-cor);
+  cursor: pointer; text-align: center; text-decoration: none; box-shadow: 0 6px 0 rgba(0,0,0,.15);
+}
+.botao:active { transform: translateY(3px); box-shadow: 0 3px 0 rgba(0,0,0,.15); }
+.botao[disabled] { opacity: .6; cursor: wait; }
+.botao.secundario { background: var(--branco); color: var(--verde-escuro); border: 2px solid var(--linha); box-shadow: none; }
+
+.mensagem { border-radius: 12px; padding: 12px 14px; margin-top: 14px; font-weight: 700; font-size: .95rem; }
+.mensagem.erro { background: #fde6e8; color: #9d1f2a; }
+.mensagem.ok { background: var(--verde-claro); color: var(--verde-escuro); }
+
+.ola { display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  background: var(--cor-clara); border-radius: 12px; padding: 12px 14px; font-weight: 700; }
+.ola button { background: none; border: 0; color: var(--cinza); text-decoration: underline; font: inherit; font-size: .85rem; cursor: pointer; }
+
+/* ---------- Resultado / placar ---------- */
+.placar { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
+.placar div { background: var(--cor-clara); border-radius: 14px; padding: 14px 10px; text-align: center; }
+.placar strong { display: block; font-family: "Fredoka", sans-serif; font-size: 2rem; color: var(--cor); line-height: 1.1; }
+.placar span { font-size: .82rem; font-weight: 700; color: var(--cinza); }
+.centro { text-align: center; }
+.festa { font-size: 3.4rem; animation: pulo .8s ease-out; display: block; }
+@keyframes pulo { 0% { transform: scale(.3) rotate(-20deg); } 70% { transform: scale(1.15) rotate(6deg); } 100% { transform: scale(1); } }
+
+/* ---------- Grade de lixeiras (início) ---------- */
+.grade { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.lixeira-card {
+  border-radius: 16px; padding: 16px 14px; text-decoration: none; color: var(--t, #fff); background: var(--c);
+  display: flex; flex-direction: column; gap: 2px; min-height: 110px; box-shadow: var(--sombra);
+}
+.lixeira-card .e { font-size: 1.9rem; }
+.lixeira-card b { font-family: "Fredoka", sans-serif; font-size: 1.15rem; }
+.lixeira-card small { opacity: .9; font-weight: 700; }
+.lixeira-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+
+/* ---------- Ranking ---------- */
+.abas { display: grid; grid-template-columns: 1fr 1fr; background: var(--verde-claro); border-radius: 14px; padding: 4px; margin-bottom: 14px; }
+.abas button { border: 0; background: none; padding: 11px 6px; border-radius: 10px; font: inherit; font-weight: 800; color: var(--verde-escuro); cursor: pointer; }
+.abas button[aria-selected=true] { background: var(--branco); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+.rank { list-style: none; margin: 0; padding: 0; }
+.rank li { display: flex; align-items: center; gap: 12px; padding: 12px 4px; border-bottom: 1px solid var(--linha); }
+.rank li:last-child { border-bottom: 0; }
+.rank .pos { width: 36px; height: 36px; flex: 0 0 auto; border-radius: 50%; display: grid; place-items: center;
+  font-family: "Fredoka", sans-serif; font-weight: 700; background: var(--verde-claro); color: var(--verde-escuro); }
+.rank li:nth-child(1) .pos { background: #f6c945; color: #5c4400; font-size: 1.2rem; }
+.rank li:nth-child(2) .pos { background: #d5dbe0; color: #3d474f; }
+.rank li:nth-child(3) .pos { background: #e6b48a; color: #5a3416; }
+.rank .quem { flex: 1; min-width: 0; }
+.rank .quem b { display: block; }
+.rank .quem small { color: var(--cinza); font-weight: 600; }
+.rank .valor { text-align: right; font-family: "Fredoka", sans-serif; font-size: 1.3rem; color: var(--verde); }
+.rank .valor small { display: block; font-family: "Nunito", sans-serif; font-size: .72rem; color: var(--cinza); font-weight: 700; }
+.vazio { text-align: center; color: var(--cinza); padding: 24px 8px; }
+
+/* ---------- Pipoca ---------- */
+.tema-pipoca { --cor: #e2463a; --cor-clara: #fdebe4; }
+.voucher {
+  border: 3px dashed var(--cor); border-radius: 20px; padding: 22px 16px; text-align: center;
+  background: repeating-linear-gradient(45deg, #fff, #fff 12px, #fff7f3 12px, #fff7f3 24px);
+}
+.voucher .codigo { font-family: "Fredoka", sans-serif; font-size: 2.5rem; letter-spacing: .06em; color: var(--cor); margin: 6px 0; }
+.relogio { font-family: "Fredoka", sans-serif; font-size: 1.3rem; display: inline-flex; align-items: center; gap: 8px;
+  background: var(--tinta); color: #fff; padding: 6px 14px; border-radius: 999px; margin-top: 6px; }
+.relogio i { width: 10px; height: 10px; border-radius: 50%; background: #3ddc84; animation: piscar 1s infinite; }
+@keyframes piscar { 50% { opacity: .2; } }
+.pipoca-anim { font-size: 3.6rem; display: inline-block; animation: balanco 1.6s ease-in-out infinite; }
+@keyframes balanco { 0%,100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg) translateY(-6px); } }
+
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
