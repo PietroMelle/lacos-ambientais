@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lixeira — Laços Ambientais</title>
+  <meta name="theme-color" content="#2f7d4f">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header id="topo"></header>
+
+  <main class="container">
+    <section class="hero" id="hero"></section>
+
+    <section class="cartao">
+      <h2>✅ Pode jogar aqui</h2>
+      <ul class="lista sim" id="pode"></ul>
+    </section>
+
+    <section class="cartao">
+      <h2>🚫 Não pode</h2>
+      <ul class="lista nao" id="naoPode"></ul>
+    </section>
+
+    <section class="cartao destaque">
+      <h2>💡 Dica de ouro</h2>
+      <p id="dica"></p>
+      <h2>🤓 Você sabia?</h2>
+      <p id="curiosidade" style="margin:0"></p>
+    </section>
+
+    <!-- ===== Competição ===== -->
+    <section class="cartao" id="registro">
+      <h2>🏆 Registre seu descarte e concorra!</h2>
+      <p>Todo mês tem <b>2 prêmios</b>: para quem <b>mais descartar itens</b> e para quem <b>descartar em mais dias</b>.</p>
+
+      <form id="form" novalidate>
+        <div id="identificacao">
+          <label for="nome">Nome e sobrenome</label>
+          <input type="text" id="nome" autocomplete="name" maxlength="80" placeholder="Ex.: Ana Souza" required>
+
+          <label for="vinculo">O que você faz na faculdade?</label>
+          <select id="vinculo" required><option value="">Escolha…</option></select>
+
+          <label for="celular">Celular (WhatsApp)</label>
+          <input type="tel" id="celular" inputmode="numeric" autocomplete="tel" placeholder="(11) 91234-5678" required>
+          <p class="ajuda">Só usamos para avisar se você ganhar. Ele nunca aparece no ranking.</p>
+        </div>
+        <div id="jaConhecido" class="ola" hidden></div>
+
+        <label class="centro" style="margin-top:20px">Quantos itens você jogou agora?</label>
+        <div class="contador">
+          <button type="button" id="menos" aria-label="Diminuir">−</button>
+          <output id="qtd" aria-live="polite">1</output>
+          <button type="button" id="mais" aria-label="Aumentar">+</button>
+        </div>
+        <p class="ajuda centro">Máximo de 10 por registro · até 5 registros por dia</p>
+
+        <label class="consentimento" id="blocoConsent">
+          <input type="checkbox" id="consent">
+          <span>Concordo que a Laços Ambientais use meu nome, vínculo e celular apenas para esta competição, conforme a
+            <a href="privacidade.html" target="_blank">política de privacidade</a>.</span>
+        </label>
+
+        <button class="botao" type="submit" id="enviar">Registrar descarte</button>
+        <div id="msg" role="alert"></div>
+      </form>
+
+      <div id="sucesso" hidden></div>
+    </section>
+  </main>
+
+  <footer id="rodape"></footer>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/lacos.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script>
+  (function () {
+    const tipo = new URLSearchParams(location.search).get("tipo");
+    const L = Lacos.LIXOS[tipo];
+    if (!L) { location.replace("index.html"); return; }
+
+    // ----- Conteúdo da lixeira -----
+    document.title = "Lixeira " + L.cor + " (" + L.nome + ") — Laços Ambientais";
+    document.documentElement.style.setProperty("--cor", L.hex);
+    document.documentElement.style.setProperty("--cor-clara", L.claro);
+    document.documentElement.style.setProperty("--sobre-cor", L.texto || "#ffffff");
+    document.querySelector('meta[name="theme-color"]').content = L.hex;
+    document.getElementById("hero").innerHTML =
+      '<span class="hero-emoji" aria-hidden="true">' + L.emoji + '</span>' +
+      '<span class="etiqueta">Lixeira ' + L.cor + '</span>' +
+      '<h1>' + L.nome + '</h1><p>' + L.chamada + '</p>';
+    const li = (arr) => arr.map((t) => "<li>" + Lacos.esc(t) + "</li>").join("");
+    document.getElementById("pode").innerHTML = li(L.pode);
+    document.getElementById("naoPode").innerHTML = li(L.naoPode);
+    document.getElementById("dica").textContent = L.dica;
+    document.getElementById("curiosidade").textContent = L.curiosidade;
+
+    // ----- Formulário -----
+    const $ = (id) => document.getElementById(id);
+    Lacos.VINCULOS.forEach((v) => $("vinculo").insertAdjacentHTML("beforeend", '<option>' + v + '</option>'));
+    $("celular").addEventListener("input", (e) => { e.target.value = Lacos.mascaraCelular(e.target.value); });
+
+    let qtd = 1;
+    const atualizarQtd = () => { $("qtd").textContent = qtd; };
+    $("menos").onclick = () => { qtd = Math.max(1, qtd - 1); atualizarQtd(); };
+    $("mais").onclick = () => { qtd = Math.min(10, qtd + 1); atualizarQtd(); };
+
+    // Pessoa que já registrou neste celular: não precisa digitar tudo de novo
+    let eu = Lacos.recuperar("lacos_participante");
+    function mostrarConhecido() {
+      if (eu) {
+        $("identificacao").hidden = true;
+        $("blocoConsent").hidden = true;
+        $("jaConhecido").hidden = false;
+        $("jaConhecido").innerHTML = '<span>Olá, ' + Lacos.esc(eu.nome.split(" ")[0]) + '! 👋</span>' +
+          '<button type="button" id="naoSouEu">Não é você?</button>';
+        $("naoSouEu").onclick = () => { Lacos.esquecer("lacos_participante"); eu = null; mostrarConhecido(); };
+      } else {
+        $("identificacao").hidden = false;
+        $("blocoConsent").hidden = false;
+        $("jaConhecido").hidden = true;
+      }
+    }
+    mostrarConhecido();
+
+    function erro(t) { $("msg").innerHTML = '<div class="mensagem erro">' + Lacos.esc(t) + '</div>'; }
+
+    $("form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      $("msg").innerHTML = "";
+      const dados = eu || {
+        nome: $("nome").value.trim(),
+        vinculo: $("vinculo").value,
+        celular: $("celular").value.replace(/\D/g, ""),
+      };
+      if (!eu) {
+        if (dados.nome.split(/\s+/).length < 2) return erro("Digite seu nome e sobrenome.");
+        if (!dados.vinculo) return erro("Escolha o que você faz na faculdade.");
+        if (dados.celular.length < 10) return erro("Confira o celular: DDD + número.");
+        if (!$("consent").checked) return erro("Para participar, marque a caixinha de consentimento.");
+      }
+      $("enviar").disabled = true;
+      $("enviar").textContent = "Registrando…";
+      try {
+        const r = await Api.registrarDescarte({
+          p_nome: dados.nome, p_vinculo: dados.vinculo, p_celular: dados.celular,
+          p_tipo: tipo, p_quantidade: qtd, p_consentimento: true,
+        });
+        if (!eu) { eu = dados; Lacos.guardar("lacos_participante", dados); }
+        $("form").hidden = true;
+        $("sucesso").hidden = false;
+        $("sucesso").innerHTML =
+          '<div class="centro"><span class="festa">🎉</span>' +
+          '<h2>Valeu, ' + Lacos.esc(dados.nome.split(" ")[0]) + '!</h2>' +
+          '<p>+' + qtd + ' ' + (qtd > 1 ? "itens registrados" : "item registrado") + ' na lixeira ' + L.cor.toLowerCase() + '. O planeta agradece. 🌎</p></div>' +
+          '<div class="placar">' +
+            '<div><strong>' + r.total_itens + '</strong><span>itens no mês<br>' + r.pos_itens + 'º lugar</span></div>' +
+            '<div><strong>' + r.dias + '</strong><span>' + (r.dias > 1 ? "dias" : "dia") + ' no mês<br>' + r.pos_dias + 'º lugar</span></div>' +
+          '</div>' +
+          '<a class="botao" href="ranking.html">Ver o ranking 🏆</a>' +
+          '<a class="botao secundario" href="index.html">Conhecer as outras lixeiras</a>';
+        $("sucesso").scrollIntoView({ behavior: "smooth", block: "start" });
+      } catch (err) {
+        erro(err.message);
+      } finally {
+        $("enviar").disabled = false;
+        $("enviar").textContent = "Registrar descarte";
+      }
+    });
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ranking do mês — Laços Ambientais</title>
+  <meta name="theme-color" content="#2f7d4f">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header id="topo"></header>
+
+  <main class="container">
+    <section class="hero">
+      <span class="hero-emoji" aria-hidden="true">🏆</span>
+      <span class="etiqueta" id="mes"></span>
+      <h1>Ranking do mês</h1>
+      <p>Dois prêmios, duas formas de ganhar: <b>volume</b> ou <b>constância</b>. Qual é a sua?</p>
+    </section>
+
+    <section class="cartao">
+      <div class="abas" role="tablist">
+        <button role="tab" aria-selected="true" data-criterio="itens">♻ Mais itens</button>
+        <button role="tab" aria-selected="false" data-criterio="dias">📅 Mais dias</button>
+      </div>
+      <p class="ajuda" id="explica"></p>
+      <ol class="rank" id="lista"><li class="vazio">Carregando…</li></ol>
+    </section>
+
+    <section class="cartao destaque">
+      <h2>Como funciona</h2>
+      <p>Cada lixeira tem um QR Code. Jogou o lixo no lugar certo? Leia o código e registre quantos itens descartou.</p>
+      <p style="margin:0">No fim do mês, o <b>1º lugar em itens</b> e o <b>1º lugar em dias</b> ganham um presente. Empates são decididos por quem chegou lá primeiro.</p>
+    </section>
+  </main>
+
+  <footer id="rodape"></footer>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/lacos.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script>
+  (function () {
+    const $ = (id) => document.getElementById(id);
+    $("mes").textContent = Lacos.mesAtual();
+    const textos = {
+      itens: "Quem descartou mais itens corretamente neste mês.",
+      dias: "Quem descartou em mais dias diferentes neste mês. Constância vale ouro!",
+    };
+
+    async function carregar(criterio) {
+      document.querySelectorAll(".abas button").forEach((b) => b.setAttribute("aria-selected", b.dataset.criterio === criterio));
+      $("explica").textContent = textos[criterio];
+      $("lista").innerHTML = '<li class="vazio">Carregando…</li>';
+      try {
+        const linhas = await Api.ranking(criterio);
+        if (!linhas || !linhas.length) {
+          $("lista").innerHTML = '<li class="vazio">Ninguém registrou ainda este mês.<br><b>O pódio está vazio esperando por você!</b> 🥇</li>';
+          return;
+        }
+        $("lista").innerHTML = linhas.map((r) => {
+          const valor = criterio === "dias" ? r.dias : r.total_itens;
+          const rotulo = criterio === "dias" ? (r.dias > 1 ? "dias" : "dia") : (r.total_itens > 1 ? "itens" : "item");
+          const extra = criterio === "dias" ? r.total_itens + " itens" : r.dias + (r.dias > 1 ? " dias" : " dia");
+          return '<li><span class="pos">' + r.posicao + '</span>' +
+            '<span class="quem"><b>' + Lacos.esc(r.nome) + '</b><small>' + Lacos.esc(r.vinculo) + ' · ' + extra + '</small></span>' +
+            '<span class="valor">' + valor + '<small>' + rotulo + '</small></span></li>';
+        }).join("");
+      } catch (err) {
+        $("lista").innerHTML = '<li class="vazio">' + Lacos.esc(err.message) + '</li>';
+      }
+    }
+
+    document.querySelectorAll(".abas button").forEach((b) => b.addEventListener("click", () => carregar(b.dataset.criterio)));
+    carregar("itens");
+  })();
+  </script>
+</body>
+</html>

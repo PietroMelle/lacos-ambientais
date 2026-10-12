@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacidade — Laços Ambientais</title>
+  <meta name="theme-color" content="#2f7d4f">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header id="topo"></header>
+
+  <main class="container">
+    <section class="hero">
+      <span class="hero-emoji" aria-hidden="true">🔒</span>
+      <span class="etiqueta">LGPD · Lei 13.709/2018</span>
+      <h1>Seus dados, sem mistério</h1>
+      <p>Explicação curta e direta de como usamos as informações que você nos passa.</p>
+    </section>
+
+    <section class="cartao">
+      <h2>Quem cuida dos dados</h2>
+      <p><span data-cfg="RESPONSAVEL"></span>. Contato: <b data-cfg="CONTATO"></b>.</p>
+
+      <h2>O que coletamos</h2>
+      <p><b>Competição das lixeiras:</b> nome, vínculo com a faculdade (aluno, aprendiz, professor…), celular, tipo de lixo e quantidade registrada.</p>
+      <p><b>Pipoca da gincana:</b> apenas o nome, para garantir uma pipoca por pessoa.</p>
+
+      <h2>Para que usamos</h2>
+      <p>Somente para calcular o ranking da competição, apurar os vencedores do mês e entrar em contato com quem ganhar. Não vendemos, não compartilhamos e não usamos para propaganda.</p>
+
+      <h2>O que aparece em público</h2>
+      <p>No ranking aparece apenas o <b>primeiro nome com a inicial do sobrenome</b> (ex.: "Ana S."), o vínculo e a pontuação. <b>Seu celular nunca é exibido.</b></p>
+
+      <h2>Por quanto tempo</h2>
+      <p>Os dados ficam guardados só durante a campanha e serão <b>apagados até <span data-cfg="FIM_CAMPANHA"></span></b>.</p>
+
+      <h2>Base legal</h2>
+      <p>Seu <b>consentimento</b> (art. 7º, I, da LGPD), dado ao marcar a caixinha antes de participar. A participação é totalmente voluntária.</p>
+
+      <h2>Seus direitos</h2>
+      <p style="margin:0">Você pode, a qualquer momento, pedir para ver, corrigir ou apagar seus dados — ou retirar seu consentimento — pelo contato acima. Se pedir a exclusão, seus registros saem da competição.</p>
+    </section>
+
+    <a class="botao secundario" href="javascript:history.back()">← Voltar</a>
+  </main>
+
+  <footer id="rodape"></footer>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/lacos.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script>
+    document.querySelectorAll("[data-cfg]").forEach((el) => { el.textContent = window.LACOS_CONFIG[el.dataset.cfg] || "—"; });
+  </script>
+</body>
+</html>

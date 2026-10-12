@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resgate sua pipoca — Laços Ambientais</title>
+  <meta name="theme-color" content="#e2463a">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="tema-pipoca">
+  <header id="topo"></header>
+
+  <main class="container">
+    <section class="hero">
+      <span class="hero-emoji pipoca-anim" aria-hidden="true">🍿</span>
+      <span class="etiqueta">Gincana Sustentável</span>
+      <h1>Você mandou bem!</h1>
+      <p>Passou pelas estações? Então a pipoca é sua. Resgate abaixo e mostre o código para a equipe.</p>
+    </section>
+
+    <section class="cartao" id="formArea">
+      <form id="form" novalidate>
+        <label for="nome">Seu nome e sobrenome</label>
+        <input type="text" id="nome" autocomplete="name" maxlength="80" placeholder="Ex.: Ana Souza" required>
+        <p class="ajuda">Vale uma pipoca por pessoa. Seu nome só é usado para controlar o resgate.</p>
+        <button class="botao" type="submit" id="enviar">Quero minha pipoca! 🍿</button>
+        <div id="msg" role="alert"></div>
+      </form>
+    </section>
+
+    <section class="cartao" id="voucherArea" hidden>
+      <div class="voucher">
+        <p style="margin:0;font-weight:800">Pipoca liberada para</p>
+        <h2 id="vNome" style="font-size:1.6rem;margin:2px 0 0"></h2>
+        <div class="codigo" id="vCodigo"></div>
+        <div class="relogio" aria-label="Horário atual"><i></i><span id="vHora"></span></div>
+        <p class="ajuda" style="margin-top:12px">Mostre esta tela para a equipe da Laços Ambientais.<br>O relógio ao vivo prova que não é print. 😉</p>
+      </div>
+      <p class="centro" style="margin:16px 0 0">Enquanto a pipoca estoura, que tal conhecer nossas <a href="index.html">lixeiras sustentáveis</a> e entrar na competição do mês?</p>
+    </section>
+  </main>
+
+  <footer id="rodape"></footer>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/lacos.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script>
+  (function () {
+    const $ = (id) => document.getElementById(id);
+
+    function mostrarVoucher(v) {
+      $("formArea").hidden = true;
+      $("voucherArea").hidden = false;
+      $("vNome").textContent = v.nome;
+      $("vCodigo").textContent = v.codigo;
+      const tic = () => { $("vHora").textContent = new Date().toLocaleTimeString("pt-BR"); };
+      tic(); setInterval(tic, 1000);
+    }
+
+    // Se recarregar a página, o código continua aparecendo
+    const salvo = Lacos.recuperar("lacos_pipoca");
+    if (salvo) mostrarVoucher(salvo);
+
+    $("form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      $("msg").innerHTML = "";
+      const nome = $("nome").value.trim();
+      if (nome.split(/\s+/).length < 2) {
+        $("msg").innerHTML = '<div class="mensagem erro">Digite seu nome e sobrenome.</div>';
+        return;
+      }
+      $("enviar").disabled = true;
+      $("enviar").textContent = "Estourando…";
+      try {
+        const v = await Api.resgatarPipoca(nome);
+        Lacos.guardar("lacos_pipoca", v);
+        mostrarVoucher(v);
+      } catch (err) {
+        $("msg").innerHTML = '<div class="mensagem erro">' + Lacos.esc(err.message) + '</div>';
+      } finally {
+        $("enviar").disabled = false;
+        $("enviar").textContent = "Quero minha pipoca! 🍿";
+      }
+    });
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QR Codes para impressão — Laços Ambientais</title>
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    .painel { max-width: 720px; margin: 20px auto; padding: 0 16px; }
+    .folhas { display: grid; gap: 24px; justify-content: center; padding: 0 16px 40px; }
+    .folha {
+      width: 190mm; height: 270mm; background: #fff; border-radius: 10px; box-shadow: var(--sombra);
+      display: flex; flex-direction: column; overflow: hidden; --c: #2f7d4f; --t: #fff; break-after: page;
+    }
+    .folha-topo { background: var(--c); color: var(--t); text-align: center; padding: 12mm 10mm 9mm; }
+    .folha-topo .e { font-size: 30mm; line-height: 1; }
+    .folha-topo .cor { font-family: "Fredoka", sans-serif; font-size: 11mm; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin: 3mm 0 0; }
+    .folha-topo .tipo { font-family: "Fredoka", sans-serif; font-size: 22mm; font-weight: 700; line-height: 1; margin: 1mm 0 0; }
+    .folha-meio { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6mm 12mm; text-align: center; }
+    .folha-meio .exemplos { font-size: 5.2mm; font-weight: 700; color: var(--cinza); margin-bottom: 5mm; }
+    .qr { width: 95mm; height: 95mm; }
+    .qr svg { width: 100%; height: 100%; display: block; }
+    .folha-meio .cta { font-family: "Fredoka", sans-serif; font-size: 8mm; margin: 5mm 0 0; color: var(--tinta); }
+    .folha-meio .sub { font-size: 5mm; font-weight: 700; color: var(--cinza); margin: 1mm 0 0; }
+    .folha-pe { border-top: 2mm solid var(--c); padding: 4mm; text-align: center; font-family: "Fredoka", sans-serif; font-size: 6mm; color: var(--verde-escuro); }
+    @media print {
+      @page { size: A4 portrait; margin: 10mm; }
+      body { background: #fff; }
+      .painel, .aviso-demo, #topo, #rodape { display: none !important; }
+      .folhas { padding: 0; gap: 0; }
+      .folha { box-shadow: none; border-radius: 0; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @media screen and (max-width: 800px) { .folha { zoom: .45; } }
+  </style>
+</head>
+<body>
+  <header id="topo"></header>
+
+  <section class="painel cartao">
+    <h2>🖨 QR Codes para as lixeiras e a pipoca</h2>
+    <p>Confira o endereço do site publicado (o mesmo que aparece na barra do navegador) e clique em imprimir. Sai uma folha A4 por lixeira, mais a da pipoca.</p>
+    <label for="base">Endereço do site</label>
+    <input type="text" id="base" placeholder="https://seu-usuario.github.io/lacos-ambientais/">
+    <p class="ajuda">Dica: teste cada QR com o celular antes de colar na caixa.</p>
+    <button class="botao" id="imprimir" type="button">Imprimir / salvar PDF</button>
+  </section>
+
+  <div class="folhas" id="folhas"></div>
+
+  <footer id="rodape"></footer>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/lacos.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/qrcode.js"></script>
+  <script>
+  (function () {
+    const $ = (id) => document.getElementById(id);
+    const padrao = location.protocol.startsWith("http") ? location.href.replace(/qrcodes\.html.*$/, "") : "";
+    $("base").value = Lacos.recuperar("lacos_base_qr") || padrao;
+
+    function svgQR(url) {
+      const q = qrcode(0, "M");
+      q.addData(url);
+      q.make();
+      return q.createSvgTag({ cellSize: 8, margin: 2, scalable: true });
+    }
+
+    function desenhar() {
+      let base = $("base").value.trim();
+      if (base && !base.endsWith("/")) base += "/";
+      Lacos.guardar("lacos_base_qr", base);
+      const folhas = Object.entries(Lacos.LIXOS).map(([id, L]) => `
+        <div class="folha" style="--c:${L.hex};--t:${L.texto || "#fff"}">
+          <div class="folha-topo">
+            <div class="e">${L.emoji}</div>
+            <p class="cor">Lixeira ${L.cor}</p>
+            <p class="tipo">${L.nome}</p>
+          </div>
+          <div class="folha-meio">
+            <p class="exemplos">${L.pode.slice(0, 3).map(Lacos.esc).join(" · ")}</p>
+            <div class="qr">${svgQR(base + "lixeira.html?tipo=" + id)}</div>
+            <p class="cta">Descartou? Aponte a câmera! 📱</p>
+            <p class="sub">Aprenda o que vai aqui e concorra a prêmios todo mês 🏆</p>
+          </div>
+          <div class="folha-pe">♻ Laços Ambientais</div>
+        </div>`);
+      folhas.push(`
+        <div class="folha" style="--c:#e2463a;--t:#fff">
+          <div class="folha-topo">
+            <div class="e">🍿</div>
+            <p class="cor">Gincana Sustentável</p>
+            <p class="tipo" style="font-size:17mm">Resgate sua pipoca!</p>
+          </div>
+          <div class="folha-meio">
+            <p class="exemplos">Passou pelas estações? A pipoca é sua.</p>
+            <div class="qr">${svgQR(base + "pipoca.html")}</div>
+            <p class="cta">Aponte a câmera e resgate 📱</p>
+            <p class="sub">Uma pipoca por pessoa · mostre o código para a equipe</p>
+          </div>
+          <div class="folha-pe">♻ Laços Ambientais</div>
+        </div>`);
+      $("folhas").innerHTML = folhas.join("");
+    }
+
+    $("base").addEventListener("input", desenhar);
+    $("imprimir").addEventListener("click", () => window.print());
+    desenhar();
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Laços Ambientais</title>
+  <meta name="description" content="Laços Ambientais — sustentabilidade na prática: descarte certo, aprenda e concorra a prêmios.">
+  <meta name="theme-color" content="#2f7d4f">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header id="topo"></header>
+
+  <main class="container">
+    <section class="hero">
+      <span class="etiqueta">Sustentabilidade na prática</span>
+      <h1>Pequenos gestos, grandes laços. 🌱</h1>
+      <p>Somos a <b>Laços Ambientais</b>, a empresa criada pela turma de Jovem Aprendiz para deixar a faculdade mais verde — uma latinha de cada vez.</p>
+    </section>
+
+    <section class="cartao">
+      <h2>♻ Nossas lixeiras</h2>
+      <p>Toque numa cor para saber o que vai em cada lixeira.</p>
+      <div class="grade" id="grade"></div>
+    </section>
+
+    <section class="cartao destaque">
+      <h2>🏆 Competição do mês</h2>
+      <p>Leia o QR Code da lixeira depois de descartar e registre seus itens. Todo mês premiamos <b>quem mais descartou</b> e <b>quem descartou em mais dias</b>.</p>
+      <a class="botao" href="ranking.html">Ver o ranking</a>
+    </section>
+
+    <section class="cartao">
+      <h2>🍿 Participou da gincana?</h2>
+      <p>Se você passou pelas nossas estações de perguntas, tem pipoca te esperando.</p>
+      <a class="botao secundario" href="pipoca.html">Resgatar minha pipoca</a>
+    </section>
+  </main>
+
+  <footer id="rodape"></footer>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/lacos.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script>
+    document.getElementById("grade").innerHTML = Object.entries(Lacos.LIXOS).map(([id, L]) =>
+      '<a class="lixeira-card" style="--c:' + L.hex + ';--t:' + (L.texto || '#fff') + '" href="lixeira.html?tipo=' + id + '">' +
+      '<span class="e" aria-hidden="true">' + L.emoji + '</span><b>' + L.nome + '</b><small>Lixeira ' + L.cor + '</small></a>'
+    ).join("");
+  </script>
+</body>
+</html>
