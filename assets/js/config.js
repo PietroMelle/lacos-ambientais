@@ -6,8 +6,8 @@ window.LACOS_CONFIG = {
   // Cole a "Project URL" e a chave pública ("publishable" ou "anon public").
   // NUNCA cole a chave "secret" / "service_role" aqui!
   // Enquanto ficar vazio, o site roda em MODO DEMONSTRAÇÃO (dados só no seu celular).
-  SUPABASE_URL: "sb_publishable_rpXBwdCfrOwbLGAGIs9Drw_mp_aHtXa",
-  SUPABASE_KEY: "LacosAmbientais2026",
+  SUPABASE_URL: "https://pfmonwaznmnzpkjqcojb.supabase.co",
+  SUPABASE_KEY: "sb_publishable_rpXBwdCfrOwbLGAGIs9Drw_mp_aHtXa",
 
   // Aparecem na página de privacidade (LGPD)
   RESPONSAVEL: "Turma do Jovem Aprendiz — empresa Laços Ambientais",
