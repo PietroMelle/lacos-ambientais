@@ -1,4 +1,4 @@
-// Conexão com o Supabase (ou modo demonstração, se não configurado)
+// Conexão com o Supabase 
 (function () {
   const cfg = window.LACOS_CONFIG || {};
   const DEMO = !cfg.SUPABASE_URL || !cfg.SUPABASE_KEY;

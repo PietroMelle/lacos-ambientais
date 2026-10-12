@@ -167,6 +167,7 @@ input:focus, select:focus { outline: none; border-color: var(--cor); box-shadow:
 .rank .valor { text-align: right; font-family: "Fredoka", sans-serif; font-size: 1.3rem; color: var(--verde); }
 .rank .valor small { display: block; font-family: "Nunito", sans-serif; font-size: .72rem; color: var(--cinza); font-weight: 700; }
 .vazio { text-align: center; color: var(--cinza); padding: 24px 8px; }
+.rank li.vazio { display: block; }   /* mensagem de ranking vazio não pode virar colunas */
 
 /* ---------- Pipoca ---------- */
 .tema-pipoca { --cor: #e2463a; --cor-clara: #fdebe4; }
@@ -183,3 +184,73 @@ input:focus, select:focus { outline: none; border-color: var(--cor); box-shadow:
 @keyframes balanco { 0%,100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg) translateY(-6px); } }
 
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+
+/* =====================================================================
+   LAYOUT PARA TELAS GRANDES (computador / projetor)
+   No celular NADA muda: tudo abaixo só liga a partir de 900px de largura.
+   O @supports garante que navegadores muito antigos continuem com o
+   layout de celular em vez de quebrar.
+   ===================================================================== */
+@supports selector(:has(*)) {
+@media (min-width: 900px) {
+
+  /* ---- Estrutura geral: grade de 12 colunas ---- */
+  body:has(main.container) #topo { max-width: 1120px; padding: 20px 32px; }
+  body:has(main.container) #topo .marca { font-size: 1.3rem; }
+  body:has(main.container) #rodape { padding-top: 44px; }
+
+  main.container {
+    max-width: 1120px; padding: 0 32px;
+    display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 24px; align-items: start;
+  }
+  main.container > * { grid-column: 1 / -1; margin: 0; min-width: 0; }
+
+  .cartao { padding: 28px; }
+  h2 { font-size: 1.5rem; }
+
+  main.container > .hero { border-radius: 28px; padding: 44px 52px 48px; }
+  .hero h1 { font-size: 3.2rem; max-width: 18ch; }
+  .hero p { font-size: 1.2rem; max-width: 54ch; }
+  .hero-emoji { font-size: 4.4rem; }
+  .hero::after { width: 300px; height: 300px; right: -80px; top: -100px; }
+
+  /* ---- Início: 5 lixeiras numa fileira + 2 cartões lado a lado ---- */
+  main.container:has(#grade) { align-items: stretch; }
+  main.container:has(#grade) .grade { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+  main.container:has(#grade) .lixeira-card { min-height: 180px; padding: 22px 18px; justify-content: flex-end; }
+  main.container:has(#grade) .lixeira-card:last-child:nth-child(odd) { grid-column: auto; }
+  main.container:has(#grade) .lixeira-card .e { font-size: 2.8rem; margin-bottom: auto; }
+  main.container:has(#grade) .lixeira-card b { font-size: 1.3rem; }
+  main.container:has(#grade) > .destaque,
+  main.container:has(#grade) > .cartao:last-child { grid-column: span 6; }
+
+  /* ---- Lixeira: informações à esquerda, formulário à direita ---- */
+  .duas-colunas { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 24px; align-items: start; }
+  .col-info { display: flex; flex-direction: column; gap: 24px; }
+  .col-info .cartao, .col-registro .cartao { margin: 0; }
+
+  /* ---- Ranking: lista grande + "Como funciona" ao lado ---- */
+  main.container:has(#lista) > .cartao:not(.destaque) { grid-column: span 7; }
+  main.container:has(#lista) > .destaque { grid-column: span 5; }
+  .rank li { padding: 15px 6px; }
+  .rank .valor { font-size: 1.6rem; }
+  .rank .pos { width: 42px; height: 42px; }
+
+  /* ---- Pipoca: tudo centralizado, foco no resgate ---- */
+  main.container:has(#formArea) > #formArea,
+  main.container:has(#formArea) > #voucherArea { grid-column: 4 / span 6; }
+
+  /* ---- Privacidade: coluna de leitura confortável ---- */
+  main.container:has([data-cfg]) > .cartao { grid-column: 3 / span 8; }
+  main.container:has([data-cfg]) > a.botao { grid-column: 5 / span 4; }
+}
+
+/* Efeitos de passar o mouse (só em quem tem mouse) */
+@media (min-width: 900px) and (hover: hover) {
+  .lixeira-card, .botao, .topo-link { transition: transform .15s ease, filter .15s ease, box-shadow .15s ease; }
+  .lixeira-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,.18); }
+  .botao:hover { filter: brightness(1.06); }
+  .topo-link:hover { border-color: var(--verde); }
+}
+}
