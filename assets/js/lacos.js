@@ -102,6 +102,7 @@ window.Lacos = (function () {
     menos: '<path d="M5 12h14"/>',
     mais: '<path d="M12 5v14M5 12h14"/>',
     voltar: '<path d="M19 12H5M11 6l-6 6 6 6"/>',
+    casa: '<path d="M4 10.5L12 4l8 6.5"/><path d="M6.5 9v10.5h4V14.5h3v5h4V9"/>',
     laco: '<path d="M12 11.5C9.6 7.8 4.6 6 3.3 8.3c-1.3 2.3 2.9 5.4 8.7 3.2z"/><path d="M12 11.5c2.4-3.7 7.4-5.5 8.7-3.2 1.3 2.3-2.9 5.4-8.7 3.2z"/><path d="M11 12.5L7.5 20M13 12.5l3.5 7.5"/>',
     info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',
   };
@@ -114,9 +115,14 @@ window.Lacos = (function () {
   // Cabeçalho, rodapé e aviso de demonstração em todas as páginas
   function montarMolde() {
     const aqui = location.pathname.split("/").pop() || "index.html";
+    const noInicio = aqui === "index.html" || aqui === "index";
     const topo = document.getElementById("topo");
+    // fora do início, a marca vira o caminho de volta: botão com a casinha e o aviso "Ir para o início"
     if (topo) topo.innerHTML =
-      '<a class="marca" href="index.html" aria-label="Laços Ambientais — início">' + icone("laco") + '<span>Laços Ambientais</span></a>' +
+      (noInicio
+        ? '<a class="marca" href="index.html" aria-label="Laços Ambientais — início">' + icone("laco") + '<span>Laços Ambientais</span></a>'
+        : '<a class="marca para-inicio" href="index.html" aria-label="Laços Ambientais, ir para o início"><span class="marca-casa">' + icone("casa") + '</span>' +
+          '<span class="marca-nome">Laços Ambientais<small>Ir para o início</small></span></a>') +
       '<a class="topo-link" href="ranking.html"' + (aqui === "ranking.html" ? ' aria-current="page"' : "") + '>' + icone("trofeu") + 'Ranking</a>';
     const rodape = document.getElementById("rodape");
     if (rodape) rodape.innerHTML =

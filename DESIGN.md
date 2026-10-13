@@ -258,6 +258,14 @@ components:
     rounded: "{rounded.pill}"
     padding: "8px 18px"
     height: "44px"
+  marca-inicio:
+    backgroundColor: "transparent"
+    textColor: "{colors.tinta}"
+    rounded: "{rounded.pill}"
+    size: "36px"
+  marca-inicio-hover:
+    backgroundColor: "{colors.tinta}"
+    textColor: "{colors.chao}"
   topo-link-atual:
     backgroundColor: "{colors.tinta}"
     textColor: "{colors.folha}"
@@ -593,7 +601,7 @@ An ink tag (or a Sheet White tag, `.clara`, on bin fields) in Tag type, with pad
 - **Consent:** a 24px native checkbox with an ink `accent-color`, set beside the policy sentence.
 
 ### Navigation
-The header holds the brand on the left (the drawn bow icon at 32px plus "Laços Ambientais" in Brand type, 1.4rem from 760px) and one "Ranking" pill on the right (2px currentColor outline, 44px tall, 700 at 0.95rem). Hover fills the pill with ink, or on a bin field inverts it to the field colour. On the ranking page the pill is filled ink (`aria-current`). On bin and pipoca pages the header floods with the field colour, and `theme-color` follows it. The focus colour follows the surface: ink on the ground, the field's text colour on bin fields, yellow on ink, and Sheet White on the gincana.
+The header holds the brand on the left and one "Ranking" pill on the right (2px currentColor outline, 44px tall, 700 at 0.95rem, 14px side padding below 760px and 18px above). On the home page the brand is the drawn bow icon at 32px plus "Laços Ambientais" in Brand type (clamp(1.05rem, 4.6vw, 1.25rem), 1.4rem from 760px), kept on one line. On every other page the brand becomes the way home. The bow is replaced by a house icon in a 36px circle (42px from 760px) with the same 2px currentColor outline as the pill. Under the name sits the action line "Ir para o início" (Funnel Sans 700, 0.75rem, 0.8rem from 760px). On hover the circle fills with currentColor and the house takes the header's own surface colour (`--topo-fundo`: Concrete on the ground, the field colour on bin and pipoca pages). Pressing scales the circle to 0.92. The header fits on one line from 360px up. Hover fills the pill with ink, or on a bin field inverts it to the field colour. On the ranking page the pill is filled ink (`aria-current`). On bin and pipoca pages the header floods with the field colour, and `theme-color` follows it. The focus colour follows the surface: ink on the ground, the field's text colour on bin fields, yellow on ink, and Sheet White on the gincana.
 
 ### Tabs and ruler (abas, régua)
 The ranking switch is a pill track in Deep Concrete with 4px padding. Its two 50px tabs ("Mais itens", "Mais dias") are 700 at 1rem with icons. An ink thumb slides between them (0.5s) and the selected label turns Sheet White. Under the tabs a ruler runs 0 / half / max, in 0.78rem 600 tabular Slate Ink, over 1px ticks every 10% and a 1px baseline, inset 3.4rem to line up with the names. Each row's strand is cut to its true proportion of the leader, 5px ink, and stretches in over 1s with a 55ms stagger. The leader's row is larger (3rem numerals) and holds a 24px full braid. An empty podium shows a loose strand end at the ruler's zero: a 40px ink strand ending in a 12px dot.

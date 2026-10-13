@@ -84,22 +84,33 @@ code { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-siz
 /* ---------- Topo ---------- */
 .aviso-demo { background: var(--amarelo); color: var(--tinta); font-size: .9rem; font-weight: 600; text-align: center; padding: 9px 16px; }
 #topo {
-  position: relative; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  --topo-fundo: var(--chao);
+  position: relative; z-index: 10; display: flex; align-items: center; justify-content: space-between; gap: 12px;
   padding: 14px var(--gutter); view-transition-name: topo;
 }
 .marca {
-  display: inline-flex; align-items: center; gap: 10px; min-height: 44px; text-decoration: none;
-  font-family: var(--display); font-weight: 800; font-size: 1.25rem; letter-spacing: -.02em; line-height: 1;
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; text-decoration: none;
+  font-family: var(--display); font-weight: 800; font-size: clamp(1.05rem, 4.6vw, 1.25rem); letter-spacing: -.02em; line-height: 1;
+  white-space: nowrap;
 }
 .marca .ic { width: 32px; height: 32px; stroke-width: 2.1; }
+/* fora do início: a casinha num botão de contorno (o mesmo traço da pílula do ranking) e o aviso embaixo do nome */
+.marca-casa {
+  display: grid; place-items: center; flex: none; width: 36px; height: 36px; border: 2px solid currentColor; border-radius: 50%;
+  transition: background-color .25s var(--ease), transform .2s var(--ease);
+}
+.marca .marca-casa .ic { width: 20px; height: 20px; stroke-width: 2.2; transition: color .25s var(--ease); }
+.marca-nome { display: grid; gap: 4px; }
+.marca-nome small { font-family: var(--texto); font-weight: 700; font-size: .75rem; line-height: 1.1; letter-spacing: .01em; }
+.para-inicio:active .marca-casa { transform: scale(.92); }
 .topo-link {
-  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 18px;
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 14px; white-space: nowrap;
   border: 2px solid currentColor; border-radius: 999px; text-decoration: none; font-weight: 700; font-size: .95rem;
   transition: background-color .25s var(--ease), color .25s var(--ease);
 }
 .topo-link .ic { width: 1.05em; height: 1.05em; stroke-width: 2.3; }
 .topo-link[aria-current=page] { background: var(--tinta); color: var(--folha); border-color: var(--tinta); }
-.pagina-cor #topo { background: var(--cor); color: var(--sobre-cor); --foco: var(--sobre-cor); }
+.pagina-cor #topo { background: var(--cor); color: var(--sobre-cor); --foco: var(--sobre-cor); --topo-fundo: var(--cor); }
 
 /* ---------- Rodapé: o cordão amarra e termina ---------- */
 #rodape {
@@ -543,6 +554,8 @@ select {
 @media (hover: hover) {
   .topo-link:hover { background: var(--tinta); color: var(--folha); border-color: var(--tinta); }
   .pagina-cor .topo-link:hover { background: var(--sobre-cor); color: var(--cor); border-color: var(--sobre-cor); }
+  .para-inicio:hover .marca-casa { background: currentColor; }
+  .para-inicio:hover .marca-casa .ic { color: var(--topo-fundo); }
   .botao:hover { background: color-mix(in srgb, var(--b) 84%, #000); border-color: color-mix(in srgb, var(--b) 84%, #000); }
   .botao.claro:hover { background: #fff; border-color: #fff; }
   .botao.secundario:hover { background: var(--tinta); color: var(--folha); }
@@ -563,8 +576,12 @@ select {
   .cartao { padding: 36px 34px 34px; }
   .painel-tinta { padding: 40px 38px; }
 
-  #topo { padding-block: 20px; }
-  .marca { font-size: 1.4rem; }
+  #topo { padding-block: 20px; gap: 16px; }
+  .marca { font-size: 1.4rem; gap: 12px; }
+  .marca-casa { width: 42px; height: 42px; }
+  .marca .marca-casa .ic { width: 22px; height: 22px; }
+  .marca-nome small { font-size: .8rem; }
+  .topo-link { padding-inline: 18px; }
 
   .abertura { padding-top: 44px; }
   .abertura h1 { font-size: clamp(4.5rem, 7.4vw, 6rem); max-width: 10ch; }
