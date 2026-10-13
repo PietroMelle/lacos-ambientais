@@ -4,9 +4,9 @@
 --  Pode rodar de novo sem medo: o script recria as funções.
 --
 --  Segurança: as tabelas ficam TRANCADAS (RLS sem nenhuma política).
---  O site só consegue chamar 3 funções públicas:
---    registrar_descarte, ranking_mes e resgatar_pipoca.
---  Ninguém de fora consegue listar nomes ou celulares.
+--  O site só consegue chamar 4 funções públicas:
+--    registrar_descarte, ranking_mes, resgatar_pipoca e pipocas_resgatadas.
+--  Ninguém de fora consegue listar nomes completos ou celulares.
 -- =====================================================================
 
 -- ---------- Tabelas ----------
@@ -185,6 +185,16 @@ exception when unique_violation then
 end;
 $$;
 
+-- Lista pública de quem já resgatou: só "Ana S." e o horário (nada de nome completo ou código)
+create or replace function pipocas_resgatadas()
+returns table(nome text, resgatado_em timestamptz)
+language sql stable security definer set search_path = public as $$
+  select exibir_nome(nome), criado_em
+  from pipocas
+  order by normalizar_nome(nome)
+  limit 3000;
+$$;
+
 -- ---------- Permissões ----------
 -- Funções internas: ninguém de fora chama
 revoke execute on function normalizar_nome(text), exibir_nome(text),
@@ -192,8 +202,8 @@ revoke execute on function normalizar_nome(text), exibir_nome(text),
   from public, anon, authenticated;
 -- Funções públicas: liberadas para o site
 revoke execute on function registrar_descarte(text,text,text,text,int,boolean),
-                           ranking_mes(text), resgatar_pipoca(text)
+                           ranking_mes(text), resgatar_pipoca(text), pipocas_resgatadas()
   from public;
 grant execute on function registrar_descarte(text,text,text,text,int,boolean),
-                          ranking_mes(text), resgatar_pipoca(text)
+                          ranking_mes(text), resgatar_pipoca(text), pipocas_resgatadas()
   to anon, authenticated;

@@ -33,11 +33,14 @@
       @page { size: A4 portrait; margin: 10mm; }
       body { background: #fff; }
       .painel, .aviso-demo, #topo, #rodape { display: none !important; }
+      body.so-pipoca .folha:not(.folha-pipoca) { display: none !important; }
       .folhas { padding: 0; gap: 0; }
       .folha { box-shadow: none; border-radius: 0; }
       * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     }
     @media screen and (max-width: 800px) { .folha { zoom: .45; } }
+    .acoes { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+    .acoes .botao { width: auto; }
   </style>
 </head>
 <body>
@@ -45,11 +48,14 @@
 
   <section class="painel cartao" style="margin-inline:auto;width:min(720px,calc(100% - 40px))">
     <h2 data-ic="impressora">QR Codes para as lixeiras e a pipoca</h2>
-    <p>Confira o endereço do site publicado (o mesmo que aparece na barra do navegador) e clique em imprimir. Sai uma folha A4 por lixeira, mais a da pipoca.</p>
+    <p>Confira o endereço do site publicado (o mesmo que aparece na barra do navegador) e clique em imprimir. Sai uma folha A4 por lixeira, mais a da pipoca. Para a parede da sala, imprima só a da pipoca.</p>
     <label for="base">Endereço do site</label>
     <input type="text" id="base" placeholder="https://seu-usuario.github.io/lacos-ambientais/">
     <p class="ajuda">Dica: teste cada QR com o celular antes de colar na caixa.</p>
-    <button class="botao" id="imprimir" type="button">Imprimir / salvar PDF</button>
+    <div class="acoes">
+      <button class="botao" id="imprimir" type="button" data-ic="impressora">Imprimir todas (6 folhas)</button>
+      <button class="botao secundario" id="imprimirPipoca" type="button" data-ic="pipoca">Só a da pipoca</button>
+    </div>
   </section>
 
   <div class="folhas" id="folhas"></div>
@@ -94,11 +100,11 @@
           <div class="folha-pe">${Lacos.icone("laco")}Laços Ambientais</div>
         </div>`);
       folhas.push(`
-        <div class="folha" style="--c:#cf3a2e;--t:#fafbf8">
+        <div class="folha folha-pipoca" style="--c:#cf3a2e;--t:#fafbf8">
           <div class="folha-topo">
             <div class="linha1"><p class="cor">Gincana Sustentável</p><div class="e">${Lacos.icone("pipoca")}</div></div>
             <p class="tipo" style="font-size:16mm">Resgate sua pipoca!</p>
-            <div class="folha-fio" data-trama="liso"></div>
+            <div class="folha-fio" style="background:var(--t)"></div>
           </div>
           <div class="folha-meio">
             <p class="exemplos">Passou pelas estações? A pipoca é sua.</p>
@@ -113,6 +119,9 @@
 
     $("base").addEventListener("input", desenhar);
     $("imprimir").addEventListener("click", () => window.print());
+    // só a folha da pipoca (para a parede da sala): as outras somem só na impressão
+    $("imprimirPipoca").addEventListener("click", () => { document.body.classList.add("so-pipoca"); window.print(); });
+    addEventListener("afterprint", () => document.body.classList.remove("so-pipoca"));
     desenhar();
   })();
   </script>

@@ -102,6 +102,7 @@ window.Lacos = (function () {
     menos: '<path d="M5 12h14"/>',
     mais: '<path d="M12 5v14M5 12h14"/>',
     voltar: '<path d="M19 12H5M11 6l-6 6 6 6"/>',
+    lupa: '<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>',
     casa: '<path d="M4 10.5L12 4l8 6.5"/><path d="M6.5 9v10.5h4V14.5h3v5h4V9"/>',
     laco: '<path d="M12 11.5C9.6 7.8 4.6 6 3.3 8.3c-1.3 2.3 2.9 5.4 8.7 3.2z"/><path d="M12 11.5c2.4-3.7 7.4-5.5 8.7-3.2 1.3 2.3-2.9 5.4-8.7 3.2z"/><path d="M11 12.5L7.5 20M13 12.5l3.5 7.5"/>',
     info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',

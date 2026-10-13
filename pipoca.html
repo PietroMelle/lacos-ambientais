@@ -26,7 +26,7 @@
         <form id="form" novalidate>
           <label for="nome" style="margin-top:0">Seu nome e sobrenome</label>
           <input type="text" id="nome" autocomplete="name" maxlength="80" placeholder="Ex.: Ana Souza" required>
-          <p class="ajuda">Vale uma pipoca por pessoa. Seu nome só é usado para controlar o resgate.</p>
+          <p class="ajuda">Vale uma pipoca por pessoa. Seu nome só é usado para controlar o resgate e, na lista abaixo, aparece só o primeiro nome e a inicial do sobrenome.</p>
           <button class="botao" type="submit" id="enviar">Quero minha pipoca!</button>
           <div id="msg" role="alert"></div>
         </form>
@@ -44,6 +44,24 @@
         </div>
       </div>
       <p class="depois">Enquanto a pipoca estoura, que tal conhecer nossas <a href="index.html">lixeiras sustentáveis</a> e entrar na competição do mês?</p>
+    </section>
+
+    <section class="faixa faixa-centro resgates" aria-labelledby="tituloResgates">
+      <div class="resgates-cab">
+        <h2 id="tituloResgates">Quem já resgatou</h2>
+        <p class="resgates-total" id="rTotal" aria-live="polite"></p>
+      </div>
+      <div class="busca">
+        <span data-ic="lupa"></span>
+        <input type="search" id="rBusca" placeholder="Procurar um nome" autocomplete="off" enterkeyhint="search" aria-label="Procurar um nome na lista" aria-controls="rLista">
+      </div>
+      <div class="abas abas-ordem" role="group" aria-label="Ordem da lista">
+        <button type="button" aria-pressed="true" data-ordem="az">A–Z</button>
+        <button type="button" aria-pressed="false" data-ordem="za">Z–A</button>
+        <button type="button" aria-pressed="false" data-ordem="recentes">Mais recentes</button>
+      </div>
+      <div class="resgates-lista" id="rLista"></div>
+      <button class="botao secundario" type="button" id="rMais" hidden></button>
     </section>
   </main>
 
@@ -84,8 +102,10 @@
       $("enviar").textContent = "Estourando…";
       try {
         const v = await Api.resgatarPipoca(nome);
+        v.naLista = Lacos.exibirNome(nome); // para marcar "você" na lista
         Lacos.guardar("lacos_pipoca", v);
         mostrarVoucher(v);
+        Lista.carregar(v.naLista);
       } catch (err) {
         $("msg").innerHTML = '<div class="mensagem erro">' + Lacos.esc(err.message) + '</div>';
       } finally {
@@ -93,6 +113,104 @@
         $("enviar").textContent = "Quero minha pipoca!";
       }
     });
+  })();
+
+  // ----- Quem já resgatou: busca, ordem e grupos (dados do banco) -----
+  const Lista = (function () {
+    const $ = (id) => document.getElementById(id);
+    const POR_VEZ = 60, TZ = "America/Sao_Paulo";
+    let todos = [], ordem = "az", busca = "", mostrar = POR_VEZ, meu = "", carregadoEm = 0;
+
+    // normaliza letra a letra, para a posição do trecho achado bater com o nome original
+    const plano = (t) => [...t].map((c) => c.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase()).join("");
+    const dia = (d) => d.toLocaleDateString("sv-SE", { timeZone: TZ });
+    const hora = (d) => d.toLocaleTimeString("pt-BR", { timeZone: TZ, hour: "2-digit", minute: "2-digit" });
+    const curta = (d) => d.toLocaleDateString("pt-BR", { timeZone: TZ, day: "2-digit", month: "2-digit" });
+    function nomeDoDia(d) {
+      const k = dia(d);
+      if (k === dia(new Date())) return "Hoje";
+      if (k === dia(new Date(Date.now() - 864e5))) return "Ontem";
+      const s = d.toLocaleDateString("pt-BR", { timeZone: TZ, weekday: "long", day: "2-digit", month: "2-digit" });
+      return s.charAt(0).toUpperCase() + s.slice(1);
+    }
+    function marcar(nome) {
+      const i = busca ? plano(nome).indexOf(busca) : -1;
+      if (i < 0) return Lacos.esc(nome);
+      return Lacos.esc(nome.slice(0, i)) + "<mark>" + Lacos.esc(nome.slice(i, i + busca.length)) + "</mark>" + Lacos.esc(nome.slice(i + busca.length));
+    }
+
+    function desenhar() {
+      const lista = $("rLista");
+      document.querySelectorAll(".abas-ordem button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.ordem === ordem));
+      const cmp = (a, b) => a.nome.localeCompare(b.nome, "pt-BR", { sensitivity: "base" }) || a.t - b.t;
+      const r = todos.filter((x) => !busca || x.plano.includes(busca));
+      r.sort(ordem === "recentes" ? (a, b) => b.t - a.t : ordem === "za" ? (a, b) => cmp(b, a) : cmp);
+      $("rMais").hidden = true;
+      if (!todos.length) {
+        lista.innerHTML = '<p class="resgates-vazio"><span class="ponta" aria-hidden="true"></span>Ninguém resgatou ainda. <b>A primeira pipoca pode ser a sua!</b></p>';
+        return;
+      }
+      if (!r.length) {
+        lista.innerHTML = '<p class="resgates-vazio">Nenhum nome com “' + Lacos.esc($("rBusca").value.trim()) + '” na lista. Confira a grafia ou procure só pelo primeiro nome.' +
+          '<button type="button" class="limpar" id="rLimpar">Limpar busca</button></p>';
+        $("rLimpar").onclick = () => { $("rBusca").value = ""; busca = ""; desenhar(); $("rBusca").focus(); };
+        return;
+      }
+      const vis = r.slice(0, mostrar);
+      // o resgate mais recente com o nome de quem está neste aparelho ganha a marca "você"
+      const eu = meu ? todos.filter((x) => x.nome === meu).sort((a, b) => b.t - a.t)[0] : null;
+      const grupos = [];
+      vis.forEach((x) => {
+        const chave = ordem === "recentes" ? nomeDoDia(x.d) : (plano(x.nome).charAt(0).toUpperCase().replace(/[^A-Z]/, "#") || "#");
+        const g = grupos[grupos.length - 1];
+        if (g && g.chave === chave) g.itens.push(x); else grupos.push({ chave, itens: [x] });
+      });
+      let n = 0;
+      lista.innerHTML = grupos.map((g) =>
+        '<section class="grupo"><h3>' + Lacos.esc(g.chave) + '</h3><ol>' +
+        g.itens.map((x) => '<li' + (x === eu ? ' class="voce"' : "") + ' style="--i:' + Math.min(n++, 24) + '">' +
+          '<span class="quem">' + marcar(x.nome) + (x === eu ? " <em>você</em>" : "") + '</span>' +
+          '<span class="quando">' + (ordem === "recentes" ? "" : curta(x.d) + " · ") + hora(x.d) + '</span></li>').join("") +
+        '</ol></section>').join("");
+      const resto = r.length - vis.length;
+      if (resto > 0) { $("rMais").hidden = false; $("rMais").textContent = "Mostrar mais " + Math.min(resto, POR_VEZ) + " de " + resto; }
+    }
+
+    function total(n) {
+      $("rTotal").innerHTML = n ? '<strong data-conta="' + n + '">' + n + "</strong> " + (n > 1 ? "pipocas estouradas" : "pipoca estourada") : "";
+      if (n) Cordao.contarTodos($("rTotal"));
+    }
+
+    async function carregar(marcarComo) {
+      if (marcarComo) meu = marcarComo;
+      if (!todos.length) $("rLista").innerHTML = '<p class="resgates-carregando">Carregando a lista…</p>';
+      try {
+        const linhas = (await Api.pipocasResgatadas()) || [];
+        todos = linhas.map((x) => { const d = new Date(x.resgatado_em); return { nome: x.nome, plano: plano(x.nome), d, t: d.getTime() }; });
+        carregadoEm = Date.now();
+        total(todos.length);
+        desenhar();
+      } catch (_) {
+        if (todos.length) return; // mantém a lista que já está na tela
+        $("rLista").innerHTML = '<p class="resgates-vazio">Não consegui carregar a lista agora. Confira sua internet.' +
+          '<button type="button" class="limpar" id="rDeNovo">Tentar de novo</button></p>';
+        $("rDeNovo").onclick = () => carregar();
+      }
+    }
+
+    let espera = 0;
+    $("rBusca").addEventListener("input", (e) => {
+      clearTimeout(espera);
+      espera = setTimeout(() => { busca = plano(e.target.value.trim().replace(/\s+/g, " ")); mostrar = POR_VEZ; desenhar(); }, 120);
+    });
+    document.querySelectorAll(".abas-ordem button").forEach((b) => b.addEventListener("click", () => { ordem = b.dataset.ordem; mostrar = POR_VEZ; desenhar(); }));
+    $("rMais").addEventListener("click", () => { mostrar += POR_VEZ; desenhar(); });
+    // quem deixa a página aberta vê a lista atualizada ao voltar para ela
+    document.addEventListener("visibilitychange", () => { if (!document.hidden && Date.now() - carregadoEm > 30000) carregar(); });
+
+    const salvo = Lacos.recuperar("lacos_pipoca");
+    carregar(salvo && salvo.naLista);
+    return { carregar };
   })();
   </script>
 </body>

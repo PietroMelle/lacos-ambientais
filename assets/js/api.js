@@ -93,8 +93,11 @@
         const db = ler();
         if (db.pip.some((x) => x.norm === norm)) throw erro("NOME_JA_USADO");
         const codigo = "PIP-" + String(Math.floor(Math.random() * 10000)).padStart(4, "0");
-        db.pip.push({ nome, norm, codigo }); salvar(db);
+        db.pip.push({ nome, norm, codigo, ts: Date.now() }); salvar(db);
         return { codigo, nome: nome.split(" ")[0] };
+      },
+      pipocas_resgatadas() {
+        return ler().pip.map((x) => ({ nome: Lacos.exibirNome(x.nome), resgatado_em: new Date(x.ts || Date.now()).toISOString() }));
       },
     };
   })();
@@ -104,6 +107,7 @@
     registrarDescarte: (dados) => rpc("registrar_descarte", dados),
     ranking: (criterio) => rpc("ranking_mes", { p_criterio: criterio }),
     resgatarPipoca: (nome) => rpc("resgatar_pipoca", { p_nome: nome }),
+    pipocasResgatadas: () => rpc("pipocas_resgatadas", {}),
     limparDemo: () => { try { localStorage.removeItem("lacos_demo_db"); } catch (_) {} },
   };
 })();

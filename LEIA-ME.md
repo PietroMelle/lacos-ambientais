@@ -39,8 +39,10 @@ Abra a pasta no VS Code com a extensão *Live Server*, ou rode `python -m http.s
    ```
 
 > **"Mas a chave fica visível no site?"** Fica, e tudo bem: ela é pública por natureza.
-> As tabelas estão trancadas e a chave só consegue chamar 3 funções (registrar, ver o ranking e resgatar pipoca).
-> Ninguém consegue listar nomes ou celulares por ela. Isso foi testado.
+> As tabelas estão trancadas e a chave só consegue chamar 4 funções (registrar, ver o ranking, resgatar pipoca e ver a lista de quem resgatou).
+> A lista da pipoca mostra só "Ana S." e o horário. Ninguém consegue listar nomes completos ou celulares por ela.
+>
+> **Já tinha rodado o `schema.sql` antes desta versão?** Rode também o `supabase/atualizacao-lista-pipoca.sql` (uma vez), senão a lista de quem resgatou a pipoca não carrega. Isso foi testado.
 
 ## Passo 3 — Publicar no GitHub Pages (10 minutos)
 
@@ -91,6 +93,8 @@ Para mudar os limites, edite os números `10`, `5` e `1 minute` na função `reg
 - Exige **nome e sobrenome**, e cada nome resgata só uma vez. "João Silva", "joao silva" e "JOÃO  SILVA" contam como o mesmo nome.
 - A tela do código mostra um **relógio ao vivo piscando**. Se o relógio estiver parado, é print. 😉
 - Homônimos (dois "Ana Souza" de verdade) acontecem raramente. Nesse caso, a segunda pessoa pode usar o nome do meio.
+- Embaixo do formulário fica a lista **Quem já resgatou**, direto do banco: busca por nome e ordem A–Z (padrão), Z–A ou mais recentes. Mostra só "Ana S." e o horário.
+- Para colar na parede da sala: em `qrcodes.html`, clique em **Só a da pipoca** e imprima.
 
 ## LGPD — checklist da turma
 
