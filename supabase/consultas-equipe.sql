@@ -46,3 +46,10 @@ from pipocas order by criado_em;
 
 -- 7) FIM DA CAMPANHA: APAGAR TUDO (LGPD) — tire os "--" para rodar
 -- truncate descartes, participantes, pipocas restart identity;
+
+-- 8) HISTÓRICO DAS ENTREGAS DE PIPOCA (quem entregou, quem desfez e quando)
+--    Use se alguém disser que não recebeu. Precisa ter rodado atualizacao-equipe-pipoca.sql.
+select p.codigo, p.nome, h.acao, h.por,
+       h.em at time zone 'America/Sao_Paulo' as quando
+from pipocas_historico h join pipocas p on p.id = h.pipoca_id
+order by h.em desc;

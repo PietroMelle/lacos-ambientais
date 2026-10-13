@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entregas da pipoca — Equipe Laços Ambientais</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#eef0ec">
+  <link rel="preload" href="assets/fonts/funnel-display-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header id="topo"></header>
+
+  <main>
+    <section class="cabeca">
+      <h1>Entregas da pipoca</h1>
+      <div class="cabeca-fio" id="cabecaFio">
+        <span class="etiqueta" data-balanca="entra"><span>Só para a equipe</span></span>
+        <span class="capa-icone" data-ic="cadeado"></span>
+      </div>
+      <p>Marque cada pipoca na hora em que ela chega na mão da pessoa. Fica registrado quem entregou e quando.</p>
+    </section>
+
+    <!-- Login: sem ele o banco não entrega nenhum nome -->
+    <section class="faixa faixa-centro" id="portaoArea" hidden>
+      <div class="cartao portao">
+        <h2>Entrar</h2>
+        <p>Use o login da equipe criado no Supabase.</p>
+        <form id="login" novalidate>
+          <label for="email">E-mail</label>
+          <input type="text" id="email" inputmode="email" autocomplete="username" autocapitalize="off" spellcheck="false" required>
+          <label for="senha">Senha</label>
+          <input type="password" id="senha" autocomplete="current-password" required>
+          <button class="botao" type="submit" id="entrar">Entrar</button>
+          <div id="loginMsg" role="alert"></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Painel: só aparece depois que o banco confirma que o login é da equipe -->
+    <section class="faixa faixa-larga" id="painel" hidden aria-labelledby="tituloPainel">
+      <h2 class="sr" id="tituloPainel">Lista de resgates</h2>
+      <div class="conectado">
+        <p>Conectado como <b id="quem"></b></p>
+        <button type="button" id="sair">Sair</button>
+      </div>
+      <div class="busca">
+        <span data-ic="lupa"></span>
+        <input type="search" id="busca" placeholder="Nome ou código (ex.: 0427)" autocomplete="off" enterkeyhint="search" aria-label="Procurar por nome ou código" aria-controls="tabela">
+      </div>
+      <div class="abas abas-ordem entregas-filtro" role="group" aria-label="Mostrar">
+        <button type="button" aria-pressed="true" data-filtro="faltam">Faltam <span id="nFaltam"></span></button>
+        <button type="button" aria-pressed="false" data-filtro="entregues">Entregues <span id="nEntregues"></span></button>
+        <button type="button" aria-pressed="false" data-filtro="todas">Todas <span id="nTodas"></span></button>
+      </div>
+      <table class="tabela-entregas" id="tabela">
+        <thead><tr><th scope="col">Pessoa</th><th scope="col">Código</th><th scope="col">Resgatou</th><th scope="col">Entrega</th></tr></thead>
+        <tbody id="linhas"></tbody>
+      </table>
+      <p class="entregas-vazio" id="vazio" hidden></p>
+      <div class="entregas-pe">
+        <span id="atualizado"></span>
+        <button type="button" id="baixar" data-ic="papel">Baixar planilha (CSV)</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="entregas-aviso" id="aviso" role="status" aria-live="polite"></div>
+  <footer id="rodape"></footer>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/lacos.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/cordao.js"></script>
+  <script src="assets/js/equipe.js"></script>
+  <script>
+  (function () {
+    const $ = (id) => document.getElementById(id);
+    const TZ = "America/Sao_Paulo";
+    Cordao.tranca($("cabecaFio"));
+
+    let todos = [], filtro = "faltam", busca = "", eu = "", relogio = 0;
+
+    // o mesmo nó de trevo do contador das lixeiras: entregue = nó apertado
+    const NO = (() => {
+      const P = [], d = (pts) => "M" + pts.map((p) => p[0].toFixed(1) + " " + p[1].toFixed(1)).join("L");
+      for (let k = 0; k <= 150; k++) {
+        const t = 2 * Math.PI * k / 150;
+        P.push([14 + 3 * (Math.sin(t) + 2 * Math.sin(2 * t)), 14 + 3 * (Math.cos(t) - 2 * Math.cos(2 * t) + 0.47), -Math.sin(3 * t)]);
+      }
+      const cima = []; let tr = null;
+      P.forEach((p) => { if (p[2] > -0.25) { if (!tr) cima.push(tr = []); tr.push(p); } else tr = null; });
+      const camada = (dd, cap) => '<path class="contorno" stroke-linecap="' + cap + '" d="' + dd + '"/><path class="corpo" stroke-linecap="' + cap + '" d="' + dd + '"/>';
+      return '<svg viewBox="0 0 28 28" aria-hidden="true">' + camada(d(P) + "Z", "round") + cima.map((r) => camada(d(r), "butt")).join("") + "</svg>";
+    })();
+
+    const plano = (t) => [...String(t)].map((c) => c.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase()).join("");
+    const quando = (iso) => {
+      const d = new Date(iso);
+      return d.toLocaleDateString("pt-BR", { timeZone: TZ, day: "2-digit", month: "2-digit" }) + " · " + d.toLocaleTimeString("pt-BR", { timeZone: TZ, hour: "2-digit", minute: "2-digit" });
+    };
+    function marcar(txt, alvo) {
+      const i = alvo ? plano(txt).indexOf(alvo) : -1;
+      if (i < 0) return Lacos.esc(txt);
+      return Lacos.esc(txt.slice(0, i)) + "<mark>" + Lacos.esc(txt.slice(i, i + alvo.length)) + "</mark>" + Lacos.esc(txt.slice(i + alvo.length));
+    }
+
+    let avisoT = 0;
+    function avisar(txt, ruim) {
+      const a = $("aviso");
+      a.textContent = txt; a.classList.toggle("ruim", !!ruim); a.classList.add("ve");
+      clearTimeout(avisoT); avisoT = setTimeout(() => a.classList.remove("ve"), 4200);
+    }
+
+    // ---------- Portão ----------
+    function mostrarPortao(msg) {
+      clearInterval(relogio);
+      $("painel").hidden = true;
+      $("portaoArea").hidden = false;
+      $("loginMsg").innerHTML = msg ? '<div class="mensagem erro">' + Lacos.esc(msg) + "</div>" : "";
+      if (!Equipe.configurado) {
+        $("loginMsg").innerHTML = '<div class="mensagem erro">O Supabase ainda não está configurado em config.js.</div>';
+        $("entrar").disabled = true;
+      }
+    }
+
+    $("login").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = $("email").value.trim(), senha = $("senha").value;
+      if (!email || !senha) { $("loginMsg").innerHTML = '<div class="mensagem erro">Preencha o e-mail e a senha.</div>'; return; }
+      $("entrar").disabled = true; $("entrar").textContent = "Entrando…"; $("loginMsg").innerHTML = "";
+      try {
+        await Equipe.entrar(email, senha);
+        $("senha").value = "";
+        await abrirPainel();
+      } catch (err) {
+        $("loginMsg").innerHTML = '<div class="mensagem erro">' + Lacos.esc(err.message) + "</div>";
+      } finally {
+        $("entrar").disabled = false; $("entrar").textContent = "Entrar";
+      }
+    });
+
+    $("sair").addEventListener("click", async () => { await Equipe.sair(); todos = []; $("linhas").innerHTML = ""; mostrarPortao(); $("email").focus(); });
+
+    // ---------- Painel ----------
+    async function carregar() {
+      const linhas = await Equipe.pipocas();
+      todos = (linhas || []).map((x) => ({ ...x, plano: plano(x.nome), cod: plano(x.codigo) }));
+      if (todos[0]) eu = todos[0].voce;
+      $("atualizado").textContent = "Atualizado às " + new Date().toLocaleTimeString("pt-BR", { timeZone: TZ, hour: "2-digit", minute: "2-digit", second: "2-digit" });
+      desenhar();
+    }
+
+    async function abrirPainel() {
+      try {
+        await carregar();
+      } catch (err) {
+        if (err.codigo === "SEM_ACESSO" || err.codigo === "SESSAO") { await Equipe.sair(); mostrarPortao(err.message); return; }
+        mostrarPortao(err.message); return;
+      }
+      $("portaoArea").hidden = true;
+      $("painel").hidden = false;
+      $("quem").textContent = eu || (Equipe.sessao() || {}).email || "";
+      // a lista se atualiza sozinha, para duas pessoas da equipe não entregarem a mesma pipoca
+      clearInterval(relogio);
+      relogio = setInterval(() => { if (!document.hidden) carregar().catch(tratarErro); }, 20000);
+    }
+
+    function tratarErro(err) {
+      if (err.codigo === "SESSAO" || err.codigo === "SEM_ACESSO") { mostrarPortao(err.message); return; }
+      avisar(err.message, true);
+    }
+
+    function desenhar(agora) {
+      const faltam = todos.filter((x) => !x.entregue_em), entregues = todos.length - faltam.length;
+      $("nFaltam").textContent = "(" + faltam.length + ")";
+      $("nEntregues").textContent = "(" + entregues + ")";
+      $("nTodas").textContent = "(" + todos.length + ")";
+      // buscando, procura em todas: quem diz que não recebeu aparece com quem entregou e quando
+      const f = busca ? "todas" : filtro;
+      document.querySelectorAll(".entregas-filtro button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.filtro === f));
+
+      const q = busca.replace(/^pip-?/, "");
+      let r = todos.filter((x) => f === "todas" || (f === "faltam" ? !x.entregue_em || x.id === agora : !!x.entregue_em));
+      if (busca) r = r.filter((x) => x.plano.includes(busca) || (q && x.cod.includes(q)));
+      // faltam: quem resgatou primeiro aparece primeiro; entregues: a última entrega primeiro
+      if (f === "faltam") r.sort((a, b) => new Date(a.resgatado_em) - new Date(b.resgatado_em));
+      if (f === "entregues") r.sort((a, b) => new Date(b.entregue_em) - new Date(a.entregue_em));
+
+      $("linhas").innerHTML = r.map((x) => {
+        const nota = x.desfeitos ? x.desfeitos + (x.desfeitos > 1 ? " entregas desfeitas" : " entrega desfeita") + " · veja o histórico no Supabase" : "";
+        const acao = x.entregue_em
+          ? '<div class="entregue"><span class="entregue-selo">' + NO + "Entregue</span><small>por " + Lacos.esc(x.entregue_por || "?") + " · " + quando(x.entregue_em) + "</small>" +
+            '<button type="button" class="desfazer" data-desfazer="' + x.id + '">Desfazer</button></div>'
+          : '<button type="button" class="entregar" data-entregar="' + x.id + '" aria-label="Entregar pipoca de ' + Lacos.esc(x.nome) + '">Entregar</button>';
+        return '<tr class="linha-entrega' + (x.id === agora ? " agora" + (f === "faltam" ? " saindo" : "") : "") + '" data-id="' + x.id + '">' +
+          '<td class="td-nome">' + marcar(x.nome, busca) + '<span class="td-nota">' + nota + "</span></td>" +
+          '<td class="td-codigo">' + marcar(x.codigo, q ? plano(x.codigo).indexOf(q) >= 0 ? q : "" : "") + "</td>" +
+          '<td class="td-quando">' + quando(x.resgatado_em) + "</td>" +
+          '<td class="td-acao">' + acao + "</td></tr>";
+      }).join("");
+
+      const vazio = $("vazio");
+      vazio.hidden = r.length > 0;
+      $("tabela").hidden = r.length === 0;
+      if (!r.length) {
+        vazio.innerHTML = busca ? "Ninguém com “" + Lacos.esc($("busca").value.trim()) + "” resgatou pipoca. Confira a grafia ou procure pelo código."
+          : filtro === "faltam" && todos.length ? "<b>Tudo entregue!</b> Nenhuma pipoca esperando."
+          : filtro === "entregues" ? "Nenhuma pipoca entregue ainda."
+          : "Ninguém resgatou pipoca ainda.";
+      }
+      if (agora && f === "faltam") setTimeout(() => desenhar(), 1400);
+    }
+
+    $("linhas").addEventListener("click", async (e) => {
+      const ent = e.target.closest("[data-entregar]"), des = e.target.closest("[data-desfazer]");
+      if (ent) {
+        const id = Number(ent.dataset.entregar), x = todos.find((p) => p.id === id);
+        ent.disabled = true; ent.textContent = "Marcando…";
+        try {
+          const r = await Equipe.entregar(id);
+          Object.assign(x, r);
+          desenhar(id);
+          avisar("Pipoca de " + x.nome + " marcada como entregue.");
+        } catch (err) {
+          if (err.codigo === "JA_ENTREGUE") {
+            avisar("Já tinha sido entregue" + (err.por ? " por " + err.por + (err.em ? " · " + quando(err.em) : "") : "") + ".", true);
+            carregar().catch(tratarErro);
+          } else { tratarErro(err); desenhar(); }
+        }
+      }
+      if (des) {
+        // dois toques para desfazer: evita desmarcar sem querer
+        if (!des.classList.contains("confirma")) {
+          des.classList.add("confirma"); des.textContent = "Confirmar desfazer";
+          setTimeout(() => { if (des.isConnected) { des.classList.remove("confirma"); des.textContent = "Desfazer"; } }, 4000);
+          return;
+        }
+        const id = Number(des.dataset.desfazer), x = todos.find((p) => p.id === id);
+        des.disabled = true;
+        try {
+          await Equipe.desfazer(id);
+          x.entregue_em = null; x.entregue_por = null; x.desfeitos = (x.desfeitos || 0) + 1;
+          desenhar();
+          avisar("Entrega de " + x.nome + " desfeita. Ficou registrado no histórico.");
+        } catch (err) { tratarErro(err); desenhar(); }
+      }
+    });
+
+    let espera = 0;
+    $("busca").addEventListener("input", (e) => {
+      clearTimeout(espera);
+      espera = setTimeout(() => { busca = plano(e.target.value.trim().replace(/\s+/g, " ")); desenhar(); }, 120);
+    });
+    document.querySelectorAll(".entregas-filtro button").forEach((b) => b.addEventListener("click", () => { filtro = b.dataset.filtro; if (busca) { busca = ""; $("busca").value = ""; } desenhar(); }));
+
+    // Planilha para guardar: abre no Excel e no Google Planilhas
+    $("baixar").addEventListener("click", () => {
+      const cel = (v) => '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"';
+      const linhas = [["Nome", "Código", "Resgatou em", "Situação", "Entregue em", "Entregue por", "Entregas desfeitas"]]
+        .concat(todos.map((x) => [x.nome, x.codigo, quando(x.resgatado_em), x.entregue_em ? "Entregue" : "Falta entregar",
+          x.entregue_em ? quando(x.entregue_em) : "", x.entregue_por || "", x.desfeitos || 0]));
+      const csv = "﻿" + linhas.map((l) => l.map(cel).join(";")).join("\r\n");
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
+      a.download = "entregas-pipoca-" + new Date().toLocaleDateString("sv-SE", { timeZone: TZ }) + ".csv";
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+    });
+
+    if (Equipe.sessao()) abrirPainel(); else mostrarPortao();
+  })();
+  </script>
+</body>
+</html>

@@ -2,6 +2,7 @@
 --  LAÇOS AMBIENTAIS — Banco de dados (Supabase / PostgreSQL)
 --  Como usar: Supabase > SQL Editor > New query > cole TUDO > Run.
 --  Pode rodar de novo sem medo: o script recria as funções.
+--  Depois, rode também atualizacao-equipe-pipoca.sql (área da equipe com login).
 --
 --  Segurança: as tabelas ficam TRANCADAS (RLS sem nenhuma política).
 --  O site só consegue chamar 4 funções públicas:

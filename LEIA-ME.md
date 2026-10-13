@@ -10,6 +10,7 @@ Site da empresa **Laços Ambientais** (Jovem Aprendiz) com:
 | `pipoca.html` | Resgate da pipoca da gincana (1 por nome) | QR Code no fim das estações |
 | `privacidade.html` | Política de privacidade (LGPD) | Link no formulário |
 | `qrcodes.html` | Gera as 6 folhas A4 com QR Code para imprimir | Só a equipe |
+| `entregas.html` | Controle de **entrega das pipocas** (com login) | Só a equipe |
 
 Lixeiras no padrão CONAMA 275: **Azul** (papel), **Vermelha** (plástico), **Verde** (vidro), **Amarela** (metal) e **Marrom** (orgânico).
 
@@ -96,6 +97,32 @@ Para mudar os limites, edite os números `10`, `5` e `1 minute` na função `reg
 - Embaixo do formulário fica a lista **Quem já resgatou**, direto do banco: busca por nome e ordem A–Z (padrão), Z–A ou mais recentes. Mostra só "Ana S." e o horário.
 - Para colar na parede da sala: em `qrcodes.html`, clique em **Só a da pipoca** e imprima.
 
+## Área da equipe: entregas da pipoca (`entregas.html`)
+
+Na hora de entregar, a equipe procura a pessoa pelo **nome ou pelo código** (ex.: `0427`) e toca em **Entregar**. Fica gravado no banco **quem entregou e quando**. Se alguém voltar dizendo que não recebeu, é só procurar o nome: aparece "Entregue por Ana · 12/10 · 14:32".
+
+- Duas pessoas da equipe não conseguem entregar a mesma pipoca: a segunda recebe o aviso "Já tinha sido entregue por…". A lista também se atualiza sozinha a cada 20 segundos.
+- Marcou errado? Toque em **Desfazer** duas vezes. O "desfazer" também fica registrado: a consulta **8** do `consultas-equipe.sql` mostra o histórico completo, que o site não consegue apagar.
+- **Baixar planilha (CSV)** gera um arquivo que abre no Excel ou no Google Planilhas.
+
+### Como ligar (uma vez só, uns 10 minutos)
+
+1. **Rode o SQL:** Supabase → SQL Editor → New query → cole todo o `supabase/atualizacao-equipe-pipoca.sql` → **Run**.
+2. **Crie o login de cada pessoa da equipe:** Supabase → **Authentication → Users → Add user → Create new user**. Coloque o e-mail e uma senha forte e marque **Auto Confirm User**.
+3. **Diga ao banco quem é da equipe:** no SQL Editor, rode uma linha por pessoa (com o mesmo e-mail do passo 2):
+   ```sql
+   insert into equipe (email, nome) values ('email.da.pessoa@exemplo.com', 'Victor');
+   ```
+   O nome é o que aparece em "Entregue por…".
+4. **Feche o cadastro público:** Supabase → **Authentication → Sign In / Providers** → desligue **Allow new users to sign up**. Assim, ninguém de fora consegue criar um login sozinho.
+5. Abra `entregas.html` no site publicado e entre.
+
+> **Por que é seguro, mesmo a página sendo pública?** O arquivo `entregas.html` pode ser aberto por qualquer um que souber o endereço (no GitHub Pages todo arquivo é público), mas ele é só uma "casca" vazia. Os nomes completos, códigos e entregas só saem do banco para quem **fez login** e **está na tabela `equipe`**. Quem confere a senha é o Supabase e quem confere a equipe é o banco, então não adianta mexer no código da página. Nenhuma senha fica guardada no site.
+>
+> O login vale só para aquela aba: fechou a aba, saiu. Num computador compartilhado, clique em **Sair** do mesmo jeito.
+>
+> Para tirar alguém da equipe: `delete from equipe where email = '...';` e apague o usuário em Authentication → Users.
+
 ## LGPD — checklist da turma
 
 - [ ] Preencher `CONTATO` e `FIM_CAMPANHA` no `config.js`
@@ -107,7 +134,7 @@ Para mudar os limites, edite os números `10`, `5` e `1 minute` na função `reg
 ## Estrutura de pastas
 
 ```
-├── index.html, lixeira.html, ranking.html, pipoca.html, privacidade.html, qrcodes.html
+├── index.html, lixeira.html, ranking.html, pipoca.html, privacidade.html, qrcodes.html, entregas.html
 ├── assets/
 │   ├── css/style.css          → visual (cores, fontes, layout)
 │   ├── fonts/                 → Funnel Display e Funnel Sans (licença OFL, já inclusas no site)
@@ -115,11 +142,14 @@ Para mudar os limites, edite os números `10`, `5` e `1 minute` na função `reg
 │       ├── config.js          → ⭐ ÚNICO arquivo a editar
 │       ├── lacos.js           → textos das lixeiras (pode/não pode/dicas) e cores de cada uma
 │       ├── cordao.js          → o cordão de cinco fios (desenho e animações do site)
+│       ├── equipe.js          → login da equipe e funções da área de entregas
 │       ├── api.js             → conexão com o banco (+ modo demonstração)
 │       └── qrcode.js          → biblioteca de QR Code (licença MIT)
 └── supabase/
     ├── schema.sql             → cria o banco (rodar 1 vez)
-    └── consultas-equipe.sql   → vencedores, relatórios e limpeza LGPD
+    ├── consultas-equipe.sql   → vencedores, relatórios, histórico de entregas e limpeza LGPD
+    ├── atualizacao-lista-pipoca.sql   → lista pública "Quem já resgatou" (rodar 1 vez)
+    └── atualizacao-equipe-pipoca.sql  → área da equipe / entregas (rodar 1 vez)
 ```
 
 Para mudar os textos de cada lixeira, edite o bloco `LIXOS` em `assets/js/lacos.js`.
