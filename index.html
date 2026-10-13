@@ -8,45 +8,80 @@
       name="description"
       content="Laços Ambientais — sustentabilidade na prática: descarte certo, aprenda e concorra a prêmios."
     />
-    <meta name="theme-color" content="#2f7d4f" />
+    <meta name="theme-color" content="#eef0ec" />
+    <link rel="preload" href="assets/fonts/funnel-display-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body>
     <header id="topo"></header>
 
-    <main class="container">
-      <section class="hero">
-        <span class="etiqueta">Sustentabilidade na prática</span>
-        <h1>Pequenos gestos, grandes laços. 🌱</h1>
-        <p>
-          Somos a <b>Laços Ambientais</b>, a empresa criada pela turma de Jovem
-          Aprendiz para deixar a faculdade mais verde — uma latinha de cada vez.
-        </p>
+    <main>
+      <div class="trama">
+        <section class="abertura">
+          <h1>Pequenos gestos, grandes <span class="no">laços.<i class="base" aria-hidden="true"></i></span></h1>
+          <div class="recado">
+            <p>
+              Somos a <b>Laços Ambientais</b>, a empresa criada pela turma de Jovem
+              Aprendiz para deixar a faculdade mais verde — uma latinha de cada vez.
+            </p>
+            <span class="etiqueta" data-balanca="entra"><span>Sustentabilidade na prática</span></span>
+          </div>
+        </section>
+
+        <section class="lixeiras" aria-labelledby="titulo-lixeiras">
+          <div class="lixeiras-cab">
+            <h2 id="titulo-lixeiras">Nossas lixeiras</h2>
+            <p>Toque numa cor para saber o que vai em cada lixeira.</p>
+          </div>
+          <div class="lanes" id="grade"></div>
+        </section>
+      </div>
+
+      <section class="jogo" aria-labelledby="titulo-jogo">
+        <div class="jogo-cab">
+          <h2 id="titulo-jogo">Onde isso vai?</h2>
+          <p>Teste rápido: toque na lixeira certa para cada item.</p>
+        </div>
+        <div class="jogo-palco">
+          <div class="jogo-fio" id="jogoFio" aria-hidden="true"></div>
+          <span class="etiqueta jogo-item" id="jogoItem" data-balanca><span id="jogoTexto"></span></span>
+          <div class="jogo-opcoes" id="jogoOpcoes" role="group" aria-label="Escolha a lixeira"></div>
+          <p class="jogo-msg" id="jogoMsg" role="status" aria-live="polite"></p>
+          <div class="jogo-pe">
+            <span><strong id="jogoAcertos">0</strong> de <strong id="jogoTotal">0</strong> certos</span>
+            <button type="button" id="jogoProx">Próximo item</button>
+          </div>
+        </div>
       </section>
 
-      <section class="cartao">
-        <h2>♻ Nossas lixeiras</h2>
-        <p>Toque numa cor para saber o que vai em cada lixeira.</p>
-        <div class="grade" id="grade"></div>
-      </section>
+      <section class="competicao">
+        <div class="painel-tinta comp">
+          <div class="comp-fio" id="compFio" aria-hidden="true"></div>
+          <div class="comp-texto">
+            <h2 data-ic="trofeu">Competição do mês</h2>
+            <p>
+              Leia o QR Code da lixeira depois de descartar e registre seus itens.
+              Todo mês premiamos <b>quem mais descartou</b> e
+              <b>quem descartou em mais dias</b>.
+            </p>
+            <a class="botao amarelo" href="ranking.html">Ver o ranking<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+          <div class="topo3" id="topo3" hidden>
+            <h3 id="topo3Titulo">Agora no ranking</h3>
+            <ol id="topo3Lista"></ol>
+          </div>
+        </div>
 
-      <section class="cartao destaque">
-        <h2>🏆 Competição do mês</h2>
-        <p>
-          Leia o QR Code da lixeira depois de descartar e registre seus itens.
-          Todo mês premiamos <b>quem mais descartou</b> e
-          <b>quem descartou em mais dias</b>.
-        </p>
-        <a class="botao" href="ranking.html">Ver o ranking</a>
-      </section>
-
-      <section class="cartao">
-        <h2>🍿 Participou da gincana?</h2>
-        <p>
-          Se você passou pelas nossas estações de perguntas, tem pipoca te
-          esperando.
-        </p>
-        <a class="botao secundario" href="pipoca.html">Resgatar minha pipoca</a>
+        <div class="gincana">
+          <div>
+            <h2 data-ic="pipoca">Participou da gincana?</h2>
+            <p>
+              Se você passou pelas nossas estações de perguntas, tem pipoca te
+              esperando.
+            </p>
+          </div>
+          <a class="botao claro" href="pipoca.html">Resgatar minha pipoca</a>
+        </div>
       </section>
     </main>
 
@@ -55,26 +90,91 @@
     <script src="assets/js/config.js"></script>
     <script src="assets/js/lacos.js"></script>
     <script src="assets/js/api.js"></script>
+    <script src="assets/js/cordao.js"></script>
     <script>
-      document.getElementById("grade").innerHTML = Object.entries(Lacos.LIXOS)
-        .map(
-          ([id, L]) =>
-            '<a class="lixeira-card" style="--c:' +
-            L.hex +
-            ";--t:" +
-            (L.texto || "#fff") +
-            '" href="lixeira.html?tipo=' +
-            id +
-            '">' +
-            '<span class="e" aria-hidden="true">' +
-            L.emoji +
-            "</span><b>" +
-            L.nome +
-            "</b><small>Lixeira " +
-            L.cor +
-            "</small></a>",
-        )
-        .join("");
+    (function () {
+      const $ = (id) => document.getElementById(id);
+      const tipos = Object.keys(Lacos.LIXOS);
+
+      // ----- As cinco lixeiras, uma por fio -----
+      $("grade").innerHTML = tipos.map((id) => {
+        const L = Lacos.LIXOS[id];
+        return '<a class="lane" href="lixeira.html?tipo=' + id + '" style="--c:' + L.hex + ";--tx:" + (L.texto || "#fafbf8") +
+          ";--cl:" + L.linha + ";--vt:lixeira-" + id + '">' +
+          '<span class="lane-nome">' + L.nome + "</span>" +
+          '<span class="lane-info"><b>Lixeira ' + L.cor.toLowerCase() + "</b> · " + Lacos.esc(L.pode[0]) + "</span>" +
+          '<span class="lane-ic">' + Lacos.icone(id) + "</span>" +
+          '<span class="lane-seta">' + Lacos.icone("seta") + "</span></a>";
+      }).join("");
+      Cordao.abertura();
+
+      // ----- Onde isso vai? -----
+      Cordao.tranca($("jogoFio"));
+      const itens = [];
+      tipos.forEach((id) => Lacos.LIXOS[id].pode.forEach((t) => itens.push({ t, id })));
+      for (let i = itens.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [itens[i], itens[j]] = [itens[j], itens[i]]; }
+      let atual = 0, acertos = 0, total = 0, travado = false;
+      const etiqueta = $("jogoItem"), balanco = Cordao.balancar(etiqueta);
+      $("jogoOpcoes").innerHTML = tipos.map((id) => {
+        const L = Lacos.LIXOS[id];
+        return '<button type="button" data-tipo="' + id + '" style="--c:' + L.hex + ";--tx:" + (L.texto || "#fafbf8") + '">' +
+          '<span class="bola">' + Lacos.icone(id) + "</span>" + L.nome + "</button>";
+      }).join("");
+      const botoes = [...$("jogoOpcoes").querySelectorAll("button")];
+
+      function mostrar() {
+        travado = false;
+        $("jogoTexto").textContent = itens[atual % itens.length].t;
+        $("jogoMsg").textContent = "";
+        botoes.forEach((b) => { b.disabled = false; b.classList.remove("certo", "errado"); });
+        etiqueta.classList.remove("voa", "treme");
+        etiqueta.classList.remove("chega"); void etiqueta.offsetWidth; etiqueta.classList.add("chega");
+        setTimeout(() => balanco.empurrar(2.4), 420);
+      }
+      function proximo() { atual++; mostrar(); }
+
+      botoes.forEach((b) => b.addEventListener("click", () => {
+        if (travado) return;
+        travado = true;
+        const item = itens[atual % itens.length], certo = b.dataset.tipo === item.id, L = Lacos.LIXOS[item.id];
+        total++; if (certo) acertos++;
+        $("jogoAcertos").textContent = acertos; $("jogoTotal").textContent = total;
+        botoes.forEach((x) => { x.disabled = true; if (x.dataset.tipo === item.id) x.classList.add("certo"); });
+        if (certo) {
+          $("jogoMsg").textContent = "Isso! Vai na lixeira " + L.cor.toLowerCase() + " (" + L.nome + ").";
+          const a = etiqueta.getBoundingClientRect(), c = b.getBoundingClientRect();
+          etiqueta.style.setProperty("--dx", Math.round(c.left + c.width / 2 - (a.left + a.width / 2)) + "px");
+          etiqueta.style.setProperty("--dy", Math.round(c.top + c.height / 2 - (a.top + a.height / 2)) + "px");
+          etiqueta.classList.add("voa");
+          setTimeout(proximo, Cordao.calmo() ? 1400 : 1100);
+        } else {
+          b.classList.add("errado");
+          $("jogoMsg").textContent = "Quase! Esse vai na lixeira " + L.cor.toLowerCase() + " (" + L.nome + ").";
+          etiqueta.classList.remove("treme"); void etiqueta.offsetWidth; etiqueta.classList.add("treme");
+        }
+      }));
+      $("jogoProx").addEventListener("click", proximo);
+      mostrar();
+
+      // ----- Quem está na frente agora (dados reais do ranking) -----
+      Cordao.tranca($("compFio"), { fundo: "#15181b" });
+      Api.ranking("itens").then((linhas) => {
+        const lista = $("topo3Lista");
+        if (!linhas || !linhas.length) {
+          lista.innerHTML = '<li class="vazio">Ninguém registrou ainda este mês.<br><b>O pódio está vazio esperando por você!</b></li>';
+        } else {
+          const top = linhas.slice(0, 3), max = Math.max(1, top[0].total_itens);
+          lista.innerHTML = top.map((r, i) =>
+            '<li style="--i:' + i + ";--v:" + (r.total_itens / max).toFixed(3) + '"><span class="pos">' + r.posicao + "</span>" +
+            '<span class="quem">' + Lacos.esc(r.nome) + "</span>" +
+            '<span class="valor"><span data-conta="' + r.total_itens + '">' + r.total_itens + "</span><small>" + (r.total_itens > 1 ? "itens" : "item") + "</small></span>" +
+            '<span class="barra" aria-hidden="true"></span></li>').join("");
+          Cordao.contarTodos(lista);
+          Cordao.tranca(lista.querySelector("li:first-child .barra"), { fundo: "#15181b" }); // quem lidera segura a corda inteira
+        }
+        $("topo3").hidden = false;
+      }).catch(() => {});
+    })();
     </script>
   </body>
 </html>

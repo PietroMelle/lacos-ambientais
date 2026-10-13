@@ -7,23 +7,28 @@
   <meta name="robots" content="noindex">
   <link rel="stylesheet" href="assets/css/style.css">
   <style>
-    .painel { max-width: 720px; margin: 20px auto; padding: 0 16px; }
+    .painel { max-width: 720px; margin: 24px auto; }
     .folhas { display: grid; gap: 24px; justify-content: center; padding: 0 16px 40px; }
     .folha {
-      width: 190mm; height: 270mm; background: #fff; border-radius: 10px; box-shadow: var(--sombra);
-      display: flex; flex-direction: column; overflow: hidden; --c: #2f7d4f; --t: #fff; break-after: page;
+      width: 190mm; height: 270mm; background: #fff; border-radius: 0;
+      display: flex; flex-direction: column; overflow: hidden; --c: #cf3a2e; --t: #fafbf8; break-after: page;
     }
-    .folha-topo { background: var(--c); color: var(--t); text-align: center; padding: 12mm 10mm 9mm; }
-    .folha-topo .e { font-size: 30mm; line-height: 1; }
-    .folha-topo .cor { font-family: "Fredoka", sans-serif; font-size: 11mm; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin: 3mm 0 0; }
-    .folha-topo .tipo { font-family: "Fredoka", sans-serif; font-size: 22mm; font-weight: 700; line-height: 1; margin: 1mm 0 0; }
-    .folha-meio { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6mm 12mm; text-align: center; }
-    .folha-meio .exemplos { font-size: 5.2mm; font-weight: 700; color: var(--cinza); margin-bottom: 5mm; }
+    .folha-topo { background: var(--c); color: var(--t); padding: 12mm 12mm 0; }
+    .folha-topo .linha1 { display: flex; align-items: flex-start; justify-content: space-between; gap: 8mm; }
+    .folha-topo .e { display: grid; place-items: center; flex: none; width: 30mm; height: 30mm; border: 1mm solid currentColor; border-radius: 50%; }
+    .folha-topo .e svg { width: 17mm; height: 17mm; stroke-width: 1.8; }
+    .folha-topo .cor { font-weight: 700; font-size: 7mm; line-height: 1; margin: 2mm 0 0; }
+    .folha-topo .tipo { font-family: var(--display); font-weight: 800; font-size: 30mm; line-height: .9; letter-spacing: -.04em; margin: 6mm 0 9mm; }
+    .folha-fio { --fc: var(--t); height: 4mm; margin: 0 -12mm 8mm; background: var(--trama-bg); }
+    .folha-meio { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4mm 14mm; text-align: center; }
+    .folha-meio .exemplos { font-size: 5mm; font-weight: 600; color: var(--tinta-2); margin: 0 0 6mm; }
     .qr { width: 95mm; height: 95mm; }
     .qr svg { width: 100%; height: 100%; display: block; }
-    .folha-meio .cta { font-family: "Fredoka", sans-serif; font-size: 8mm; margin: 5mm 0 0; color: var(--tinta); }
-    .folha-meio .sub { font-size: 5mm; font-weight: 700; color: var(--cinza); margin: 1mm 0 0; }
-    .folha-pe { border-top: 2mm solid var(--c); padding: 4mm; text-align: center; font-family: "Fredoka", sans-serif; font-size: 6mm; color: var(--verde-escuro); }
+    .folha-meio .cta { font-family: var(--display); font-weight: 800; font-size: 10mm; line-height: 1; letter-spacing: -.02em; margin: 6mm 0 0; color: var(--tinta); }
+    .folha-meio .sub { font-size: 5mm; font-weight: 600; color: var(--tinta-2); margin: 2mm 0 0; }
+    .folha-pe { position: relative; display: flex; align-items: center; justify-content: center; gap: 3mm; padding: 6mm 4mm 5mm; font-family: var(--display); font-weight: 800; font-size: 6.5mm; letter-spacing: -.02em; color: var(--tinta); }
+    .folha-pe::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3mm; background: var(--corda); }
+    .folha-pe svg { width: 9mm; height: 9mm; }
     @media print {
       @page { size: A4 portrait; margin: 10mm; }
       body { background: #fff; }
@@ -38,8 +43,8 @@
 <body>
   <header id="topo"></header>
 
-  <section class="painel cartao">
-    <h2>🖨 QR Codes para as lixeiras e a pipoca</h2>
+  <section class="painel cartao" style="margin-inline:auto;width:min(720px,calc(100% - 40px))">
+    <h2 data-ic="impressora">QR Codes para as lixeiras e a pipoca</h2>
     <p>Confira o endereço do site publicado (o mesmo que aparece na barra do navegador) e clique em imprimir. Sai uma folha A4 por lixeira, mais a da pipoca.</p>
     <label for="base">Endereço do site</label>
     <input type="text" id="base" placeholder="https://seu-usuario.github.io/lacos-ambientais/">
@@ -54,6 +59,7 @@
   <script src="assets/js/config.js"></script>
   <script src="assets/js/lacos.js"></script>
   <script src="assets/js/api.js"></script>
+  <script src="assets/js/cordao.js"></script>
   <script src="assets/js/qrcode.js"></script>
   <script>
   (function () {
@@ -73,34 +79,34 @@
       if (base && !base.endsWith("/")) base += "/";
       Lacos.guardar("lacos_base_qr", base);
       const folhas = Object.entries(Lacos.LIXOS).map(([id, L]) => `
-        <div class="folha" style="--c:${L.hex};--t:${L.texto || "#fff"}">
+        <div class="folha" style="--c:${L.hex};--t:${L.texto || "#fafbf8"}">
           <div class="folha-topo">
-            <div class="e">${L.emoji}</div>
-            <p class="cor">Lixeira ${L.cor}</p>
+            <div class="linha1"><p class="cor">Lixeira ${L.cor}</p><div class="e">${Lacos.icone(id)}</div></div>
             <p class="tipo">${L.nome}</p>
+            <div class="folha-fio" data-trama="${L.trama}"></div>
           </div>
           <div class="folha-meio">
             <p class="exemplos">${L.pode.slice(0, 3).map(Lacos.esc).join(" · ")}</p>
             <div class="qr">${svgQR(base + "lixeira.html?tipo=" + id)}</div>
-            <p class="cta">Descartou? Aponte a câmera! 📱</p>
-            <p class="sub">Aprenda o que vai aqui e concorra a prêmios todo mês 🏆</p>
+            <p class="cta">Descartou? Aponte a câmera!</p>
+            <p class="sub">Aprenda o que vai aqui e concorra a prêmios todo mês</p>
           </div>
-          <div class="folha-pe">♻ Laços Ambientais</div>
+          <div class="folha-pe">${Lacos.icone("laco")}Laços Ambientais</div>
         </div>`);
       folhas.push(`
-        <div class="folha" style="--c:#e2463a;--t:#fff">
+        <div class="folha" style="--c:#cf3a2e;--t:#fafbf8">
           <div class="folha-topo">
-            <div class="e">🍿</div>
-            <p class="cor">Gincana Sustentável</p>
-            <p class="tipo" style="font-size:17mm">Resgate sua pipoca!</p>
+            <div class="linha1"><p class="cor">Gincana Sustentável</p><div class="e">${Lacos.icone("pipoca")}</div></div>
+            <p class="tipo" style="font-size:16mm">Resgate sua pipoca!</p>
+            <div class="folha-fio" data-trama="liso"></div>
           </div>
           <div class="folha-meio">
             <p class="exemplos">Passou pelas estações? A pipoca é sua.</p>
             <div class="qr">${svgQR(base + "pipoca.html")}</div>
-            <p class="cta">Aponte a câmera e resgate 📱</p>
+            <p class="cta">Aponte a câmera e resgate</p>
             <p class="sub">Uma pipoca por pessoa · mostre o código para a equipe</p>
           </div>
-          <div class="folha-pe">♻ Laços Ambientais</div>
+          <div class="folha-pe">${Lacos.icone("laco")}Laços Ambientais</div>
         </div>`);
       $("folhas").innerHTML = folhas.join("");
     }

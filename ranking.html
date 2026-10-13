@@ -4,33 +4,39 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ranking do mês — Laços Ambientais</title>
-  <meta name="theme-color" content="#2f7d4f">
+  <meta name="theme-color" content="#eef0ec">
+  <link rel="preload" href="assets/fonts/funnel-display-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body class="tema-ranking">
   <header id="topo"></header>
 
-  <main class="container">
-    <section class="hero">
-      <span class="hero-emoji" aria-hidden="true">🏆</span>
-      <span class="etiqueta" id="mes"></span>
+  <main>
+    <section class="cabeca">
       <h1>Ranking do mês</h1>
+      <div class="cabeca-fio" id="cabecaFio">
+        <span class="etiqueta" data-balanca="entra"><span id="mes"></span></span>
+        <span class="capa-icone" data-ic="trofeu"></span>
+      </div>
       <p>Dois prêmios, duas formas de ganhar: <b>volume</b> ou <b>constância</b>. Qual é a sua?</p>
     </section>
 
-    <section class="cartao">
-      <div class="abas" role="tablist">
-        <button role="tab" aria-selected="true" data-criterio="itens">♻ Mais itens</button>
-        <button role="tab" aria-selected="false" data-criterio="dias">📅 Mais dias</button>
+    <section class="faixa ranking-layout">
+      <div class="cartao">
+        <div class="abas" role="tablist">
+          <button role="tab" aria-selected="true" data-criterio="itens" data-ic="ciclo">Mais itens</button>
+          <button role="tab" aria-selected="false" data-criterio="dias" data-ic="calendario">Mais dias</button>
+        </div>
+        <p class="ajuda" id="explica"></p>
+        <div class="regua" id="regua" aria-hidden="true"></div>
+        <ol class="rank" id="lista"><li class="vazio">Carregando…</li></ol>
       </div>
-      <p class="ajuda" id="explica"></p>
-      <ol class="rank" id="lista"><li class="vazio">Carregando…</li></ol>
-    </section>
 
-    <section class="cartao destaque">
-      <h2>Como funciona</h2>
-      <p>Cada lixeira tem um QR Code. Jogou o lixo no lugar certo? Leia o código e registre quantos itens descartou.</p>
-      <p style="margin:0">No fim do mês, o <b>1º lugar em itens</b> e o <b>1º lugar em dias</b> ganham um presente. Empates são decididos por quem chegou lá primeiro.</p>
+      <div class="painel-tinta">
+        <h2>Como funciona</h2>
+        <p>Cada lixeira tem um QR Code. Jogou o lixo no lugar certo? Leia o código e registre quantos itens descartou.</p>
+        <p style="margin:0">No fim do mês, o <b>1º lugar em itens</b> e o <b>1º lugar em dias</b> ganham um presente. Empates são decididos por quem chegou lá primeiro.</p>
+      </div>
     </section>
   </main>
 
@@ -39,10 +45,12 @@
   <script src="assets/js/config.js"></script>
   <script src="assets/js/lacos.js"></script>
   <script src="assets/js/api.js"></script>
+  <script src="assets/js/cordao.js"></script>
   <script>
   (function () {
     const $ = (id) => document.getElementById(id);
     $("mes").textContent = Lacos.mesAtual();
+    Cordao.tranca($("cabecaFio"));
     const textos = {
       itens: "Quem descartou mais itens corretamente neste mês.",
       dias: "Quem descartou em mais dias diferentes neste mês. Constância vale ouro!",
@@ -51,21 +59,32 @@
     async function carregar(criterio) {
       document.querySelectorAll(".abas button").forEach((b) => b.setAttribute("aria-selected", b.dataset.criterio === criterio));
       $("explica").textContent = textos[criterio];
+      $("regua").innerHTML = "";
       $("lista").innerHTML = '<li class="vazio">Carregando…</li>';
       try {
         const linhas = await Api.ranking(criterio);
         if (!linhas || !linhas.length) {
-          $("lista").innerHTML = '<li class="vazio">Ninguém registrou ainda este mês.<br><b>O pódio está vazio esperando por você!</b> 🥇</li>';
+          // a régua aparece mesmo vazia: uma ponta de fio solta no zero
+          $("regua").innerHTML = "<span>0</span><span>5</span><span>10</span>";
+          $("lista").innerHTML = '<li class="vazio"><span class="ponta" aria-hidden="true"></span>Ninguém registrou ainda este mês.<br><b>O pódio está vazio esperando por você!</b></li>';
           return;
         }
-        $("lista").innerHTML = linhas.map((r) => {
-          const valor = criterio === "dias" ? r.dias : r.total_itens;
+        // Cada pessoa é um fio com o comprimento da sua pontuação, medido na mesma régua
+        const valorDe = (r) => (criterio === "dias" ? r.dias : r.total_itens);
+        const max = Math.max(1, ...linhas.map(valorDe));
+        $("regua").innerHTML = "<span>0</span><span>" + Math.round(max / 2) + "</span><span>" + max + "</span>";
+        $("lista").innerHTML = linhas.map((r, i) => {
+          const valor = valorDe(r);
           const rotulo = criterio === "dias" ? (r.dias > 1 ? "dias" : "dia") : (r.total_itens > 1 ? "itens" : "item");
           const extra = criterio === "dias" ? r.total_itens + " itens" : r.dias + (r.dias > 1 ? " dias" : " dia");
-          return '<li><span class="pos">' + r.posicao + '</span>' +
+          return '<li' + (r.posicao === 1 ? ' class="lider"' : "") + ' style="--i:' + i + ";--v:" + (valor / max).toFixed(3) + '">' +
+            '<span class="pos">' + r.posicao + '</span>' +
             '<span class="quem"><b>' + Lacos.esc(r.nome) + '</b><small>' + Lacos.esc(r.vinculo) + ' · ' + extra + '</small></span>' +
-            '<span class="valor">' + valor + '<small>' + rotulo + '</small></span></li>';
+            '<span class="valor"><span data-conta="' + valor + '">' + valor + '</span><small>' + rotulo + '</small></span>' +
+            '<span class="barra" aria-hidden="true"></span></li>';
         }).join("");
+        Cordao.contarTodos($("lista"));
+        Cordao.tranca($("lista").querySelector(".lider .barra")); // quem lidera segura a corda inteira
       } catch (err) {
         $("lista").innerHTML = '<li class="vazio">' + Lacos.esc(err.message) + '</li>';
       }

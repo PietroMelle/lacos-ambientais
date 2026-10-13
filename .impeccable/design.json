@@ -1,0 +1,1044 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-13T01:22:28.957Z",
+  "title": "Design System: Laços Ambientais",
+  "extensions": {
+    "colorMeta": {
+      "tinta": {
+        "role": "primary",
+        "displayName": "Graphite Ink",
+        "canonical": "oklch(20.7% 0.008 248.2)",
+        "tonalRamp": [
+          "oklch(15.0% 0.008 248.2)",
+          "oklch(26.4% 0.008 248.2)",
+          "oklch(37.9% 0.008 248.2)",
+          "oklch(49.3% 0.008 248.2)",
+          "oklch(60.7% 0.008 248.2)",
+          "oklch(72.1% 0.008 248.2)",
+          "oklch(83.6% 0.008 248.2)",
+          "oklch(95.0% 0.008 248.2)"
+        ],
+        "cssVar": "--tinta"
+      },
+      "azul": {
+        "role": "secondary",
+        "displayName": "Papel Blue",
+        "canonical": "oklch(47.4% 0.139 257.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.139 257.0)",
+          "oklch(26.4% 0.139 257.0)",
+          "oklch(37.9% 0.139 257.0)",
+          "oklch(49.3% 0.139 257.0)",
+          "oklch(60.7% 0.139 257.0)",
+          "oklch(72.1% 0.139 257.0)",
+          "oklch(83.6% 0.139 257.0)",
+          "oklch(95.0% 0.139 257.0)"
+        ],
+        "cssVar": "--azul"
+      },
+      "vermelho": {
+        "role": "secondary",
+        "displayName": "Plástico Red",
+        "canonical": "oklch(57.0% 0.188 29.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.188 29.0)",
+          "oklch(26.4% 0.188 29.0)",
+          "oklch(37.9% 0.188 29.0)",
+          "oklch(49.3% 0.188 29.0)",
+          "oklch(60.7% 0.188 29.0)",
+          "oklch(72.1% 0.188 29.0)",
+          "oklch(83.6% 0.188 29.0)",
+          "oklch(95.0% 0.188 29.0)"
+        ],
+        "cssVar": "--vermelho"
+      },
+      "verde": {
+        "role": "secondary",
+        "displayName": "Vidro Green",
+        "canonical": "oklch(53.3% 0.120 153.3)",
+        "tonalRamp": [
+          "oklch(15.0% 0.120 153.3)",
+          "oklch(26.4% 0.120 153.3)",
+          "oklch(37.9% 0.120 153.3)",
+          "oklch(49.3% 0.120 153.3)",
+          "oklch(60.7% 0.120 153.3)",
+          "oklch(72.1% 0.120 153.3)",
+          "oklch(83.6% 0.120 153.3)",
+          "oklch(95.0% 0.120 153.3)"
+        ],
+        "cssVar": "--verde"
+      },
+      "amarelo": {
+        "role": "secondary",
+        "displayName": "Metal Yellow",
+        "canonical": "oklch(80.3% 0.165 84.3)",
+        "tonalRamp": [
+          "oklch(15.0% 0.165 84.3)",
+          "oklch(26.4% 0.165 84.3)",
+          "oklch(37.9% 0.165 84.3)",
+          "oklch(49.3% 0.165 84.3)",
+          "oklch(60.7% 0.165 84.3)",
+          "oklch(72.1% 0.165 84.3)",
+          "oklch(83.6% 0.165 84.3)",
+          "oklch(95.0% 0.165 84.3)"
+        ],
+        "cssVar": "--amarelo"
+      },
+      "marrom": {
+        "role": "secondary",
+        "displayName": "Orgânico Brown",
+        "canonical": "oklch(46.1% 0.082 55.8)",
+        "tonalRamp": [
+          "oklch(15.0% 0.082 55.8)",
+          "oklch(26.4% 0.082 55.8)",
+          "oklch(37.9% 0.082 55.8)",
+          "oklch(49.3% 0.082 55.8)",
+          "oklch(60.7% 0.082 55.8)",
+          "oklch(72.1% 0.082 55.8)",
+          "oklch(83.6% 0.082 55.8)",
+          "oklch(95.0% 0.082 55.8)"
+        ],
+        "cssVar": "--marrom"
+      },
+      "vermelho-linha": {
+        "role": "tertiary",
+        "displayName": "Plástico Text Red",
+        "canonical": "oklch(52.2% 0.172 28.1)",
+        "tonalRamp": [
+          "oklch(15.0% 0.172 28.1)",
+          "oklch(26.4% 0.172 28.1)",
+          "oklch(37.9% 0.172 28.1)",
+          "oklch(49.3% 0.172 28.1)",
+          "oklch(60.7% 0.172 28.1)",
+          "oklch(72.1% 0.172 28.1)",
+          "oklch(83.6% 0.172 28.1)",
+          "oklch(95.0% 0.172 28.1)"
+        ]
+      },
+      "verde-linha": {
+        "role": "tertiary",
+        "displayName": "Vidro Text Green",
+        "canonical": "oklch(49.6% 0.113 153.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.113 153.0)",
+          "oklch(26.4% 0.113 153.0)",
+          "oklch(37.9% 0.113 153.0)",
+          "oklch(49.3% 0.113 153.0)",
+          "oklch(60.7% 0.113 153.0)",
+          "oklch(72.1% 0.113 153.0)",
+          "oklch(83.6% 0.113 153.0)",
+          "oklch(95.0% 0.113 153.0)"
+        ]
+      },
+      "amarelo-linha": {
+        "role": "tertiary",
+        "displayName": "Metal Text Ochre",
+        "canonical": "oklch(53.0% 0.109 83.3)",
+        "tonalRamp": [
+          "oklch(15.0% 0.109 83.3)",
+          "oklch(26.4% 0.109 83.3)",
+          "oklch(37.9% 0.109 83.3)",
+          "oklch(49.3% 0.109 83.3)",
+          "oklch(60.7% 0.109 83.3)",
+          "oklch(72.1% 0.109 83.3)",
+          "oklch(83.6% 0.109 83.3)",
+          "oklch(95.0% 0.109 83.3)"
+        ]
+      },
+      "chao": {
+        "role": "neutral",
+        "displayName": "Campus Concrete",
+        "canonical": "oklch(95.2% 0.006 128.5)",
+        "tonalRamp": [
+          "oklch(15.0% 0.006 128.5)",
+          "oklch(26.4% 0.006 128.5)",
+          "oklch(37.9% 0.006 128.5)",
+          "oklch(49.3% 0.006 128.5)",
+          "oklch(60.7% 0.006 128.5)",
+          "oklch(72.1% 0.006 128.5)",
+          "oklch(83.6% 0.006 128.5)",
+          "oklch(95.0% 0.006 128.5)"
+        ],
+        "cssVar": "--chao"
+      },
+      "chao-fundo": {
+        "role": "neutral",
+        "displayName": "Deep Concrete",
+        "canonical": "oklch(91.7% 0.009 134.9)",
+        "tonalRamp": [
+          "oklch(15.0% 0.009 134.9)",
+          "oklch(26.4% 0.009 134.9)",
+          "oklch(37.9% 0.009 134.9)",
+          "oklch(49.3% 0.009 134.9)",
+          "oklch(60.7% 0.009 134.9)",
+          "oklch(72.1% 0.009 134.9)",
+          "oklch(83.6% 0.009 134.9)",
+          "oklch(95.0% 0.009 134.9)"
+        ],
+        "cssVar": "--chao-fundo"
+      },
+      "folha": {
+        "role": "neutral",
+        "displayName": "Sheet White",
+        "canonical": "oklch(98.6% 0.004 121.6)",
+        "tonalRamp": [
+          "oklch(15.0% 0.004 121.6)",
+          "oklch(26.4% 0.004 121.6)",
+          "oklch(37.9% 0.004 121.6)",
+          "oklch(49.3% 0.004 121.6)",
+          "oklch(60.7% 0.004 121.6)",
+          "oklch(72.1% 0.004 121.6)",
+          "oklch(83.6% 0.004 121.6)",
+          "oklch(95.0% 0.004 121.6)"
+        ],
+        "cssVar": "--folha"
+      },
+      "campo": {
+        "role": "neutral",
+        "displayName": "Field White",
+        "canonical": "oklch(100.0% 0.000 0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.000 0)",
+          "oklch(26.4% 0.000 0)",
+          "oklch(37.9% 0.000 0)",
+          "oklch(49.3% 0.000 0)",
+          "oklch(60.7% 0.000 0)",
+          "oklch(72.1% 0.000 0)",
+          "oklch(83.6% 0.000 0)",
+          "oklch(95.0% 0.000 0)"
+        ]
+      },
+      "linha": {
+        "role": "neutral",
+        "displayName": "Concrete Hairline",
+        "canonical": "oklch(83.9% 0.012 141.3)",
+        "tonalRamp": [
+          "oklch(15.0% 0.012 141.3)",
+          "oklch(26.4% 0.012 141.3)",
+          "oklch(37.9% 0.012 141.3)",
+          "oklch(49.3% 0.012 141.3)",
+          "oklch(60.7% 0.012 141.3)",
+          "oklch(72.1% 0.012 141.3)",
+          "oklch(83.6% 0.012 141.3)",
+          "oklch(95.0% 0.012 141.3)"
+        ],
+        "cssVar": "--linha"
+      },
+      "linha-escura": {
+        "role": "neutral",
+        "displayName": "Ink Hairline",
+        "canonical": "oklch(31.3% 0.011 237.0)",
+        "tonalRamp": [
+          "oklch(15.0% 0.011 237.0)",
+          "oklch(26.4% 0.011 237.0)",
+          "oklch(37.9% 0.011 237.0)",
+          "oklch(49.3% 0.011 237.0)",
+          "oklch(60.7% 0.011 237.0)",
+          "oklch(72.1% 0.011 237.0)",
+          "oklch(83.6% 0.011 237.0)",
+          "oklch(95.0% 0.011 237.0)"
+        ]
+      },
+      "tinta-2": {
+        "role": "neutral",
+        "displayName": "Slate Ink",
+        "canonical": "oklch(42.4% 0.013 219.8)",
+        "tonalRamp": [
+          "oklch(15.0% 0.013 219.8)",
+          "oklch(26.4% 0.013 219.8)",
+          "oklch(37.9% 0.013 219.8)",
+          "oklch(49.3% 0.013 219.8)",
+          "oklch(60.7% 0.013 219.8)",
+          "oklch(72.1% 0.013 219.8)",
+          "oklch(83.6% 0.013 219.8)",
+          "oklch(95.0% 0.013 219.8)"
+        ],
+        "cssVar": "--tinta-2"
+      },
+      "tinta-clara": {
+        "role": "neutral",
+        "displayName": "Ash on Ink",
+        "canonical": "oklch(85.2% 0.008 186.9)",
+        "tonalRamp": [
+          "oklch(15.0% 0.008 186.9)",
+          "oklch(26.4% 0.008 186.9)",
+          "oklch(37.9% 0.008 186.9)",
+          "oklch(49.3% 0.008 186.9)",
+          "oklch(60.7% 0.008 186.9)",
+          "oklch(72.1% 0.008 186.9)",
+          "oklch(83.6% 0.008 186.9)",
+          "oklch(95.0% 0.008 186.9)"
+        ],
+        "cssVar": "--tinta-clara"
+      },
+      "campo-borda-hover": {
+        "role": "neutral",
+        "displayName": "Field Hover Grey",
+        "canonical": "oklch(70.7% 0.012 167.7)",
+        "tonalRamp": [
+          "oklch(15.0% 0.012 167.7)",
+          "oklch(26.4% 0.012 167.7)",
+          "oklch(37.9% 0.012 167.7)",
+          "oklch(49.3% 0.012 167.7)",
+          "oklch(60.7% 0.012 167.7)",
+          "oklch(72.1% 0.012 167.7)",
+          "oklch(83.6% 0.012 167.7)",
+          "oklch(95.0% 0.012 167.7)"
+        ]
+      },
+      "placeholder": {
+        "role": "neutral",
+        "displayName": "Placeholder Grey",
+        "canonical": "oklch(54.9% 0.010 214.4)",
+        "tonalRamp": [
+          "oklch(15.0% 0.010 214.4)",
+          "oklch(26.4% 0.010 214.4)",
+          "oklch(37.9% 0.010 214.4)",
+          "oklch(49.3% 0.010 214.4)",
+          "oklch(60.7% 0.010 214.4)",
+          "oklch(72.1% 0.010 214.4)",
+          "oklch(83.6% 0.010 214.4)",
+          "oklch(95.0% 0.010 214.4)"
+        ]
+      },
+      "sombra-fio": {
+        "role": "neutral",
+        "displayName": "Strand Shadow",
+        "canonical": "oklch(15.7% 0.004 229.1)",
+        "tonalRamp": [
+          "oklch(15.0% 0.004 229.1)",
+          "oklch(26.4% 0.004 229.1)",
+          "oklch(37.9% 0.004 229.1)",
+          "oklch(49.3% 0.004 229.1)",
+          "oklch(60.7% 0.004 229.1)",
+          "oklch(72.1% 0.004 229.1)",
+          "oklch(83.6% 0.004 229.1)",
+          "oklch(95.0% 0.004 229.1)"
+        ]
+      },
+      "erro-fundo": {
+        "role": "status",
+        "displayName": "Error Blush",
+        "canonical": "oklch(93.7% 0.026 26.5)",
+        "tonalRamp": [
+          "oklch(15.0% 0.026 26.5)",
+          "oklch(26.4% 0.026 26.5)",
+          "oklch(37.9% 0.026 26.5)",
+          "oklch(49.3% 0.026 26.5)",
+          "oklch(60.7% 0.026 26.5)",
+          "oklch(72.1% 0.026 26.5)",
+          "oklch(83.6% 0.026 26.5)",
+          "oklch(95.0% 0.026 26.5)"
+        ]
+      },
+      "erro-tinta": {
+        "role": "status",
+        "displayName": "Error Ink",
+        "canonical": "oklch(42.5% 0.148 29.4)",
+        "tonalRamp": [
+          "oklch(15.0% 0.148 29.4)",
+          "oklch(26.4% 0.148 29.4)",
+          "oklch(37.9% 0.148 29.4)",
+          "oklch(49.3% 0.148 29.4)",
+          "oklch(60.7% 0.148 29.4)",
+          "oklch(72.1% 0.148 29.4)",
+          "oklch(83.6% 0.148 29.4)",
+          "oklch(95.0% 0.148 29.4)"
+        ]
+      },
+      "nao-pode": {
+        "role": "status",
+        "displayName": "Não-Pode Salmon",
+        "canonical": "oklch(74.0% 0.126 26.5)",
+        "tonalRamp": [
+          "oklch(15.0% 0.126 26.5)",
+          "oklch(26.4% 0.126 26.5)",
+          "oklch(37.9% 0.126 26.5)",
+          "oklch(49.3% 0.126 26.5)",
+          "oklch(60.7% 0.126 26.5)",
+          "oklch(72.1% 0.126 26.5)",
+          "oklch(83.6% 0.126 26.5)",
+          "oklch(95.0% 0.126 26.5)"
+        ]
+      },
+      "ok-fundo": {
+        "role": "status",
+        "displayName": "Success Cream",
+        "canonical": "oklch(95.8% 0.045 91.7)",
+        "tonalRamp": [
+          "oklch(15.0% 0.045 91.7)",
+          "oklch(26.4% 0.045 91.7)",
+          "oklch(37.9% 0.045 91.7)",
+          "oklch(49.3% 0.045 91.7)",
+          "oklch(60.7% 0.045 91.7)",
+          "oklch(72.1% 0.045 91.7)",
+          "oklch(83.6% 0.045 91.7)",
+          "oklch(95.0% 0.045 91.7)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Page headlines on the ground (ranking, privacy). Caps at 6rem."
+      },
+      "display-hero": {
+        "displayName": "Display Hero",
+        "purpose": "\"Pequenos gestos, grandes laços.\" below 760px; four lines on a phone, crossed by the braid."
+      },
+      "display-hero-wide": {
+        "displayName": "Display Hero (wide)",
+        "purpose": "Hero headline from 760px; capped at 10ch until 1100px."
+      },
+      "display-capa": {
+        "displayName": "Display Capa",
+        "purpose": "Bin name or page title on a bin-coloured cover."
+      },
+      "display-capa-wide": {
+        "displayName": "Display Capa (wide)",
+        "purpose": "Cover title from 760px; the pipoca cover uses clamp(4.5rem, 7vw, 6rem)."
+      },
+      "lane-name": {
+        "displayName": "Lane Name",
+        "purpose": "The five bin names in the home lanes."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headings (\"Nossas lixeiras\", \"Onde isso vai?\")."
+      },
+      "headline-panel": {
+        "displayName": "Headline Panel",
+        "purpose": "Headings inside cards, ink panels and the gincana band, with a 0.8em leading icon."
+      },
+      "headline-reading": {
+        "displayName": "Headline Reading",
+        "purpose": "Headings inside the privacy text."
+      },
+      "game-item": {
+        "displayName": "Game Item",
+        "purpose": "The item printed on the hanging game tag."
+      },
+      "wordmark": {
+        "displayName": "Wordmark",
+        "purpose": "Footer \"Laços Ambientais\" below 760px."
+      },
+      "wordmark-wide": {
+        "displayName": "Wordmark (wide)",
+        "purpose": "Footer wordmark from 760px, on one line."
+      },
+      "brand": {
+        "displayName": "Brand",
+        "purpose": "Header wordmark beside the bow icon; 1.4rem from 760px."
+      },
+      "numeral-counter": {
+        "displayName": "Counter Numeral",
+        "purpose": "Items-per-entry counter on the registration card."
+      },
+      "numeral-code": {
+        "displayName": "Voucher Code",
+        "purpose": "Pipoca voucher code, in Plástico Red."
+      },
+      "numeral-score": {
+        "displayName": "Score Numeral",
+        "purpose": "Success score tiles; counts up."
+      },
+      "numeral-leader": {
+        "displayName": "Leader Numeral",
+        "purpose": "Ranking leader position and value."
+      },
+      "numeral-rank": {
+        "displayName": "Rank Numeral",
+        "purpose": "Ranking values (positions are 1.9rem)."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All reading text; paragraphs max 65ch."
+      },
+      "reading": {
+        "displayName": "Reading",
+        "purpose": "Privacy text paragraphs."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Hero intro (1.25rem from 760px), 34–36ch."
+      },
+      "lead-capa": {
+        "displayName": "Lead Capa",
+        "purpose": "Cover call line (1.4rem from 760px), 30ch."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "Every pill button."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Form labels and the header Ranking pill."
+      },
+      "tag": {
+        "displayName": "Tag",
+        "purpose": "Text on hang tags."
+      },
+      "help": {
+        "displayName": "Help",
+        "purpose": "Helper lines and limits, in Slate Ink."
+      }
+    },
+    "shadows": [],
+    "depth": {
+      "backStrand": "color-mix(in srgb, <strand hex> 58%, #0b0d0e)",
+      "note": "No box-shadow anywhere; depth is the helix passing behind itself plus z-layering of cord and type."
+    },
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "The one curve: every transition, entrance and strand draw (--ease)."
+      },
+      {
+        "name": "ease-expo-out-js",
+        "value": "1 - 2^(-10t)",
+        "purpose": "JS tweens: hero intro draw and number count-up (cordao.js saida)."
+      },
+      {
+        "name": "ease-throw",
+        "value": "cubic-bezier(.6, 0, .9, .4)",
+        "purpose": "The game tag being thrown into the chosen disc (voa, .5s)."
+      },
+      {
+        "name": "hover-colour",
+        "value": "200ms–300ms",
+        "purpose": "Colour, border and background state changes."
+      },
+      {
+        "name": "icon-move",
+        "value": "350ms–450ms",
+        "purpose": "Button icon nudge (4px), lane icon −12° rotation, lane arrow slide."
+      },
+      {
+        "name": "lane-flood",
+        "value": "550ms",
+        "purpose": "Bin colour wipes down the lane (clip-path inset)."
+      },
+      {
+        "name": "tabs-thumb",
+        "value": "500ms",
+        "purpose": "Ink thumb sliding between ranking tabs."
+      },
+      {
+        "name": "surge",
+        "value": "550ms–600ms",
+        "purpose": "Entrance: rise 14px + fade (success, rank rows with 55ms stagger, score tiles at .35s/.45s)."
+      },
+      {
+        "name": "stretch",
+        "value": "1000ms",
+        "purpose": "Ranking strands stretch to length (55ms stagger +180ms; top 3: 90ms +200ms)."
+      },
+      {
+        "name": "braid-intro",
+        "value": "1700ms",
+        "purpose": "Hero braid draws to the end of the hero on load, then follows scroll."
+      },
+      {
+        "name": "braid-draw",
+        "value": "1600ms",
+        "purpose": "Straight braid draws once 40% visible; a bow's tail adds 600ms at 1100ms delay."
+      },
+      {
+        "name": "strand-draw",
+        "value": "1100ms (+150ms delay)",
+        "purpose": "Single strand across a bin cover."
+      },
+      {
+        "name": "lane-strand-draw",
+        "value": "900ms",
+        "purpose": "Each unbraided strand running along its lane."
+      },
+      {
+        "name": "success-bow",
+        "value": "1300ms (+50ms), tail 450ms at 1150ms",
+        "purpose": "The bin's strand tying a bow after a logged discard."
+      },
+      {
+        "name": "count-up",
+        "value": "1000ms",
+        "purpose": "Numbers counting up (data-conta)."
+      },
+      {
+        "name": "weave-walk",
+        "value": "period × 0.14s, linear, infinite",
+        "purpose": "Torcido, contas and nós weaves walk ~7px/s, only while visible."
+      },
+      {
+        "name": "tag-swing",
+        "value": "spring k 0.055, damping 0.93/frame, drag 0.4°/px, max ±38°",
+        "purpose": "Hang tags and the voucher swing back after a pull; entry push 3.2 at 650ms (game 2.4, voucher 2.6)."
+      },
+      {
+        "name": "knot-tighten",
+        "value": "450ms",
+        "purpose": "A new knot tightens from scale 1.7 and −35°."
+      },
+      {
+        "name": "counter-drop",
+        "value": "380ms",
+        "purpose": "Counter number drops in from −12px."
+      },
+      {
+        "name": "game-tag",
+        "value": "arrive 700ms, shake 420ms, throw 500ms",
+        "purpose": "Game tag drops in from −70px at −7°; shakes ±5° on a wrong answer."
+      },
+      {
+        "name": "voucher-hang",
+        "value": "900ms",
+        "purpose": "Voucher drops in from −50px at 9°."
+      },
+      {
+        "name": "clock-blink",
+        "value": "1s steps(2, jump-none)",
+        "purpose": "The yellow live dot on the voucher clock."
+      },
+      {
+        "name": "view-transition",
+        "value": "old 200ms ease-in, new 380ms ease (rise 10px), groups 550ms ease",
+        "purpose": "Page navigation; lane morphs into bin cover via view-transition-name lixeira-{tipo}."
+      }
+    ],
+    "reducedMotion": [
+      "All CSS animations off (animation: none !important on every element and pseudo-element).",
+      "Hero braid is drawn completely at once: no intro tween, no scroll-driven draw; lane strands appear without transition.",
+      "Straight braids, single strands and bows reveal at full length immediately.",
+      "Weaves do not walk (the IntersectionObserver that adds .anda is never attached).",
+      "Hang tags and the voucher do not swing; pointer drag and entry pushes are ignored.",
+      "Counters and scores show their final value without counting.",
+      "Smooth scrolling is only enabled under prefers-reduced-motion: no-preference; the success scroll uses behavior 'auto'.",
+      "Lane hover flood becomes an opacity fade (0.2s) instead of a clip-path wipe.",
+      "Transitions removed on lane icon, lane arrow, button icon, game disc and tabs thumb.",
+      "View transitions shortened to 0.12s.",
+      "Game advances after 1400ms instead of 1100ms after a correct answer."
+    ],
+    "breakpoints": [
+      {
+        "name": "wide",
+        "value": "760px",
+        "purpose": "The single layout breakpoint; the braid engine switches geometry at the same width (W >= 760)."
+      },
+      {
+        "name": "hero-unbound",
+        "value": "1100px",
+        "purpose": "Hero headline drops its 10ch cap."
+      },
+      {
+        "name": "hover",
+        "value": "(hover: hover)",
+        "purpose": "All hover styles are gated behind hover-capable devices."
+      },
+      {
+        "name": "qr-screen",
+        "value": "max-width: 800px",
+        "purpose": "QR print sheets preview at zoom .45 on small screens (team-only page)."
+      },
+      {
+        "name": "print",
+        "value": "print, A4 portrait, 10mm margin",
+        "purpose": "QR sheets: 190 × 270mm, print-color-adjust exact."
+      }
+    ],
+    "bins": {
+      "papel": {
+        "nome": "Papel",
+        "cor": "Azul",
+        "hex": "#1f5aa8",
+        "linha": "#1f5aa8",
+        "texto": "#fafbf8",
+        "claro": "#e4ecf7",
+        "trama": "liso",
+        "weave": "satin sheen"
+      },
+      "plastico": {
+        "nome": "Plástico",
+        "cor": "Vermelha",
+        "hex": "#cf3a2e",
+        "linha": "#b8322a",
+        "texto": "#fafbf8",
+        "claro": "#f8e3e1",
+        "trama": "torcido",
+        "weave": "twist bands"
+      },
+      "vidro": {
+        "nome": "Vidro",
+        "cor": "Verde",
+        "hex": "#23804a",
+        "linha": "#1f7442",
+        "texto": "#fafbf8",
+        "claro": "#e0efe5",
+        "trama": "duplo",
+        "weave": "hollow centre (double line)"
+      },
+      "metal": {
+        "nome": "Metal",
+        "cor": "Amarela",
+        "hex": "#f0b400",
+        "linha": "#8a6500",
+        "texto": "#15181b",
+        "claro": "#fcf1d0",
+        "trama": "contas",
+        "weave": "beads"
+      },
+      "organico": {
+        "nome": "Orgânico",
+        "cor": "Marrom",
+        "hex": "#7b4b27",
+        "linha": "#7b4b27",
+        "texto": "#fafbf8",
+        "claro": "#efe5dc",
+        "trama": "nos",
+        "weave": "knots"
+      }
+    },
+    "weaves": {
+      "liso": {
+        "svg": {
+          "stroke": "rgba(255,255,255,.5) — or clarear(tom, .3) on a light strand",
+          "strokeWidth": "0.22w"
+        },
+        "css": "linear-gradient(transparent 38%, rgba(255,255,255,.34) 38% 62%, transparent 62%), var(--fc)",
+        "walks": false
+      },
+      "torcido": {
+        "svg": {
+          "stroke": "rgba(10,12,14,.32) — or tom at .55 opacity",
+          "strokeWidth": "w",
+          "dasharray": "0.32w 0.5w",
+          "linecap": "butt",
+          "period": "0.82w"
+        },
+        "css": "repeating-linear-gradient(-60deg, var(--fc) 0 3px, color-mix(in srgb, var(--fc) 66%, #000) 3px 5px)",
+        "walks": true
+      },
+      "duplo": {
+        "svg": {
+          "stroke": "fundo (the band colour)",
+          "strokeWidth": "0.36w"
+        },
+        "css": "linear-gradient(var(--fc) 0 32%, var(--folha) 32% 68%, var(--fc) 68%)",
+        "walks": false
+      },
+      "contas": {
+        "svg": {
+          "stroke": "rgba(10,12,14,.45) — or tom at .95 opacity",
+          "strokeWidth": "0.46w",
+          "dasharray": "0 1.15w",
+          "linecap": "round",
+          "period": "1.15w"
+        },
+        "css": "radial-gradient(circle, color-mix(in srgb, var(--fc) 50%, #000) 0 1.5px, transparent 2px) 0 50% / 7px 100% repeat-x, var(--fc)",
+        "walks": true
+      },
+      "nos": {
+        "svg": {
+          "stroke": "fundo (the band colour)",
+          "strokeWidth": "w + 1.5",
+          "dasharray": "0.42w 1.7w",
+          "linecap": "butt",
+          "period": "2.12w"
+        },
+        "css": "repeating-linear-gradient(90deg, var(--fc) 0 10px, transparent 10px 13px)",
+        "walks": true
+      }
+    },
+    "braid": {
+      "order": [
+        "papel",
+        "plastico",
+        "vidro",
+        "metal",
+        "organico"
+      ],
+      "phase": "2π·i/5",
+      "frontThreshold": "depth (cos θ) >= -0.04",
+      "backRun": "stroke: color-mix(in srgb, <hex> 58%, #0b0d0e)",
+      "draw": "SVG mask path, pathLength 1, stroke-dasharray 1 1, stroke-dashoffset 1 → 0",
+      "abertura": {
+        "wide": {
+          "strand": 7,
+          "radius": 11,
+          "pitch": 66,
+          "gap": "w + 3.4",
+          "descend": 48,
+          "branchTurn": 30,
+          "unbraid": 170,
+          "loopMax": 15
+        },
+        "narrow": {
+          "strand": 5.2,
+          "radius": 8.5,
+          "pitch": 46,
+          "gap": "w + 2.6",
+          "descend": 26,
+          "branchTurn": 20,
+          "unbraid": 120,
+          "loopMax": 8.5
+        },
+        "laneEndDot": "r = 1.05w",
+        "fundo": "#eef0ec"
+      },
+      "tranca": {
+        "wide": {
+          "strand": 6.5,
+          "radius": 10,
+          "pitch": 62
+        },
+        "narrow": {
+          "strand": 5,
+          "radius": 8,
+          "pitch": 46
+        },
+        "gap": "w + 3",
+        "withBow": {
+          "strand": "5.5 / 4.5",
+          "radius": "8 / 6",
+          "bowAt": "0.78 W",
+          "bowSize": "58 / 36",
+          "y": "0.42 H"
+        }
+      },
+      "fio": {
+        "strand": "12 wide / 8.5 narrow",
+        "wave": "2.2 periods, amplitude min(10, 0.22 H)",
+        "colour": "#fafbf8 (ink #15181b on metal); weave in the field colour"
+      },
+      "laco": {
+        "strand": 8,
+        "bowSize": "min(50, 0.38 H)",
+        "fundo": "#fafbf8",
+        "tom": "texto (metal only)"
+      },
+      "overUnder": "Hero: cord at baseline + 7/5px; rises 0.15em inside \"laços.\"; over-layer (z 4) clipped to the \"l\" and \"o\" glyph boxes; h1 (z 3) covers the cord elsewhere.",
+      "layers": {
+        "cordao-tras": 0,
+        "lixeiras": 1,
+        "cordao-frente": 2,
+        "headline/recado": 3,
+        "cordao-sobre": 4,
+        "fio-leitura": 50
+      }
+    },
+    "focus": {
+      "ring": "3px solid var(--foco), offset 3px, radius 8px",
+      "foco": {
+        "ground": "#15181b",
+        "binField": "--sobre-cor",
+        "ink": "#f0b400",
+        "gincana": "#fafbf8"
+      },
+      "field": "3px outline color-mix(in srgb, var(--cor) 40%, transparent), offset 2px, border #15181b"
+    },
+    "fonts": {
+      "files": [
+        "assets/fonts/funnel-display-latin.woff2",
+        "assets/fonts/funnel-sans-latin.woff2"
+      ],
+      "weightAxis": "300 800",
+      "display": "swap",
+      "license": "OFL",
+      "preload": "funnel-display-latin.woff2 on public pages"
+    }
+  },
+  "components": [
+    {
+      "name": "Botão",
+      "kind": "button",
+      "refersTo": "botao",
+      "description": "The default pill button: page colour (--cor) with its text colour; ink on neutral pages, the bin colour on a bin page.",
+      "html": "<a class=\"ds-botao\" href=\"#\">Ver o ranking<svg class=\"ds-ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14M13 6l6 6-6 6\"/></svg></a>",
+      "css": ".ds-botao { --b: var(--tinta, #15181b); --bt: var(--folha, #fafbf8); display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 14px 26px; border: 2px solid var(--b); border-radius: 999px; background: var(--b); color: var(--bt); text-decoration: none; cursor: pointer; font: 700 1.0625rem/1.15 \"Funnel Sans\", \"Segoe UI\", system-ui, sans-serif; transition: transform .2s cubic-bezier(.16, 1, .3, 1), background-color .25s cubic-bezier(.16, 1, .3, 1), border-color .25s cubic-bezier(.16, 1, .3, 1), color .25s cubic-bezier(.16, 1, .3, 1); } .ds-botao .ds-ic { width: 1.1em; height: 1.1em; transition: transform .35s cubic-bezier(.16, 1, .3, 1); } .ds-botao:hover { background: color-mix(in srgb, var(--b) 84%, #000); border-color: color-mix(in srgb, var(--b) 84%, #000); } .ds-botao:hover .ds-ic { transform: translateX(4px); } .ds-botao:active { transform: scale(.98); } .ds-botao:focus-visible { outline: 3px solid var(--tinta, #15181b); outline-offset: 3px; } @media (prefers-reduced-motion: reduce) { .ds-botao, .ds-botao .ds-ic { transition: none; } }"
+    },
+    {
+      "name": "Campo de texto",
+      "kind": "input",
+      "refersTo": "campo",
+      "description": "Labelled text field: white, 2px hairline border, 14px radius, 56px tall; focus adds a 3px outline at 40% of the page colour.",
+      "html": "<div class=\"ds-campo\"><label for=\"ds-nome\">Nome e sobrenome</label><input id=\"ds-nome\" type=\"text\" placeholder=\"Ex.: Ana Souza\"><p class=\"ds-ajuda\">Só usamos para avisar se você ganhar. Ele nunca aparece no ranking.</p></div>",
+      "css": ".ds-campo { max-width: 420px; font-family: \"Funnel Sans\", \"Segoe UI\", system-ui, sans-serif; color: var(--tinta, #15181b); } .ds-campo label { display: block; font-weight: 700; font-size: .95rem; margin: 0 0 8px; } .ds-campo input { box-sizing: border-box; width: 100%; min-height: 56px; padding: 14px 16px; appearance: none; border: 2px solid var(--linha, #c6ccc5); border-radius: 14px; background: #fff; color: var(--tinta, #15181b); font: 500 1.0625rem/1.3 \"Funnel Sans\", \"Segoe UI\", system-ui, sans-serif; transition: border-color .2s, outline-color .2s; } .ds-campo input::placeholder { color: #6b7375; } .ds-campo input:hover { border-color: #9aa39f; } .ds-campo input:focus { outline: 3px solid color-mix(in srgb, var(--cor, #15181b) 40%, transparent); outline-offset: 2px; border-color: var(--tinta, #15181b); } .ds-ajuda { font-size: .9rem; line-height: 1.6; color: var(--tinta-2, #475053); margin: 8px 0 0; }"
+    },
+    {
+      "name": "Topo",
+      "kind": "nav",
+      "refersTo": "topo-link",
+      "description": "Header: drawn bow icon + wordmark on the left, one outlined Ranking pill on the right; the pill fills with ink on hover and on the ranking page.",
+      "html": "<header class=\"ds-topo\"><a class=\"ds-marca\" href=\"#\"><svg class=\"ds-ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.1\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 11.5C9.6 7.8 4.6 6 3.3 8.3c-1.3 2.3 2.9 5.4 8.7 3.2z\"/><path d=\"M12 11.5c2.4-3.7 7.4-5.5 8.7-3.2 1.3 2.3-2.9 5.4-8.7 3.2z\"/><path d=\"M11 12.5L7.5 20M13 12.5l3.5 7.5\"/></svg><span>Laços Ambientais</span></a><a class=\"ds-topo-link\" href=\"#\"><svg class=\"ds-ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M8 4h8v6a4 4 0 0 1-8 0z\"/><path d=\"M8 6H4v1a4 4 0 0 0 4 4M16 6h4v1a4 4 0 0 1-4 4\"/><path d=\"M12 14v4M10 18h4M8 21h8\"/></svg>Ranking</a></header>",
+      "css": ".ds-topo { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 20px; background: var(--chao, #eef0ec); color: var(--tinta, #15181b); } .ds-marca { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; color: inherit; text-decoration: none; font: 800 1.25rem/1 \"Funnel Display\", \"Segoe UI\", system-ui, sans-serif; letter-spacing: -.02em; } .ds-marca .ds-ic { width: 32px; height: 32px; } .ds-topo-link { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 18px; border: 2px solid currentColor; border-radius: 999px; color: inherit; text-decoration: none; font: 700 .95rem \"Funnel Sans\", \"Segoe UI\", system-ui, sans-serif; transition: background-color .25s cubic-bezier(.16, 1, .3, 1), color .25s cubic-bezier(.16, 1, .3, 1); } .ds-topo-link .ds-ic { width: 1.05em; height: 1.05em; } .ds-topo-link:hover, .ds-topo-link[aria-current=page] { background: var(--tinta, #15181b); color: var(--folha, #fafbf8); border-color: var(--tinta, #15181b); } .ds-topo a:focus-visible { outline: 3px solid var(--tinta, #15181b); outline-offset: 3px; border-radius: 8px; }"
+    },
+    {
+      "name": "Etiqueta (hang tag)",
+      "kind": "chip",
+      "refersTo": "etiqueta",
+      "description": "The label device: a pointed, eyelet-punched ink tag hanging on a 12px string loop. The real one follows a damped spring when pulled; hover here replays an approximation of the entry push.",
+      "html": "<span class=\"ds-etiqueta\" tabindex=\"0\"><span>Sustentabilidade na prática</span></span>",
+      "css": ".ds-etiqueta { --e: var(--tinta, #15181b); --et: var(--folha, #fafbf8); position: relative; display: inline-block; margin-top: 30px; transform-origin: 17px -24px; cursor: grab; user-select: none; } .ds-etiqueta::before { content: \"\"; position: absolute; left: 11px; top: -24px; width: 12px; height: 42px; border: 2px solid var(--tinta, #15181b); border-radius: 999px; box-sizing: border-box; } .ds-etiqueta > span { position: relative; display: block; padding: 9px 18px 9px 34px; border-radius: 0 9px 9px 0; background: var(--e); color: var(--et); font: 700 .875rem/1.25 \"Funnel Sans\", \"Segoe UI\", system-ui, sans-serif; letter-spacing: .01em; clip-path: polygon(13px 0, 100% 0, 100% 100%, 13px 100%, 0 50%); -webkit-mask: radial-gradient(circle 4.5px at 18px 50%, #0000 95%, #000 100%); mask: radial-gradient(circle 4.5px at 18px 50%, #0000 95%, #000 100%); } .ds-etiqueta:hover, .ds-etiqueta:focus-visible { animation: ds-balanca 1s ease-in-out; } .ds-etiqueta:active { cursor: grabbing; } .ds-etiqueta:focus-visible { outline: none; } .ds-etiqueta:focus-visible > span { outline: 3px solid var(--tinta, #15181b); outline-offset: 3px; } @keyframes ds-balanca { 0% { transform: rotate(0); } 11% { transform: rotate(10deg); } 33% { transform: rotate(-4deg); } 56% { transform: rotate(1.5deg); } 78% { transform: rotate(-.5deg); } 100% { transform: rotate(0); } } @media (prefers-reduced-motion: reduce) { .ds-etiqueta:hover, .ds-etiqueta:focus-visible { animation: none; } }"
+    },
+    {
+      "name": "Cartão",
+      "kind": "card",
+      "refersTo": "cartao",
+      "description": "Contained card: sheet white, 1px hairline, 22px radius, no shadow; heading in Headline Panel with a 0.8em icon in the page's line colour.",
+      "html": "<section class=\"ds-cartao\"><h2><svg class=\"ds-ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M8 4h8v6a4 4 0 0 1-8 0z\"/><path d=\"M8 6H4v1a4 4 0 0 0 4 4M16 6h4v1a4 4 0 0 1-4 4\"/><path d=\"M12 14v4M10 18h4M8 21h8\"/></svg>Registre seu descarte e concorra!</h2><p>Todo mês tem <b>2 prêmios</b>: para quem <b>mais descartar itens</b> e para quem <b>descartar em mais dias</b>.</p></section>",
+      "css": ".ds-cartao { max-width: 460px; background: var(--folha, #fafbf8); color: var(--tinta, #15181b); border: 1px solid var(--linha, #c6ccc5); border-radius: 22px; padding: 28px 22px 26px; font: 400 1.0625rem/1.6 \"Funnel Sans\", \"Segoe UI\", system-ui, sans-serif; } .ds-cartao h2 { display: flex; align-items: center; gap: 12px; margin: 0 0 .4em; font: 800 clamp(1.9rem, 7.5vw, 2.5rem)/.95 \"Funnel Display\", \"Segoe UI\", system-ui, sans-serif; letter-spacing: -.03em; text-wrap: balance; } .ds-cartao h2 .ds-ic { width: .8em; height: .8em; flex: none; color: var(--cor-linha, #15181b); } .ds-cartao p { margin: 0; } .ds-cartao b { font-weight: 700; }"
+    },
+    {
+      "name": "Trança (braid)",
+      "kind": "custom",
+      "refersTo": "braid",
+      "description": "The five-strand SVG braid as cordao.js tranca() draws it (narrow geometry: strand 5, radius 8, pitch 46), with back runs darkened toward #0b0d0e and each bin's weave on its front runs. Draws in once; torcido, contas and nós weaves walk.",
+      "html": "<div class=\"ds-tranca ds-anda\"><svg class=\"ds-tranca-svg\" viewBox=\"0 0 300 32\" width=\"300\" height=\"32\" aria-hidden=\"true\"><g fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><g><path d=\"M-1 23.5L2 24L5 23.1L8 21L11 18.2L14 14.9L17 11.8L20 9.5L23 8.2\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#1f5aa8 58%,#0b0d0e)\"/><path d=\"M47 24L50 23.5L53 21.8L56 19.2L59 16L62 12.8L65 10.2L68 8.5\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#1f5aa8 58%,#0b0d0e)\"/><path d=\"M92 23.8L95 23.8L98 22.5L101 20.2L104 17.1L107 13.8L110 11L113 8.9L116 8\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#1f5aa8 58%,#0b0d0e)\"/><path d=\"M137 23.5L140 24L143 23.1L146 21L149 18.2L152 14.9L155 11.8L158 9.5L161 8.2\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#1f5aa8 58%,#0b0d0e)\"/><path d=\"M185 24L188 23.5L191 21.8L194 19.2L197 16L200 12.8L203 10.2L206 8.5\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#1f5aa8 58%,#0b0d0e)\"/><path d=\"M230 23.8L233 23.8L236 22.5L239 20.2L242 17.1L245 13.8L248 11L251 8.9L254 8\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#1f5aa8 58%,#0b0d0e)\"/><path d=\"M275 23.5L278 24L281 23.1L284 21L287 18.2L290 14.9L293 11.8L296 9.5L299 8.2\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#1f5aa8 58%,#0b0d0e)\"/><path d=\"M-10 23.6L-7 24L-4 23L-1 20.9L2 17.9L5 14.7L8 11.7L11 9.3L14 8.1\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#cf3a2e 58%,#0b0d0e)\"/><path d=\"M38 24L41 23.5L44 21.7L47 19L50 15.8L53 12.6L56 10L59 8.4\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#cf3a2e 58%,#0b0d0e)\"/><path d=\"M83 23.9L86 23.8L89 22.4L92 20L95 16.9L98 13.6L101 10.8L104 8.8L107 8\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#cf3a2e 58%,#0b0d0e)\"/><path d=\"M128 23.6L131 24L134 23L137 20.9L140 17.9L143 14.7L146 11.7L149 9.3L152 8.1\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#cf3a2e 58%,#0b0d0e)\"/><path d=\"M176 24L179 23.5L182 21.7L185 19L188 15.8L191 12.6L194 10L197 8.4\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#cf3a2e 58%,#0b0d0e)\"/><path d=\"M221 23.9L224 23.8L227 22.4L230 20L233 16.9L236 13.6L239 10.8L242 8.8L245 8\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#cf3a2e 58%,#0b0d0e)\"/><path d=\"M266 23.6L269 24L272 23L275 20.9L278 17.9L281 14.7L284 11.7L287 9.3L290 8.1\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#cf3a2e 58%,#0b0d0e)\"/><path d=\"M-10 20.7L-7 17.7L-4 14.5L-1 11.5L2 9.2L5 8.1\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#23804a 58%,#0b0d0e)\"/><path d=\"M29 24L32 23.4L35 21.5L38 18.8L41 15.6L44 12.4L47 9.9L50 8.3\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#23804a 58%,#0b0d0e)\"/><path d=\"M74 23.9L77 23.7L80 22.3L83 19.8L86 16.7L89 13.4L92 10.6L95 8.7\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#23804a 58%,#0b0d0e)\"/><path d=\"M119 23.7L122 23.9L125 22.9L128 20.7L131 17.7L134 14.5L137 11.5L140 9.2L143 8.1\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#23804a 58%,#0b0d0e)\"/><path d=\"M167 24L170 23.4L173 21.5L176 18.8L179 15.6L182 12.4L185 9.9L188 8.3\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#23804a 58%,#0b0d0e)\"/><path d=\"M212 23.9L215 23.7L218 22.3L221 19.8L224 16.7L227 13.4L230 10.6L233 8.7\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#23804a 58%,#0b0d0e)\"/><path d=\"M257 23.7L260 23.9L263 22.9L266 20.7L269 17.7L272 14.5L275 11.5L278 9.2L281 8.1\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#23804a 58%,#0b0d0e)\"/><path d=\"M305 24L308 23.4\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#23804a 58%,#0b0d0e)\"/><path d=\"M-10 11.3L-7 9.1L-4 8.1\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#f0b400 58%,#0b0d0e)\"/><path d=\"M20 24L23 23.3L26 21.4L29 18.6L32 15.3L35 12.2L38 9.7L41 8.3\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#f0b400 58%,#0b0d0e)\"/><path d=\"M65 23.9L68 23.7L71 22.1L74 19.6L77 16.4L80 13.2L83 10.5L86 8.6\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#f0b400 58%,#0b0d0e)\"/><path d=\"M110 23.7L113 23.9L116 22.8L119 20.5L122 17.5L125 14.3L128 11.3L131 9.1L134 8.1\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#f0b400 58%,#0b0d0e)\"/><path d=\"M158 24L161 23.3L164 21.4L167 18.6L170 15.3L173 12.2L176 9.7L179 8.3\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#f0b400 58%,#0b0d0e)\"/><path d=\"M203 23.9L206 23.7L209 22.1L212 19.6L215 16.4L218 13.2L221 10.5L224 8.6\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#f0b400 58%,#0b0d0e)\"/><path d=\"M248 23.7L251 23.9L254 22.8L257 20.5L260 17.5L263 14.3L266 11.3L269 9.1L272 8.1\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#f0b400 58%,#0b0d0e)\"/><path d=\"M296 24L299 23.3L302 21.4L305 18.6L308 15.3\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#f0b400 58%,#0b0d0e)\"/><path d=\"M8 23.5L11 24L14 23.2L17 21.2L20 18.4L23 15.1L26 12L29 9.6L32 8.2\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#7b4b27 58%,#0b0d0e)\"/><path d=\"M56 24L59 23.6L62 22L65 19.4L68 16.2L71 13L74 10.3L77 8.5\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#7b4b27 58%,#0b0d0e)\"/><path d=\"M101 23.8L104 23.9L107 22.7L110 20.3L113 17.3L116 14.1L119 11.1L122 9L125 8\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#7b4b27 58%,#0b0d0e)\"/><path d=\"M146 23.5L149 24L152 23.2L155 21.2L158 18.4L161 15.1L164 12L167 9.6L170 8.2\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#7b4b27 58%,#0b0d0e)\"/><path d=\"M194 24L197 23.6L200 22L203 19.4L206 16.2L209 13L212 10.3L215 8.5\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#7b4b27 58%,#0b0d0e)\"/><path d=\"M239 23.8L242 23.9L245 22.7L248 20.3L251 17.3L254 14.1L257 11.1L260 9L263 8\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#7b4b27 58%,#0b0d0e)\"/><path d=\"M284 23.5L287 24L290 23.2L293 21.2L296 18.4L299 15.1L302 12L305 9.6L308 8.2\" stroke-width=\"5\" style=\"stroke:color-mix(in srgb,#7b4b27 58%,#0b0d0e)\"/></g><g><path d=\"M-10 16L-7 19.2L-4 21.8L-1 23.5\" stroke=\"#1f5aa8\" stroke-width=\"5\"/><path d=\"M-10 16L-7 19.2L-4 21.8L-1 23.5\" stroke=\"rgba(255,255,255,.5)\" stroke-width=\"1.1\"/><path d=\"M23 8.2L26 8.2L29 9.5L32 11.8L35 14.9L38 18.2L41 21L44 23.1L47 24\" stroke=\"#1f5aa8\" stroke-width=\"5\"/><path d=\"M23 8.2L26 8.2L29 9.5L32 11.8L35 14.9L38 18.2L41 21L44 23.1L47 24\" stroke=\"rgba(255,255,255,.5)\" stroke-width=\"1.1\"/><path d=\"M68 8.5L71 8L74 8.9L77 11L80 13.8L83 17.1L86 20.2L89 22.5L92 23.8\" stroke=\"#1f5aa8\" stroke-width=\"5\"/><path d=\"M68 8.5L71 8L74 8.9L77 11L80 13.8L83 17.1L86 20.2L89 22.5L92 23.8\" stroke=\"rgba(255,255,255,.5)\" stroke-width=\"1.1\"/><path d=\"M116 8L119 8.5L122 10.2L125 12.8L128 16L131 19.2L134 21.8L137 23.5\" stroke=\"#1f5aa8\" stroke-width=\"5\"/><path d=\"M116 8L119 8.5L122 10.2L125 12.8L128 16L131 19.2L134 21.8L137 23.5\" stroke=\"rgba(255,255,255,.5)\" stroke-width=\"1.1\"/><path d=\"M161 8.2L164 8.2L167 9.5L170 11.8L173 14.9L176 18.2L179 21L182 23.1L185 24\" stroke=\"#1f5aa8\" stroke-width=\"5\"/><path d=\"M161 8.2L164 8.2L167 9.5L170 11.8L173 14.9L176 18.2L179 21L182 23.1L185 24\" stroke=\"rgba(255,255,255,.5)\" stroke-width=\"1.1\"/><path d=\"M206 8.5L209 8L212 8.9L215 11L218 13.8L221 17.1L224 20.2L227 22.5L230 23.8\" stroke=\"#1f5aa8\" stroke-width=\"5\"/><path d=\"M206 8.5L209 8L212 8.9L215 11L218 13.8L221 17.1L224 20.2L227 22.5L230 23.8\" stroke=\"rgba(255,255,255,.5)\" stroke-width=\"1.1\"/><path d=\"M254 8L257 8.5L260 10.2L263 12.8L266 16L269 19.2L272 21.8L275 23.5\" stroke=\"#1f5aa8\" stroke-width=\"5\"/><path d=\"M254 8L257 8.5L260 10.2L263 12.8L266 16L269 19.2L272 21.8L275 23.5\" stroke=\"rgba(255,255,255,.5)\" stroke-width=\"1.1\"/><path d=\"M299 8.2L302 8.2L305 9.5L308 11.8\" stroke=\"#1f5aa8\" stroke-width=\"5\"/><path d=\"M299 8.2L302 8.2L305 9.5L308 11.8\" stroke=\"rgba(255,255,255,.5)\" stroke-width=\"1.1\"/><path d=\"M14 8.1L17 8.2L20 9.6L23 12L26 15.1L29 18.4L32 21.2L35 23.2L38 24\" stroke=\"#cf3a2e\" stroke-width=\"5\"/><path d=\"M14 8.1L17 8.2L20 9.6L23 12L26 15.1L29 18.4L32 21.2L35 23.2L38 24\" class=\"t\" style=\"--p:4.1\" stroke=\"rgba(10,12,14,.32)\" stroke-width=\"5\" stroke-dasharray=\"1.6 2.5\" stroke-linecap=\"butt\"/><path d=\"M59 8.4L62 8L65 9L68 11.1L71 14.1L74 17.3L77 20.3L80 22.7L83 23.9\" stroke=\"#cf3a2e\" stroke-width=\"5\"/><path d=\"M59 8.4L62 8L65 9L68 11.1L71 14.1L74 17.3L77 20.3L80 22.7L83 23.9\" class=\"t\" style=\"--p:4.1\" stroke=\"rgba(10,12,14,.32)\" stroke-width=\"5\" stroke-dasharray=\"1.6 2.5\" stroke-linecap=\"butt\"/><path d=\"M107 8L110 8.5L113 10.3L116 13L119 16.2L122 19.4L125 22L128 23.6\" stroke=\"#cf3a2e\" stroke-width=\"5\"/><path d=\"M107 8L110 8.5L113 10.3L116 13L119 16.2L122 19.4L125 22L128 23.6\" class=\"t\" style=\"--p:4.1\" stroke=\"rgba(10,12,14,.32)\" stroke-width=\"5\" stroke-dasharray=\"1.6 2.5\" stroke-linecap=\"butt\"/><path d=\"M152 8.1L155 8.2L158 9.6L161 12L164 15.1L167 18.4L170 21.2L173 23.2L176 24\" stroke=\"#cf3a2e\" stroke-width=\"5\"/><path d=\"M152 8.1L155 8.2L158 9.6L161 12L164 15.1L167 18.4L170 21.2L173 23.2L176 24\" class=\"t\" style=\"--p:4.1\" stroke=\"rgba(10,12,14,.32)\" stroke-width=\"5\" stroke-dasharray=\"1.6 2.5\" stroke-linecap=\"butt\"/><path d=\"M197 8.4L200 8L203 9L206 11.1L209 14.1L212 17.3L215 20.3L218 22.7L221 23.9\" stroke=\"#cf3a2e\" stroke-width=\"5\"/><path d=\"M197 8.4L200 8L203 9L206 11.1L209 14.1L212 17.3L215 20.3L218 22.7L221 23.9\" class=\"t\" style=\"--p:4.1\" stroke=\"rgba(10,12,14,.32)\" stroke-width=\"5\" stroke-dasharray=\"1.6 2.5\" stroke-linecap=\"butt\"/><path d=\"M245 8L248 8.5L251 10.3L254 13L257 16.2L260 19.4L263 22L266 23.6\" stroke=\"#cf3a2e\" stroke-width=\"5\"/><path d=\"M245 8L248 8.5L251 10.3L254 13L257 16.2L260 19.4L263 22L266 23.6\" class=\"t\" style=\"--p:4.1\" stroke=\"rgba(10,12,14,.32)\" stroke-width=\"5\" stroke-dasharray=\"1.6 2.5\" stroke-linecap=\"butt\"/><path d=\"M290 8.1L293 8.2L296 9.6L299 12L302 15.1L305 18.4L308 21.2\" stroke=\"#cf3a2e\" stroke-width=\"5\"/><path d=\"M290 8.1L293 8.2L296 9.6L299 12L302 15.1L305 18.4L308 21.2\" class=\"t\" style=\"--p:4.1\" stroke=\"rgba(10,12,14,.32)\" stroke-width=\"5\" stroke-dasharray=\"1.6 2.5\" stroke-linecap=\"butt\"/><path d=\"M5 8.1L8 8.3L11 9.7L14 12.2L17 15.3L20 18.6L23 21.4L26 23.3L29 24\" stroke=\"#23804a\" stroke-width=\"5\"/><path d=\"M5 8.1L8 8.3L11 9.7L14 12.2L17 15.3L20 18.6L23 21.4L26 23.3L29 24\" stroke=\"#eef0ec\" stroke-width=\"1.8\"/><path d=\"M50 8.3L53 8.1L56 9.1L59 11.3L62 14.3L65 17.5L68 20.5L71 22.8L74 23.9\" stroke=\"#23804a\" stroke-width=\"5\"/><path d=\"M50 8.3L53 8.1L56 9.1L59 11.3L62 14.3L65 17.5L68 20.5L71 22.8L74 23.9\" stroke=\"#eef0ec\" stroke-width=\"1.8\"/><path d=\"M95 8.7L98 8L101 8.6L104 10.5L107 13.2L110 16.4L113 19.6L116 22.1L119 23.7\" stroke=\"#23804a\" stroke-width=\"5\"/><path d=\"M95 8.7L98 8L101 8.6L104 10.5L107 13.2L110 16.4L113 19.6L116 22.1L119 23.7\" stroke=\"#eef0ec\" stroke-width=\"1.8\"/><path d=\"M143 8.1L146 8.3L149 9.7L152 12.2L155 15.3L158 18.6L161 21.4L164 23.3L167 24\" stroke=\"#23804a\" stroke-width=\"5\"/><path d=\"M143 8.1L146 8.3L149 9.7L152 12.2L155 15.3L158 18.6L161 21.4L164 23.3L167 24\" stroke=\"#eef0ec\" stroke-width=\"1.8\"/><path d=\"M188 8.3L191 8.1L194 9.1L197 11.3L200 14.3L203 17.5L206 20.5L209 22.8L212 23.9\" stroke=\"#23804a\" stroke-width=\"5\"/><path d=\"M188 8.3L191 8.1L194 9.1L197 11.3L200 14.3L203 17.5L206 20.5L209 22.8L212 23.9\" stroke=\"#eef0ec\" stroke-width=\"1.8\"/><path d=\"M233 8.7L236 8L239 8.6L242 10.5L245 13.2L248 16.4L251 19.6L254 22.1L257 23.7\" stroke=\"#23804a\" stroke-width=\"5\"/><path d=\"M233 8.7L236 8L239 8.6L242 10.5L245 13.2L248 16.4L251 19.6L254 22.1L257 23.7\" stroke=\"#eef0ec\" stroke-width=\"1.8\"/><path d=\"M281 8.1L284 8.3L287 9.7L290 12.2L293 15.3L296 18.6L299 21.4L302 23.3L305 24\" stroke=\"#23804a\" stroke-width=\"5\"/><path d=\"M281 8.1L284 8.3L287 9.7L290 12.2L293 15.3L296 18.6L299 21.4L302 23.3L305 24\" stroke=\"#eef0ec\" stroke-width=\"1.8\"/><path d=\"M-4 8.1L-1 8.3L2 9.9L5 12.4L8 15.6L11 18.8L14 21.5L17 23.4L20 24\" stroke=\"#f0b400\" stroke-width=\"5\"/><path d=\"M-4 8.1L-1 8.3L2 9.9L5 12.4L8 15.6L11 18.8L14 21.5L17 23.4L20 24\" class=\"t\" style=\"--p:5.75\" stroke=\"rgba(10,12,14,.45)\" stroke-width=\"2.3\" stroke-dasharray=\"0 5.75\" stroke-linecap=\"round\"/><path d=\"M41 8.3L44 8.1L47 9.2L50 11.5L53 14.5L56 17.7L59 20.7L62 22.9L65 23.9\" stroke=\"#f0b400\" stroke-width=\"5\"/><path d=\"M41 8.3L44 8.1L47 9.2L50 11.5L53 14.5L56 17.7L59 20.7L62 22.9L65 23.9\" class=\"t\" style=\"--p:5.75\" stroke=\"rgba(10,12,14,.45)\" stroke-width=\"2.3\" stroke-dasharray=\"0 5.75\" stroke-linecap=\"round\"/><path d=\"M86 8.6L89 8L92 8.7L95 10.6L98 13.4L101 16.7L104 19.8L107 22.3L110 23.7\" stroke=\"#f0b400\" stroke-width=\"5\"/><path d=\"M86 8.6L89 8L92 8.7L95 10.6L98 13.4L101 16.7L104 19.8L107 22.3L110 23.7\" class=\"t\" style=\"--p:5.75\" stroke=\"rgba(10,12,14,.45)\" stroke-width=\"2.3\" stroke-dasharray=\"0 5.75\" stroke-linecap=\"round\"/><path d=\"M134 8.1L137 8.3L140 9.9L143 12.4L146 15.6L149 18.8L152 21.5L155 23.4L158 24\" stroke=\"#f0b400\" stroke-width=\"5\"/><path d=\"M134 8.1L137 8.3L140 9.9L143 12.4L146 15.6L149 18.8L152 21.5L155 23.4L158 24\" class=\"t\" style=\"--p:5.75\" stroke=\"rgba(10,12,14,.45)\" stroke-width=\"2.3\" stroke-dasharray=\"0 5.75\" stroke-linecap=\"round\"/><path d=\"M179 8.3L182 8.1L185 9.2L188 11.5L191 14.5L194 17.7L197 20.7L200 22.9L203 23.9\" stroke=\"#f0b400\" stroke-width=\"5\"/><path d=\"M179 8.3L182 8.1L185 9.2L188 11.5L191 14.5L194 17.7L197 20.7L200 22.9L203 23.9\" class=\"t\" style=\"--p:5.75\" stroke=\"rgba(10,12,14,.45)\" stroke-width=\"2.3\" stroke-dasharray=\"0 5.75\" stroke-linecap=\"round\"/><path d=\"M224 8.6L227 8L230 8.7L233 10.6L236 13.4L239 16.7L242 19.8L245 22.3L248 23.7\" stroke=\"#f0b400\" stroke-width=\"5\"/><path d=\"M224 8.6L227 8L230 8.7L233 10.6L236 13.4L239 16.7L242 19.8L245 22.3L248 23.7\" class=\"t\" style=\"--p:5.75\" stroke=\"rgba(10,12,14,.45)\" stroke-width=\"2.3\" stroke-dasharray=\"0 5.75\" stroke-linecap=\"round\"/><path d=\"M272 8.1L275 8.3L278 9.9L281 12.4L284 15.6L287 18.8L290 21.5L293 23.4L296 24\" stroke=\"#f0b400\" stroke-width=\"5\"/><path d=\"M272 8.1L275 8.3L278 9.9L281 12.4L284 15.6L287 18.8L290 21.5L293 23.4L296 24\" class=\"t\" style=\"--p:5.75\" stroke=\"rgba(10,12,14,.45)\" stroke-width=\"2.3\" stroke-dasharray=\"0 5.75\" stroke-linecap=\"round\"/><path d=\"M-10 8.4L-7 10L-4 12.6L-1 15.8L2 19L5 21.7L8 23.5\" stroke=\"#7b4b27\" stroke-width=\"5\"/><path d=\"M-10 8.4L-7 10L-4 12.6L-1 15.8L2 19L5 21.7L8 23.5\" class=\"t\" style=\"--p:10.6\" stroke=\"#eef0ec\" stroke-width=\"6.5\" stroke-dasharray=\"2.1 8.5\" stroke-linecap=\"butt\"/><path d=\"M32 8.2L35 8.1L38 9.3L41 11.7L44 14.7L47 17.9L50 20.9L53 23L56 24\" stroke=\"#7b4b27\" stroke-width=\"5\"/><path d=\"M32 8.2L35 8.1L38 9.3L41 11.7L44 14.7L47 17.9L50 20.9L53 23L56 24\" class=\"t\" style=\"--p:10.6\" stroke=\"#eef0ec\" stroke-width=\"6.5\" stroke-dasharray=\"2.1 8.5\" stroke-linecap=\"butt\"/><path d=\"M77 8.5L80 8L83 8.8L86 10.8L89 13.6L92 16.9L95 20L98 22.4L101 23.8\" stroke=\"#7b4b27\" stroke-width=\"5\"/><path d=\"M77 8.5L80 8L83 8.8L86 10.8L89 13.6L92 16.9L95 20L98 22.4L101 23.8\" class=\"t\" style=\"--p:10.6\" stroke=\"#eef0ec\" stroke-width=\"6.5\" stroke-dasharray=\"2.1 8.5\" stroke-linecap=\"butt\"/><path d=\"M125 8L128 8.4L131 10L134 12.6L137 15.8L140 19L143 21.7L146 23.5\" stroke=\"#7b4b27\" stroke-width=\"5\"/><path d=\"M125 8L128 8.4L131 10L134 12.6L137 15.8L140 19L143 21.7L146 23.5\" class=\"t\" style=\"--p:10.6\" stroke=\"#eef0ec\" stroke-width=\"6.5\" stroke-dasharray=\"2.1 8.5\" stroke-linecap=\"butt\"/><path d=\"M170 8.2L173 8.1L176 9.3L179 11.7L182 14.7L185 17.9L188 20.9L191 23L194 24\" stroke=\"#7b4b27\" stroke-width=\"5\"/><path d=\"M170 8.2L173 8.1L176 9.3L179 11.7L182 14.7L185 17.9L188 20.9L191 23L194 24\" class=\"t\" style=\"--p:10.6\" stroke=\"#eef0ec\" stroke-width=\"6.5\" stroke-dasharray=\"2.1 8.5\" stroke-linecap=\"butt\"/><path d=\"M215 8.5L218 8L221 8.8L224 10.8L227 13.6L230 16.9L233 20L236 22.4L239 23.8\" stroke=\"#7b4b27\" stroke-width=\"5\"/><path d=\"M215 8.5L218 8L221 8.8L224 10.8L227 13.6L230 16.9L233 20L236 22.4L239 23.8\" class=\"t\" style=\"--p:10.6\" stroke=\"#eef0ec\" stroke-width=\"6.5\" stroke-dasharray=\"2.1 8.5\" stroke-linecap=\"butt\"/><path d=\"M263 8L266 8.4L269 10L272 12.6L275 15.8L278 19L281 21.7L284 23.5\" stroke=\"#7b4b27\" stroke-width=\"5\"/><path d=\"M263 8L266 8.4L269 10L272 12.6L275 15.8L278 19L281 21.7L284 23.5\" class=\"t\" style=\"--p:10.6\" stroke=\"#eef0ec\" stroke-width=\"6.5\" stroke-dasharray=\"2.1 8.5\" stroke-linecap=\"butt\"/></g></g></svg></div>",
+      "css": ".ds-tranca { background: var(--chao, #eef0ec); padding: 12px 0; overflow: hidden; } .ds-tranca-svg { display: block; width: 100%; max-width: 300px; height: auto; clip-path: inset(0 0 0 0); animation: ds-desenha 1.6s cubic-bezier(.16, 1, .3, 1) both; } @keyframes ds-desenha { from { clip-path: inset(0 100% 0 0); } } .ds-anda .t { animation: ds-anda calc(var(--p) * .14s) linear infinite; } @keyframes ds-anda { to { stroke-dashoffset: calc(var(--p) * -1px); } } @media (prefers-reduced-motion: reduce) { .ds-tranca-svg, .ds-anda .t { animation: none; } }"
+    },
+    {
+      "name": "Fios e tramas",
+      "kind": "custom",
+      "refersTo": "weaves",
+      "description": "One strand per bin at the lane width (7px) with its own weave, ending in the lane dot: papel liso, plástico torcido, vidro duplo, metal contas, orgânico nós. Always SVG; never CSS stripes.",
+      "html": "<ul class=\"ds-fios ds-anda\"><li><span>Papel · liso</span><svg viewBox=\"0 0 240 16\" width=\"240\" height=\"16\" aria-hidden=\"true\"><g fill=\"none\" stroke-linecap=\"round\"><path d=\"M8 8H232\" stroke=\"#1f5aa8\" stroke-width=\"7\"/><path d=\"M8 8H232\" stroke=\"rgba(255,255,255,.5)\" stroke-width=\"1.54\"/></g><circle cx=\"8\" cy=\"8\" r=\"7.35\" fill=\"#1f5aa8\"/></svg></li><li><span>Plástico · torcido</span><svg viewBox=\"0 0 240 16\" width=\"240\" height=\"16\" aria-hidden=\"true\"><g fill=\"none\" stroke-linecap=\"round\"><path d=\"M8 8H232\" stroke=\"#cf3a2e\" stroke-width=\"7\"/><path d=\"M8 8H232\" class=\"t\" style=\"--p:5.74\" stroke=\"rgba(10,12,14,.32)\" stroke-width=\"7\" stroke-dasharray=\"2.24 3.5\" stroke-linecap=\"butt\"/></g><circle cx=\"8\" cy=\"8\" r=\"7.35\" fill=\"#cf3a2e\"/></svg></li><li><span>Vidro · duplo</span><svg viewBox=\"0 0 240 16\" width=\"240\" height=\"16\" aria-hidden=\"true\"><g fill=\"none\" stroke-linecap=\"round\"><path d=\"M8 8H232\" stroke=\"#23804a\" stroke-width=\"7\"/><path d=\"M8 8H232\" stroke=\"#eef0ec\" stroke-width=\"2.52\"/></g><circle cx=\"8\" cy=\"8\" r=\"7.35\" fill=\"#23804a\"/></svg></li><li><span>Metal · contas</span><svg viewBox=\"0 0 240 16\" width=\"240\" height=\"16\" aria-hidden=\"true\"><g fill=\"none\" stroke-linecap=\"round\"><path d=\"M8 8H232\" stroke=\"#f0b400\" stroke-width=\"7\"/><path d=\"M8 8H232\" class=\"t\" style=\"--p:8.05\" stroke=\"rgba(10,12,14,.45)\" stroke-width=\"3.22\" stroke-dasharray=\"0 8.05\" stroke-linecap=\"round\"/></g><circle cx=\"8\" cy=\"8\" r=\"7.35\" fill=\"#f0b400\"/></svg></li><li><span>Orgânico · nos</span><svg viewBox=\"0 0 240 16\" width=\"240\" height=\"16\" aria-hidden=\"true\"><g fill=\"none\" stroke-linecap=\"round\"><path d=\"M8 8H232\" stroke=\"#7b4b27\" stroke-width=\"7\"/><path d=\"M8 8H232\" class=\"t\" style=\"--p:14.84\" stroke=\"#eef0ec\" stroke-width=\"8.5\" stroke-dasharray=\"2.94 11.9\" stroke-linecap=\"butt\"/></g><circle cx=\"8\" cy=\"8\" r=\"7.35\" fill=\"#7b4b27\"/></svg></li></ul>",
+      "css": ".ds-fios { list-style: none; margin: 0; padding: 16px 20px; display: grid; gap: 10px; background: var(--chao, #eef0ec); color: var(--tinta, #15181b); font: 700 .8rem/1.2 \"Funnel Sans\", \"Segoe UI\", system-ui, sans-serif; } .ds-fios li { display: grid; grid-template-columns: 8.5rem 240px; align-items: center; gap: 12px; } .ds-fios svg { display: block; overflow: visible; } .ds-anda .t { animation: ds-anda calc(var(--p) * .14s) linear infinite; } @keyframes ds-anda { to { stroke-dashoffset: calc(var(--p) * -1px); } } @media (prefers-reduced-motion: reduce) { .ds-anda .t { animation: none; } }"
+    },
+    {
+      "name": "Lane (lixeira)",
+      "kind": "custom",
+      "refersTo": "lane-papel-hover",
+      "description": "A home bin lane: its strand is the top rule; on hover or focus the bin colour wipes down the row, text turns to the field text colour and the icon ring rotates −12°.",
+      "html": "<a class=\"ds-lane\" href=\"#\"><svg class=\"ds-lane-fio\" width=\"100%\" height=\"10\" aria-hidden=\"true\"><g fill=\"none\" stroke-linecap=\"round\"><path d=\"M8 5H2400\" stroke=\"#1f5aa8\" stroke-width=\"7\"/><path d=\"M8 5H2400\" stroke=\"rgba(255,255,255,.5)\" stroke-width=\"1.54\"/></g><circle cx=\"8\" cy=\"5\" r=\"7.35\" fill=\"#1f5aa8\"/></svg><span class=\"ds-lane-nome\">Papel</span><span class=\"ds-lane-info\"><b>Lixeira azul</b> · Folhas de caderno, xerox e impressões</span><span class=\"ds-lane-ic\"><svg class=\"ds-ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6 3h8l4 4v14H6z\"/><path d=\"M14 3v4h4\"/><path d=\"M9 12h6M9 16h6\"/></svg></span></a>",
+      "css": ".ds-lane { --c: #1f5aa8; --tx: #fafbf8; --cl: #1f5aa8; position: relative; isolation: isolate; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 2px 16px; min-height: 108px; padding: 22px 20px 18px; color: var(--tinta, #15181b); background: var(--chao, #eef0ec); text-decoration: none; transition: color .3s cubic-bezier(.16, 1, .3, 1); } .ds-lane-fio { position: absolute; left: 0; top: -2px; } .ds-lane::before { content: \"\"; position: absolute; z-index: -1; inset: 3px 0 0; background: var(--c); clip-path: inset(0 0 100% 0); transition: clip-path .55s cubic-bezier(.16, 1, .3, 1); } .ds-lane-nome { font: 800 clamp(2.5rem, 12vw, 4.75rem)/.95 \"Funnel Display\", \"Segoe UI\", system-ui, sans-serif; letter-spacing: -.04em; } .ds-lane-info { grid-column: 1; font: 400 .95rem/1.4 \"Funnel Sans\", \"Segoe UI\", system-ui, sans-serif; color: var(--tinta-2, #475053); transition: color .3s cubic-bezier(.16, 1, .3, 1); } .ds-lane-info b { font-weight: 700; color: var(--tinta, #15181b); transition: color .3s cubic-bezier(.16, 1, .3, 1); } .ds-lane-ic { grid-column: 2; grid-row: 1 / span 2; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; border: 2.5px solid currentColor; color: var(--cl); transition: color .3s cubic-bezier(.16, 1, .3, 1), transform .45s cubic-bezier(.16, 1, .3, 1); } .ds-lane-ic .ds-ic { width: 28px; height: 28px; } .ds-lane:hover, .ds-lane:focus-visible { color: var(--tx); } .ds-lane:hover::before, .ds-lane:focus-visible::before { clip-path: inset(0); } .ds-lane:hover .ds-lane-info, .ds-lane:hover .ds-lane-info b, .ds-lane:focus-visible .ds-lane-info, .ds-lane:focus-visible .ds-lane-info b { color: var(--tx); } .ds-lane:hover .ds-lane-ic, .ds-lane:focus-visible .ds-lane-ic { color: var(--tx); transform: rotate(-12deg); } .ds-lane:focus-visible { outline: 3px solid var(--tinta, #15181b); outline-offset: -3px; } @media (prefers-reduced-motion: reduce) { .ds-lane::before { clip-path: none; opacity: 0; transition: opacity .2s; } .ds-lane:hover::before, .ds-lane:focus-visible::before { opacity: 1; } .ds-lane-ic { transition: none; } }"
+    },
+    {
+      "name": "Abas e régua",
+      "kind": "custom",
+      "refersTo": "aba-ativa",
+      "description": "Ranking switch (pill track, sliding ink thumb) over a 10-step ruler; each person is a 5px ink strand at true proportion of the leader (the leader's own strand is a full braid).",
+      "html": "<div class=\"ds-ranking\"><div class=\"ds-abas\" role=\"tablist\"><button role=\"tab\" aria-selected=\"true\"><svg class=\"ds-ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 12a8 8 0 0 1 14-5M20 12a8 8 0 0 1-14 5\"/><path d=\"M18 3v4h-4M6 21v-4h4\"/></svg>Mais itens</button><button role=\"tab\" aria-selected=\"false\"><svg class=\"ds-ic\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"4\" y=\"5\" width=\"16\" height=\"16\" rx=\"3\"/><path d=\"M4 10h16M8 3v4M16 3v4\"/></svg>Mais dias</button></div><div class=\"ds-regua\" aria-hidden=\"true\"><span>0</span><span>24</span><span>48</span></div><div class=\"ds-barra\" style=\"--v:.729\"></div><div class=\"ds-barra\" style=\"--v:.458\"></div><div class=\"ds-barra\" style=\"--v:.125\"></div></div>",
+      "css": ".ds-ranking { max-width: 460px; font-family: \"Funnel Sans\", \"Segoe UI\", system-ui, sans-serif; color: var(--tinta, #15181b); } .ds-abas { position: relative; isolation: isolate; display: grid; grid-template-columns: 1fr 1fr; padding: 4px; border-radius: 999px; background: var(--chao-fundo, #e1e5df); } .ds-abas::before { content: \"\"; position: absolute; z-index: -1; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 4px); border-radius: 999px; background: var(--tinta, #15181b); transition: transform .5s cubic-bezier(.16, 1, .3, 1); } .ds-abas:has(button:nth-child(2)[aria-selected=true])::before { transform: translateX(100%); } .ds-abas button { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; border: 0; border-radius: 999px; background: none; color: var(--tinta-2, #475053); cursor: pointer; font: 700 1rem \"Funnel Sans\", \"Segoe UI\", system-ui, sans-serif; transition: color .3s cubic-bezier(.16, 1, .3, 1); } .ds-abas button .ds-ic { width: 1.1em; height: 1.1em; } .ds-abas button[aria-selected=true] { color: var(--folha, #fafbf8); } .ds-abas button:not([aria-selected=true]):hover { color: var(--tinta, #15181b); } .ds-abas button:focus-visible { outline: 3px solid var(--tinta, #15181b); outline-offset: 3px; } .ds-regua { display: flex; justify-content: space-between; margin: 18px 0 10px; padding-bottom: 6px; font-size: .78rem; font-weight: 600; color: var(--tinta-2, #475053); font-variant-numeric: tabular-nums; background: linear-gradient(var(--linha, #c6ccc5), var(--linha, #c6ccc5)) 0 100% / 100% 1px no-repeat, repeating-linear-gradient(90deg, var(--linha, #c6ccc5) 0 1px, transparent 1px 10%) 0 100% / 100% 6px no-repeat; } .ds-barra { height: 5px; margin: 14px 0; border-radius: 3px; min-width: 14px; width: calc(var(--v) * 100%); background: var(--tinta, #15181b); animation: ds-estica 1s cubic-bezier(.16, 1, .3, 1) backwards; } @keyframes ds-estica { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0); } } @media (prefers-reduced-motion: reduce) { .ds-abas::before { transition: none; } .ds-barra { animation: none; } }"
+    },
+    {
+      "name": "Voucher",
+      "kind": "custom",
+      "refersTo": "voucher",
+      "description": "The pipoca voucher as a large hang tag: 18×72px string loop, punched 9px eyelet, dashed tear line, code in Plástico Red, live clock pill with a blinking yellow dot.",
+      "html": "<div class=\"ds-voucher\" tabindex=\"0\"><div class=\"ds-voucher-corpo\"><h2>Ana Souza</h2><div class=\"ds-codigo\">PIP-0427</div><div class=\"ds-relogio\"><i></i><span>21:59:09</span></div></div></div>",
+      "css": ".ds-voucher { position: relative; max-width: 360px; margin: 56px auto 0; transform-origin: 50% -46px; font-family: \"Funnel Sans\", \"Segoe UI\", system-ui, sans-serif; color: var(--tinta, #15181b); } .ds-voucher::before { content: \"\"; position: absolute; left: 50%; top: -46px; width: 18px; height: 72px; margin-left: -9px; box-sizing: border-box; border: 2.5px solid var(--tinta, #15181b); border-radius: 999px; } .ds-voucher-corpo { position: relative; padding: 56px 22px 28px; border-radius: 26px; background: var(--folha, #fafbf8); border: 1px solid var(--linha, #c6ccc5); text-align: center; -webkit-mask: radial-gradient(circle 9px at 50% 24px, #0000 95%, #000 100%); mask: radial-gradient(circle 9px at 50% 24px, #0000 95%, #000 100%); } .ds-voucher-corpo::after { content: \"\"; position: absolute; left: 22px; right: 22px; top: 44px; border-top: 2px dashed var(--linha, #c6ccc5); } .ds-voucher h2 { margin: 4px 0 0; font: 800 clamp(2rem, 9vw, 2.6rem)/.95 \"Funnel Display\", \"Segoe UI\", system-ui, sans-serif; letter-spacing: -.03em; } .ds-codigo { margin: 14px auto 18px; font: 800 clamp(3.6rem, 19vw, 5.6rem)/.9 \"Funnel Display\", \"Segoe UI\", system-ui, sans-serif; letter-spacing: -.02em; color: var(--vermelho, #cf3a2e); font-variant-numeric: tabular-nums; } .ds-relogio { display: inline-flex; align-items: center; gap: 10px; padding: 8px 18px; border-radius: 999px; background: var(--tinta, #15181b); color: var(--folha, #fafbf8); font-weight: 700; font-size: 1.35rem; font-variant-numeric: tabular-nums; } .ds-relogio i { width: 11px; height: 11px; border-radius: 50%; background: var(--amarelo, #f0b400); animation: ds-piscar 1s steps(2, jump-none) infinite; } @keyframes ds-piscar { 50% { opacity: .15; } } .ds-voucher:hover, .ds-voucher:focus-visible { animation: ds-balanca 1s ease-in-out; } .ds-voucher:focus-visible { outline: none; } .ds-voucher:focus-visible .ds-voucher-corpo { outline: 3px solid var(--tinta, #15181b); outline-offset: 3px; } @keyframes ds-balanca { 0% { transform: rotate(0); } 11% { transform: rotate(10deg); } 33% { transform: rotate(-4deg); } 56% { transform: rotate(1.5deg); } 78% { transform: rotate(-.5deg); } 100% { transform: rotate(0); } } @media (prefers-reduced-motion: reduce) { .ds-voucher:hover, .ds-voucher:focus-visible, .ds-relogio i { animation: none; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "O Cordão",
+    "overview": "A single cord ties the campus to its bins. Five strands in the CONAMA 275 bin colours are braided in SVG into one helix: azul for papel, vermelho for plástico, verde for vidro, amarelo for metal and marrom for orgânico. The cord passes over and under the headline. It loops, unbraids above the bin lanes, and each strand turns off to run along the top of its own bin. When someone logs a discard, their bin's strand closes into a bow. The cord is the system's one recurring object. It serves as the divider, the ranking measure, the string that holds every label and the bow that signs off the footer. Pages are built around where the cord goes.\n\nEverything else stays quiet so the cord can carry the colour. The ground is cool concrete-light and the ink is graphite. There is one display face at one heavy weight. Surfaces are flat, with no shadows, and controls are pills and circles. A bin colour appears only as a strand or as the field that strand floods. Each strand also has its own weave, so a bin can be read by texture before hue: satin for papel, twist for plástico, a hollow double line for vidro, beads for metal and knots for orgânico.\n\nThe density is mobile-first and one-handed, because people arrive from a QR Code beside a bin. Type is large, touch targets run from 44 to 56px, and the layout is one column that splits 7/5 from 760px. This world replaces an earlier torn-poster (décollage) look, which is retired. It also refuses the generic eco landing page: no leaf ornaments, no mint gradients, no grids of equal rounded cards.",
+    "keyCharacteristics": [
+      "One five-strand SVG braid in the CONAMA colours, drawn along its length as you arrive and as you scroll.",
+      "Each bin has its own weave, so it never depends on hue alone.",
+      "Cool concrete ground (#eef0ec), graphite ink (#15181b), and bin colour only as strands and the fields they flood.",
+      "Funnel Display 800 for display type, capped at 6rem; Funnel Sans for reading; tabular figures for every count.",
+      "Hang tags on string serve as labels; they swing when pulled.",
+      "Flat surfaces. The only depth is the helix passing behind itself.",
+      "Bands run full-bleed, with the strand entering from beyond the screen edge."
+    ],
+    "rules": [
+      {
+        "name": "The Strands-and-Fields Rule",
+        "body": "The five bin colours appear as strands, as the fields those strands flood, and as their own bin's marks on its own surfaces: icon rings, list markers, the knot line and its buttons. They never tint a card, colour a heading or become decoration. Metal Yellow has one recorded exception. On ink it is the signal colour: the focus ring, the one call to action (\"Ver o ranking\"), the icon in an ink panel's heading and the live dot on the clock. Off ink it is used only for the text-selection highlight and the demo-mode banner. That exception is not a licence for more.",
+        "section": "colors"
+      },
+      {
+        "name": "The Metal Exception Rule",
+        "body": "Every bin field carries Sheet White text except metal, whose yellow field carries Graphite Ink (the `texto` value in `lacos.js`). The swap follows the strand too: on the yellow cover the single strand is drawn in ink with yellow beads. On the success bow, metal's beads are ink.",
+        "section": "colors"
+      },
+      {
+        "name": "The Linha Rule",
+        "body": "A bin colour used as text or as a line on a light surface uses its `linha` value, so every bin stays at least 4.6:1 on the ground.",
+        "section": "colors"
+      },
+      {
+        "name": "The 6rem Ceiling Rule",
+        "body": "No display setting goes above 6rem. Every display clamp, from the hero and covers to the page headlines and the footer wordmark, tops out at exactly 6rem. The large numerals stop below it (5.5rem and 5.6rem).",
+        "section": "typography"
+      },
+      {
+        "name": "The One Weight Rule",
+        "body": "Funnel Display appears only at 800, always with negative tracking (-0.02em to -0.04em) and a line-height between 0.88 and 1.08. Funnel Sans carries everything else, at 400 for reading, 500–600 for emphasis and 700 for labels and buttons. Every number that counts uses tabular figures. Nothing is set in uppercase.",
+        "section": "typography"
+      },
+      {
+        "name": "The Full-Bleed Band Rule",
+        "body": "The game stage, the competition panel, the gincana band, the bin cover and the footer each run edge to edge with square corners. Their strands start beyond the edge of the screen (x = −20 to −40px) and cross the whole band. A braid never starts or stops inside the gutter. The 22px radius belongs to contained cards only; an ink panel that becomes a band (`.comp`) drops it to 0.",
+        "section": "layout"
+      },
+      {
+        "name": "The Canal Rule",
+        "body": "On the home page the lanes reserve a corridor on the right (56px, 84px from 760px) for the descending braid. No text or icon enters it.",
+        "section": "layout"
+      },
+      {
+        "name": "The Helix-Only Depth Rule",
+        "body": "Shadows do not exist. If something needs to feel in front, it has to physically cross over something else, the way the cord does.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Over-Under Rule",
+        "body": "Where the cord meets type, it weaves through the letters and never strikes them through. In the hero it runs just below the baseline of \"grandes laços.\", so the letters stand on it and the descenders of \"g\" and \"ç\" cross over it. Inside \"laços.\" it rises to 0.15em above the baseline, passes over the \"l\" and the \"o\" on a clipped over-layer, and slips under the \"a\", the \"ç\" and the \"s\". The tied trefoil knots use the same logic: their upper crossings are painted again on top.",
+        "section": "shapes"
+      },
+      {
+        "name": "The Hang-Tag Rule",
+        "body": "A label is a hang tag on a string, hung from a strand: from the hero cord, from a cover's single strand, from the game's braid, or from the voucher loop. A tag hangs below the cord after its heading. It never sits above a heading as a kicker.",
+        "section": "shapes"
+      },
+      {
+        "name": "The Real Strand Rule",
+        "body": "Every strand of the cord is drawn as SVG by `cordao.js` (`abertura`, `tranca`, `fio`, `laco`). A strand is never replaced by CSS stripes or gradients. The CSS weave (`[data-trama]`) is allowed only for one straight, static strand of a single bin, 4–6px tall, in its own weave: the knot line, the section dividers and the printed QR sheets.",
+        "section": "components"
+      },
+      {
+        "name": "The Own Weave Rule",
+        "body": "Each bin keeps its own weave everywhere it appears: papel liso, plástico torcido, vidro duplo, metal contas, orgânico nós. A weave is never swapped, merged or dropped, and never lent to a surface that is not that bin.",
+        "section": "components"
+      },
+      {
+        "name": "The Draw-Once Rule",
+        "body": "A strand draws along its own length and never retracts. Scrolling back up leaves the cord where it had reached. Weaves walk only while their braid is on screen.",
+        "section": "components"
+      },
+      {
+        "name": "The Strand-as-Measure Rule",
+        "body": "When the cord carries data, its length is the data. Ranking strands are cut to true proportion on a shared ruler, the leader holds the whole braid, and there are exactly ten knots because ten is the cap.",
+        "section": "components"
+      },
+      {
+        "name": "The Still Cord Rule",
+        "body": "Under `prefers-reduced-motion: reduce`, everything rests in its final state. Every CSS animation is off. The braid is drawn completely at once, with no intro and no scroll draw. Weaves stand still, tags do not swing or take pushes, numbers show their final value, and smooth scrolling is off. The lane flood becomes a 0.2s opacity fade instead of a wipe. Icon, arrow, disc and tab-thumb transitions are removed. Page transitions shorten to 0.12s. In the game, the next item waits 1400ms instead of 1100ms. Colour remains the only feedback.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "**Do** draw every cord, braid, lane strand and bow with the `cordao.js` engine, and pass the colour of the band behind it as `fundo` (#eef0ec on the ground, #fafbf8 on sheet, #15181b on ink, the bin hex on a cover), so the hollow and knot weaves cut through to the right surface.",
+      "**Do** carry each bin's weave wherever that bin appears: papel liso, plástico torcido, vidro duplo, metal contas, orgânico nós.",
+      "**Do** flood a whole field with a bin colour and pair it with Sheet White text, or Graphite Ink on Metal Yellow. Use the `linha` value when the bin colour becomes text or a line on a light surface.",
+      "**Do** cap display type at 6rem and set it only in Funnel Display 800 with negative tracking. Set every count in tabular figures.",
+      "**Do** run bands full-bleed with square corners, and start their strands beyond the edge of the screen.",
+      "**Do** hang labels as tags from a strand, with the 12px string loop, the pointed end and the punched eyelet, and leave about 70px below the strand for the swing.",
+      "**Do** keep touch targets at least 44px, and 56px for buttons and fields.",
+      "**Do** make reduced motion show the finished state at once: the cord fully drawn, the weave still, tags fixed and numbers final."
+    ],
+    "donts": [
+      "**Don't** replace a strand with CSS stripes or gradients. No five-colour diagonal stripe (`--corda` is not a strand) and no striped band standing in for the braid.",
+      "**Don't** give a bin another bin's weave, or put a bin weave on a surface that is not that bin.",
+      "**Don't** use `box-shadow`, drop shadows, glows or blur. Depth is the helix passing behind itself.",
+      "**Don't** use bin colours as decoration: no tinted cards or panels at rest, no coloured headings, no gradients. Light tints of a bin colour (13–35%) appear only as state: the correct game choice, an empty knot on hover, the returning-visitor strip.",
+      "**Don't** bring back the eco landing page (leaf ornaments, mint gradients, grids of equal rounded cards). The leaf drawing belongs only to the orgânico bin icon.",
+      "**Don't** bring back the torn-poster/décollage world: no ripped edges, collage layering or paper grain.",
+      "**Don't** set display type above 6rem, use Funnel Display below 800, set text in uppercase, or use monospace as costume.",
+      "**Don't** put a label or kicker above a heading. Tags hang from the cord, after the heading.",
+      "**Don't** round a full-bleed band, or let a strand start or stop inside the gutter.",
+      "**Don't** strike text through with the cord. It weaves over and under the letters.",
+      "**Don't** let a strand retract on scroll, or animate a weave that is off screen."
+    ]
+  }
+}

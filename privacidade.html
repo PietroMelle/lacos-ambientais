@@ -4,21 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Privacidade — Laços Ambientais</title>
-  <meta name="theme-color" content="#2f7d4f">
+  <meta name="theme-color" content="#eef0ec">
+  <link rel="preload" href="assets/fonts/funnel-display-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
   <header id="topo"></header>
 
-  <main class="container">
-    <section class="hero">
-      <span class="hero-emoji" aria-hidden="true">🔒</span>
-      <span class="etiqueta">LGPD · Lei 13.709/2018</span>
+  <main>
+    <section class="cabeca">
       <h1>Seus dados, sem mistério</h1>
+      <div class="cabeca-fio" id="cabecaFio">
+        <span class="etiqueta" data-balanca="entra"><span>LGPD · Lei 13.709/2018</span></span>
+        <span class="capa-icone" data-ic="cadeado"></span>
+      </div>
       <p>Explicação curta e direta de como usamos as informações que você nos passa.</p>
     </section>
 
-    <section class="cartao">
+    <div class="faixa faixa-leitura">
+    <section class="cartao leitura">
       <h2>Quem cuida dos dados</h2>
       <p><span data-cfg="RESPONSAVEL"></span>. Contato: <b data-cfg="CONTATO"></b>.</p>
 
@@ -42,7 +46,8 @@
       <p style="margin:0">Você pode, a qualquer momento, pedir para ver, corrigir ou apagar seus dados — ou retirar seu consentimento — pelo contato acima. Se pedir a exclusão, seus registros saem da competição.</p>
     </section>
 
-    <a class="botao secundario" href="javascript:history.back()">← Voltar</a>
+    <a class="botao secundario" href="javascript:history.back()" data-ic="voltar">Voltar</a>
+    </div>
   </main>
 
   <footer id="rodape"></footer>
@@ -50,8 +55,11 @@
   <script src="assets/js/config.js"></script>
   <script src="assets/js/lacos.js"></script>
   <script src="assets/js/api.js"></script>
+  <script src="assets/js/cordao.js"></script>
   <script>
     document.querySelectorAll("[data-cfg]").forEach((el) => { el.textContent = window.LACOS_CONFIG[el.dataset.cfg] || "—"; });
+    Cordao.tranca(document.getElementById("cabecaFio"));
+    Cordao.progressoLeitura();
   </script>
 </body>
 </html>

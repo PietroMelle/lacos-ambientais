@@ -4,39 +4,40 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lixeira — Laços Ambientais</title>
-  <meta name="theme-color" content="#2f7d4f">
+  <meta name="theme-color" content="#23804a">
+  <link rel="preload" href="assets/fonts/funnel-display-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body class="pagina-cor">
   <header id="topo"></header>
 
-  <main class="container">
-    <section class="hero" id="hero"></section>
+  <main>
+    <section class="capa capa-lixeira" id="hero"></section>
 
-    <div class="duas-colunas">
-    <div class="col-info">
-    <section class="cartao">
-      <h2>✅ Pode jogar aqui</h2>
+    <div class="faixa duas-colunas">
+    <div class="col-info" id="colInfo">
+    <section class="aberta">
+      <h2 data-ic="ok">Pode jogar aqui</h2>
       <ul class="lista sim" id="pode"></ul>
     </section>
 
-    <section class="cartao">
-      <h2>🚫 Não pode</h2>
+    <section class="painel-tinta nao-pode">
+      <h2 data-ic="x">Não pode</h2>
       <ul class="lista nao" id="naoPode"></ul>
     </section>
 
-    <section class="cartao destaque">
-      <h2>💡 Dica de ouro</h2>
+    <section class="aberta dicas">
+      <h2>Dica de ouro</h2>
       <p id="dica"></p>
-      <h2>🤓 Você sabia?</h2>
-      <p id="curiosidade" style="margin:0"></p>
+      <h2>Você sabia?</h2>
+      <p id="curiosidade"></p>
     </section>
     </div>
 
     <!-- ===== Competição ===== -->
     <div class="col-registro">
     <section class="cartao" id="registro">
-      <h2>🏆 Registre seu descarte e concorra!</h2>
+      <h2 data-ic="trofeu">Registre seu descarte e concorra!</h2>
       <p>Todo mês tem <b>2 prêmios</b>: para quem <b>mais descartar itens</b> e para quem <b>descartar em mais dias</b>.</p>
 
       <form id="form" novalidate>
@@ -53,12 +54,13 @@
         </div>
         <div id="jaConhecido" class="ola" hidden></div>
 
-        <label class="centro" style="margin-top:20px">Quantos itens você jogou agora?</label>
+        <label class="rotulo-contador" id="rotuloQtd">Quantos itens você jogou agora?</label>
         <div class="contador">
-          <button type="button" id="menos" aria-label="Diminuir">−</button>
-          <output id="qtd" aria-live="polite">1</output>
-          <button type="button" id="mais" aria-label="Aumentar">+</button>
+          <button type="button" id="menos" aria-label="Diminuir" data-ic="menos"></button>
+          <output id="qtd" aria-live="polite" aria-labelledby="rotuloQtd">1</output>
+          <button type="button" id="mais" aria-label="Aumentar" data-ic="mais"></button>
         </div>
+        <div class="nos" id="nos" aria-hidden="true"></div>
         <p class="ajuda centro">Máximo de 10 por registro · até 5 registros por dia</p>
 
         <label class="consentimento" id="blocoConsent">
@@ -82,6 +84,7 @@
   <script src="assets/js/config.js"></script>
   <script src="assets/js/lacos.js"></script>
   <script src="assets/js/api.js"></script>
+  <script src="assets/js/cordao.js"></script>
   <script>
   (function () {
     const tipo = new URLSearchParams(location.search).get("tipo");
@@ -90,29 +93,74 @@
 
     // ----- Conteúdo da lixeira -----
     document.title = "Lixeira " + L.cor + " (" + L.nome + ") — Laços Ambientais";
-    document.documentElement.style.setProperty("--cor", L.hex);
-    document.documentElement.style.setProperty("--cor-clara", L.claro);
-    document.documentElement.style.setProperty("--sobre-cor", L.texto || "#ffffff");
+    const raiz = document.documentElement.style;
+    raiz.setProperty("--cor", L.hex);
+    raiz.setProperty("--cor-clara", L.claro);
+    raiz.setProperty("--sobre-cor", L.texto || "#fafbf8");
+    raiz.setProperty("--cor-linha", L.linha);
     document.querySelector('meta[name="theme-color"]').content = L.hex;
-    document.getElementById("hero").innerHTML =
-      '<span class="hero-emoji" aria-hidden="true">' + L.emoji + '</span>' +
-      '<span class="etiqueta">Lixeira ' + L.cor + '</span>' +
-      '<h1>' + L.nome + '</h1><p>' + L.chamada + '</p>';
+    if (L.texto) document.body.classList.add("cor-escura");
+    const hero = document.getElementById("hero");
+    hero.style.setProperty("--vt", "lixeira-" + tipo);
+    hero.innerHTML =
+      '<h1 class="nome">' + L.nome + '</h1>' +
+      '<div class="capa-fio" id="capaFio">' +
+        '<span class="etiqueta clara" data-balanca="entra"><span>Lixeira ' + L.cor + '</span></span>' +
+        '<span class="capa-icone">' + Lacos.icone(tipo) + '</span>' +
+      '</div>' +
+      '<div class="capa-texto"><p class="chamada">' + L.chamada + '</p>' +
+      '<a class="botao claro" href="#registro">Registrar meu descarte' + Lacos.icone("seta") + '</a></div>';
+    Cordao.fio(document.getElementById("capaFio"), tipo, { cor: L.texto || "#fafbf8", fundo: L.hex });
     const li = (arr) => arr.map((t) => "<li>" + Lacos.esc(t) + "</li>").join("");
     document.getElementById("pode").innerHTML = li(L.pode);
     document.getElementById("naoPode").innerHTML = li(L.naoPode);
     document.getElementById("dica").textContent = L.dica;
     document.getElementById("curiosidade").textContent = L.curiosidade;
+    document.getElementById("colInfo").dataset.trama = L.trama;
 
     // ----- Formulário -----
     const $ = (id) => document.getElementById(id);
     Lacos.VINCULOS.forEach((v) => $("vinculo").insertAdjacentHTML("beforeend", '<option>' + v + '</option>'));
     $("celular").addEventListener("input", (e) => { e.target.value = Lacos.mascaraCelular(e.target.value); });
 
+    // Cada item é um nó no fio: dá para tocar no nó ou usar − e +
     let qtd = 1;
-    const atualizarQtd = () => { $("qtd").textContent = qtd; };
-    $("menos").onclick = () => { qtd = Math.max(1, qtd - 1); atualizarQtd(); };
-    $("mais").onclick = () => { qtd = Math.min(10, qtd + 1); atualizarQtd(); };
+    const nos = $("nos");
+    nos.dataset.trama = L.trama;
+    // vazio: o fio faz uma laçada e cruza por cima de si mesmo; contado: a laçada aperta num nó de trevo
+    const trevo = (() => {
+      const P = [], d = (pts) => "M" + pts.map((p) => p[0].toFixed(1) + " " + p[1].toFixed(1)).join("L");
+      for (let k = 0; k <= 180; k++) {
+        const t = 2 * Math.PI * k / 180;
+        P.push([14 + 3 * (Math.sin(t) + 2 * Math.sin(2 * t)), 14 + 3 * (Math.cos(t) - 2 * Math.cos(2 * t) + 0.47), -Math.sin(3 * t)]);
+      }
+      // os trechos mais altos são pintados de novo por cima: é o que faz o fio passar por cima em cada cruzamento
+      const cima = [];
+      let trecho = null;
+      P.forEach((p) => { if (p[2] > -0.25) { if (!trecho) cima.push(trecho = []); trecho.push(p); } else trecho = null; });
+      const camada = (dd, cap) => '<path class="contorno" stroke-linecap="' + cap + '" d="' + dd + '"/><path class="corpo" stroke-linecap="' + cap + '" d="' + dd + '"/>';
+      return camada(d(P) + "Z", "round") + cima.map((r) => camada(d(r), "butt")).join("");
+    })();
+    const no = '<svg viewBox="0 0 28 28" aria-hidden="true">' +
+      '<g class="solto"><path d="M2 14C7.5 14 11 10.4 14 7.4C17.2 4.2 18 0 14 0"/><path class="vao" d="M12.7 6.1L15.3 8.7"/>' +
+      '<path d="M14 0C10 0 10.8 4.2 14 7.4C17 10.4 20.5 14 26 14"/></g>' +
+      '<g class="preso">' + trevo + '</g></svg>';
+    nos.innerHTML = Array.from({ length: 10 }, (_, i) => '<i data-n="' + (i + 1) + '">' + no + '</i>').join("");
+    function pintarNos(cresceu) {
+      [...nos.children].forEach((k, i) => {
+        k.classList.toggle("on", i < qtd);
+        k.classList.remove("novo");
+        if (cresceu && i === qtd - 1) { void k.offsetWidth; k.classList.add("novo"); }
+      });
+    }
+    const atualizarQtd = (antes) => {
+      const o = $("qtd"); o.textContent = qtd; o.classList.remove("bate"); void o.offsetWidth; o.classList.add("bate");
+      pintarNos(qtd > antes);
+    };
+    $("menos").onclick = () => { const a = qtd; qtd = Math.max(1, qtd - 1); atualizarQtd(a); };
+    $("mais").onclick = () => { const a = qtd; qtd = Math.min(10, qtd + 1); atualizarQtd(a); };
+    nos.addEventListener("click", (e) => { const k = e.target.closest("[data-n]"); if (k) { const a = qtd; qtd = Number(k.dataset.n); atualizarQtd(a); } });
+    pintarNos(false);
 
     // Pessoa que já registrou neste celular: não precisa digitar tudo de novo
     let eu = Lacos.recuperar("lacos_participante");
@@ -121,7 +169,7 @@
         $("identificacao").hidden = true;
         $("blocoConsent").hidden = true;
         $("jaConhecido").hidden = false;
-        $("jaConhecido").innerHTML = '<span>Olá, ' + Lacos.esc(eu.nome.split(" ")[0]) + '! 👋</span>' +
+        $("jaConhecido").innerHTML = '<span>Olá, ' + Lacos.esc(eu.nome.split(" ")[0]) + '!</span>' +
           '<button type="button" id="naoSouEu">Não é você?</button>';
         $("naoSouEu").onclick = () => { Lacos.esquecer("lacos_participante"); eu = null; mostrarConhecido(); };
       } else {
@@ -159,16 +207,18 @@
         $("form").hidden = true;
         $("sucesso").hidden = false;
         $("sucesso").innerHTML =
-          '<div class="centro"><span class="festa">🎉</span>' +
-          '<h2>Valeu, ' + Lacos.esc(dados.nome.split(" ")[0]) + '!</h2>' +
-          '<p>+' + qtd + ' ' + (qtd > 1 ? "itens registrados" : "item registrado") + ' na lixeira ' + L.cor.toLowerCase() + '. O planeta agradece. 🌎</p></div>' +
+          '<div class="laco-fio" id="lacoFio" aria-hidden="true"></div>' +
+          '<div class="centro"><h2>Valeu, ' + Lacos.esc(dados.nome.split(" ")[0]) + '!</h2>' +
+          '<p>+' + qtd + ' ' + (qtd > 1 ? "itens registrados" : "item registrado") + ' na lixeira ' + L.cor.toLowerCase() + '. O planeta agradece.</p></div>' +
           '<div class="placar">' +
-            '<div><strong>' + r.total_itens + '</strong><span>itens no mês<br>' + r.pos_itens + 'º lugar</span></div>' +
-            '<div><strong>' + r.dias + '</strong><span>' + (r.dias > 1 ? "dias" : "dia") + ' no mês<br>' + r.pos_dias + 'º lugar</span></div>' +
+            '<div><strong data-conta="' + r.total_itens + '">' + r.total_itens + '</strong><span>itens no mês<br>' + r.pos_itens + 'º lugar</span></div>' +
+            '<div><strong data-conta="' + r.dias + '">' + r.dias + '</strong><span>' + (r.dias > 1 ? "dias" : "dia") + ' no mês<br>' + r.pos_dias + 'º lugar</span></div>' +
           '</div>' +
-          '<a class="botao" href="ranking.html">Ver o ranking 🏆</a>' +
+          '<a class="botao" href="ranking.html">Ver o ranking' + Lacos.icone("seta") + '</a>' +
           '<a class="botao secundario" href="index.html">Conhecer as outras lixeiras</a>';
-        $("sucesso").scrollIntoView({ behavior: "smooth", block: "start" });
+        Cordao.laco($("lacoFio"), tipo);
+        Cordao.contarTodos($("sucesso"));
+        $("sucesso").scrollIntoView({ behavior: Cordao.calmo() ? "auto" : "smooth", block: "start" });
       } catch (err) {
         erro(err.message);
       } finally {

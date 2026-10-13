@@ -105,10 +105,12 @@ Para mudar os limites, edite os números `10`, `5` e `1 minute` na função `reg
 ```
 ├── index.html, lixeira.html, ranking.html, pipoca.html, privacidade.html, qrcodes.html
 ├── assets/
-│   ├── css/style.css          → visual (cores, fontes)
+│   ├── css/style.css          → visual (cores, fontes, layout)
+│   ├── fonts/                 → Funnel Display e Funnel Sans (licença OFL, já inclusas no site)
 │   └── js/
 │       ├── config.js          → ⭐ ÚNICO arquivo a editar
-│       ├── lacos.js           → textos das lixeiras (pode/não pode/dicas)
+│       ├── lacos.js           → textos das lixeiras (pode/não pode/dicas) e cores de cada uma
+│       ├── cordao.js          → o cordão de cinco fios (desenho e animações do site)
 │       ├── api.js             → conexão com o banco (+ modo demonstração)
 │       └── qrcode.js          → biblioteca de QR Code (licença MIT)
 └── supabase/

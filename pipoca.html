@@ -4,39 +4,46 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Resgate sua pipoca — Laços Ambientais</title>
-  <meta name="theme-color" content="#e2463a">
+  <meta name="theme-color" content="#cf3a2e">
+  <link rel="preload" href="assets/fonts/funnel-display-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="tema-pipoca">
+<body class="tema-pipoca pagina-cor">
   <header id="topo"></header>
 
-  <main class="container">
-    <section class="hero">
-      <span class="hero-emoji pipoca-anim" aria-hidden="true">🍿</span>
-      <span class="etiqueta">Gincana Sustentável</span>
+  <main>
+    <section class="capa">
       <h1>Você mandou bem!</h1>
-      <p>Passou pelas estações? Então a pipoca é sua. Resgate abaixo e mostre o código para a equipe.</p>
-    </section>
-
-    <section class="cartao" id="formArea">
-      <form id="form" novalidate>
-        <label for="nome">Seu nome e sobrenome</label>
-        <input type="text" id="nome" autocomplete="name" maxlength="80" placeholder="Ex.: Ana Souza" required>
-        <p class="ajuda">Vale uma pipoca por pessoa. Seu nome só é usado para controlar o resgate.</p>
-        <button class="botao" type="submit" id="enviar">Quero minha pipoca! 🍿</button>
-        <div id="msg" role="alert"></div>
-      </form>
-    </section>
-
-    <section class="cartao" id="voucherArea" hidden>
-      <div class="voucher">
-        <p style="margin:0;font-weight:800">Pipoca liberada para</p>
-        <h2 id="vNome" style="font-size:1.6rem;margin:2px 0 0"></h2>
-        <div class="codigo" id="vCodigo"></div>
-        <div class="relogio" aria-label="Horário atual"><i></i><span id="vHora"></span></div>
-        <p class="ajuda" style="margin-top:12px">Mostre esta tela para a equipe da Laços Ambientais.<br>O relógio ao vivo prova que não é print. 😉</p>
+      <div class="capa-fio" id="capaFio">
+        <span class="etiqueta clara" data-balanca="entra"><span>Gincana Sustentável</span></span>
+        <span class="capa-icone" data-ic="pipoca"></span>
       </div>
-      <p class="centro" style="margin:16px 0 0">Enquanto a pipoca estoura, que tal conhecer nossas <a href="index.html">lixeiras sustentáveis</a> e entrar na competição do mês?</p>
+      <p class="chamada">Passou pelas estações? Então a pipoca é sua. Resgate abaixo e mostre o código para a equipe.</p>
+    </section>
+
+    <section class="faixa faixa-centro" id="formArea">
+      <div class="cartao">
+        <form id="form" novalidate>
+          <label for="nome" style="margin-top:0">Seu nome e sobrenome</label>
+          <input type="text" id="nome" autocomplete="name" maxlength="80" placeholder="Ex.: Ana Souza" required>
+          <p class="ajuda">Vale uma pipoca por pessoa. Seu nome só é usado para controlar o resgate.</p>
+          <button class="botao" type="submit" id="enviar">Quero minha pipoca!</button>
+          <div id="msg" role="alert"></div>
+        </form>
+      </div>
+    </section>
+
+    <section class="faixa faixa-centro" id="voucherArea" hidden>
+      <div class="voucher" id="voucher" data-balanca>
+        <div class="voucher-corpo">
+          <p class="liberada">Pipoca liberada para</p>
+          <h2 id="vNome"></h2>
+          <div class="codigo" id="vCodigo"></div>
+          <div class="relogio" aria-label="Horário atual"><i></i><span id="vHora"></span></div>
+          <p class="ajuda">Mostre esta tela para a equipe da Laços Ambientais.<br>O relógio ao vivo prova que não é print.</p>
+        </div>
+      </div>
+      <p class="depois">Enquanto a pipoca estoura, que tal conhecer nossas <a href="index.html">lixeiras sustentáveis</a> e entrar na competição do mês?</p>
     </section>
   </main>
 
@@ -45,9 +52,11 @@
   <script src="assets/js/config.js"></script>
   <script src="assets/js/lacos.js"></script>
   <script src="assets/js/api.js"></script>
+  <script src="assets/js/cordao.js"></script>
   <script>
   (function () {
     const $ = (id) => document.getElementById(id);
+    Cordao.tranca($("capaFio"), { fundo: "#cf3a2e" }); // a gincana não é de uma lixeira só: leva a corda inteira
 
     function mostrarVoucher(v) {
       $("formArea").hidden = true;
@@ -56,6 +65,7 @@
       $("vCodigo").textContent = v.codigo;
       const tic = () => { $("vHora").textContent = new Date().toLocaleTimeString("pt-BR"); };
       tic(); setInterval(tic, 1000);
+      setTimeout(() => Cordao.balancar($("voucher")).empurrar(2.6), 700);
     }
 
     // Se recarregar a página, o código continua aparecendo
@@ -80,7 +90,7 @@
         $("msg").innerHTML = '<div class="mensagem erro">' + Lacos.esc(err.message) + '</div>';
       } finally {
         $("enviar").disabled = false;
-        $("enviar").textContent = "Quero minha pipoca! 🍿";
+        $("enviar").textContent = "Quero minha pipoca!";
       }
     });
   })();
