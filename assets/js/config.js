@@ -5,6 +5,6 @@ window.LACOS_CONFIG = {
 
 
   RESPONSAVEL: "Espro - Turma 16219 | Empresa Laços Ambientais",
-  CONTATO: "mudar_email_para_o_fixo@exemplo.com",
-  FIM_CAMPANHA: "30/11/2026",
+  CONTATO: "lacos.ambientais@gmail.com",
+  FIM_CAMPANHA: "31/12/2026",
 };

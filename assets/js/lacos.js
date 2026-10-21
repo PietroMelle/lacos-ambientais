@@ -125,7 +125,7 @@ window.Lacos = (function () {
     if (rodape) rodape.innerHTML =
       '<div class="rodape-no" aria-hidden="true"></div>' +
       '<p class="rodape-marca">Laços Ambientais</p>' +
-      '<div class="rodape-linhas"><p>Projeto da turma de Jovem Aprendiz</p>' +
+      '<div class="rodape-linhas"><p>Projeto da turma Espro 16219</p>' +
       '<p><a href="privacidade.html">Privacidade e dados (LGPD)</a></p></div>';
     document.querySelectorAll("[data-ic]").forEach((el) => el.insertAdjacentHTML("afterbegin", icone(el.dataset.ic)));
     if (window.Api && Api.DEMO) {
