@@ -4,7 +4,7 @@ window.LACOS_CONFIG = {
   SUPABASE_KEY: "sb_publishable_rpXBwdCfrOwbLGAGIs9Drw_mp_aHtXa",
 
 
-  RESPONSAVEL: "Turma do Jovem Aprendiz — empresa Laços Ambientais",
-  CONTATO: "mudar_email_para_o_fixo@exemplo.com",   
-  FIM_CAMPANHA: "30/11/2026",              
+  RESPONSAVEL: "Espro - Turma 16219 | Empresa Laços Ambientais",
+  CONTATO: "mudar_email_para_o_fixo@exemplo.com",
+  FIM_CAMPANHA: "30/11/2026",
 };

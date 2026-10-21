@@ -138,7 +138,7 @@ Na hora de entregar, a equipe procura a pessoa pelo **nome ou pelo código** (ex
 ├── assets/
 │   ├── css/style.css          → visual (cores, fontes, layout)
 │   ├── fonts/                 → Funnel Display e Funnel Sans (licença OFL, já inclusas no site)
-│   ├── favicon.svg            → ícone da aba do navegador (o laço); favicon-32.png e icone-180.png são as versões em imagem
+│   ├── logo.png               → logo oficial da empresa (original). logo-96.png, favicon-32/192.png e icone-180.png são versões pequenas dela
 │   └── js/
 │       ├── config.js          → ⭐ ÚNICO arquivo a editar
 │       ├── lacos.js           → textos das lixeiras (pode/não pode/dicas) e cores de cada uma

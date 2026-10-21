@@ -94,6 +94,8 @@ code { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-siz
   white-space: nowrap;
 }
 .marca .ic { width: 32px; height: 32px; stroke-width: 2.1; }
+/* a logo oficial tem fundo transparente e traço verde-escuro: vai sobre um disco branco para ler em qualquer cor de topo */
+.marca-logo { flex: none; width: 44px; height: 44px; border-radius: 50%; background: #fff; }
 /* fora do início: a casinha num botão de contorno (o mesmo traço da pílula do ranking) e o aviso embaixo do nome */
 .marca-casa {
   display: grid; place-items: center; flex: none; width: 36px; height: 36px; border: 2px solid currentColor; border-radius: 50%;

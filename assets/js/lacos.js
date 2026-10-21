@@ -1,8 +1,5 @@
-// Utilidades + conteúdo das lixeiras (Laços Ambientais)
+// Utilidades + conteúdo das lixeiras
 window.Lacos = (function () {
-  // Cores no padrão CONAMA 275/2001
-  // hex = cor da lixeira · linha = a mesma cor quando vira texto/ícone sobre o fundo claro
-  // trama = o desenho do fio de cada lixeira (para reconhecer sem depender só da cor)
   const LIXOS = {
     papel: {
       nome: "Papel", cor: "Azul", emoji: "📰", hex: "#1f5aa8", linha: "#1f5aa8", claro: "#e4ecf7", trama: "liso",
@@ -56,7 +53,7 @@ window.Lacos = (function () {
     },
   };
 
-  const VINCULOS = ["Aluno Anhanguera", "Aprendiz Espro", "Aprendiz CIEE", "Professor(a)", "Funcionário(a)", "Visitante", "Outro"];
+  const VINCULOS = ["Aluno Anhanguera", "Espro", "CIEE", "Professor(a)", "Funcionário(a)", "Visitante", "Outro"];
 
   function normalizar(t) {
     return String(t || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().trim().replace(/\s+/g, " ");
@@ -118,10 +115,9 @@ window.Lacos = (function () {
     const aqui = location.pathname.split("/").pop() || "index.html";
     const noInicio = aqui === "index.html" || aqui === "index";
     const topo = document.getElementById("topo");
-    // fora do início, a marca vira o caminho de volta: botão com a casinha e o aviso "Ir para o início"
     if (topo) topo.innerHTML =
       (noInicio
-        ? '<a class="marca" href="index.html" aria-label="Laços Ambientais — início">' + icone("laco") + '<span>Laços Ambientais</span></a>'
+        ? '<a class="marca" href="index.html" aria-label="Laços Ambientais — início"><img class="marca-logo" src="assets/logo-96.png" alt="" width="44" height="44"><span>Laços Ambientais</span></a>'
         : '<a class="marca para-inicio" href="index.html" aria-label="Laços Ambientais, ir para o início"><span class="marca-casa">' + icone("casa") + '</span>' +
           '<span class="marca-nome">Laços Ambientais<small>Ir para o início</small></span></a>') +
       '<a class="topo-link" href="ranking.html"' + (aqui === "ranking.html" ? ' aria-current="page"' : "") + '>' + icone("trofeu") + 'Ranking</a>';
