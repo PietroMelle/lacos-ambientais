@@ -53,6 +53,7 @@
       </div>
       <p class="depois">Na fila para receber a pipoca? Que tal conhecer nossas <a href="index.html">lixeiras
           sustentáveis</a> e entrar na competição do mês?</p>
+      <p class="outra-pessoa"><button type="button" id="naoSouEu">Não é você? Novo resgate</button></p>
     </section>
 
     <section class="faixa faixa-centro resgates" aria-labelledby="tituloResgates">
@@ -95,6 +96,9 @@
         tic(); setInterval(tic, 1000);
         setTimeout(() => Cordao.balancar($("voucher")).empurrar(2.6), 700);
       }
+
+      // Aparelho compartilhado: esquece o resgate guardado e volta ao formulário
+      $("naoSouEu").addEventListener("click", () => { Lacos.esquecer("lacos_pipoca"); location.reload(); });
 
       // Se recarregar a página, o código continua aparecendo
       const salvo = Lacos.recuperar("lacos_pipoca");

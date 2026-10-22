@@ -525,6 +525,12 @@ select {
 @keyframes piscar { 50% { opacity: .15; } }
 .voucher .ajuda { margin-top: 16px; }
 .depois { text-align: center; margin: 28px auto 0; max-width: 46ch; }
+.outra-pessoa { text-align: center; margin: 14px auto 0; }
+.outra-pessoa button {
+  min-height: 44px; padding: 0 12px; border: 0; background: transparent; color: var(--tinta-2);
+  font: 500 .85rem var(--texto); text-decoration: underline; text-underline-offset: 3px; opacity: .6; cursor: pointer;
+}
+.outra-pessoa button:hover, .outra-pessoa button:focus-visible { opacity: 1; }
 
 /* Quem já resgatou: lista do banco, com busca e ordem */
 .resgates { padding-top: 64px; padding-bottom: 56px; }
